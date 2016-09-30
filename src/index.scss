@@ -1,0 +1,47 @@
+* {
+	box-sizing: border-box;
+	font-family: "Inconsolata", monospace;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+
+	padding: 0;
+	margin: 0;
+
+	background-color: #222222;
+	color: #efefef;
+}
+
+.footer {
+	padding: 15px;
+	text-align: center;
+
+	.link {
+		display: inline-block;
+
+		padding: 5px 8px;
+		background-color: #efefef;
+		box-shadow: 0 0 8px #000000;
+		border-radius: 15px;
+		border: solid 1px transparent;
+
+		font-size: 0.8em;
+		color: #000000;
+		text-decoration: none;
+
+		transition: 200ms all;
+
+		&:hover {
+			background-color: #000000;
+			color: #efefef;
+			border: solid 1px #efefef;
+		};
+	}
+}
+
+#canvas {
+	flex: 1;
+	padding: 15px;
+}
