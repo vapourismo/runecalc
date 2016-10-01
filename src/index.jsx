@@ -100,7 +100,7 @@ class ItemSet extends Component {
 					runes={this.props.loadout.chest}
 					onChangeRunes={newRunes => this.updateRunes("chest", newRunes)} />
 				<Item
-					title="feet"
+					title="Feet"
 					runes={this.props.loadout.hands}
 					onChangeRunes={newRunes => this.updateRunes("hands", newRunes)} />
 				<Item
