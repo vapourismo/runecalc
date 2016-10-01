@@ -37,7 +37,8 @@ const runes = [
 		setName: "Vim",
 		power: 2,
 		statName: "Focus Pool",
-		statValue: 75
+		statValue: 75,
+		unique: true
 	},
 	{
 		type: "fire",
@@ -65,7 +66,8 @@ const runes = [
 		setName: "Ruination",
 		power: 2,
 		statName: "Crit-Hit Severity Rating",
-		statValue: 501
+		statValue: 501,
+		unique: true
 	},
 	{
 		type: "fire",
@@ -86,7 +88,8 @@ const runes = [
 		setName: "Rejuvenation",
 		power: 2,
 		statName: "Crit-Hit Rating",
-		statValue: 501
+		statValue: 501,
+		unique: true
 	},
 	{
 		type: "fire",
@@ -114,7 +117,8 @@ const runes = [
 		setName: "Intensification",
 		power: 2,
 		statName: "Intensity Rating",
-		statValue: 501
+		statValue: 501,
+		unique: true
 	},
 	{
 		type: "life",
@@ -142,7 +146,8 @@ const runes = [
 		setName: "Basher",
 		power: 2,
 		statName: "Multi-Hit Severity Rating",
-		statValue: 501
+		statValue: 501,
+		unique: true
 	},
 	{
 		type: "water",
@@ -156,42 +161,48 @@ const runes = [
 		setName: "Prevention",
 		power: 3,
 		statName: "Focus Recovery Rating",
-		statValue: 501
+		statValue: 501,
+		unique: true
 	},
 	{
 		type: "life",
 		setName: "Prevention",
 		power: 3,
 		statName: "Focus Pool",
-		statValue: 75
+		statValue: 75,
+		unique: true
 	},
 	{
 		type: "logic",
 		setName: "Prevention",
 		power: 3,
 		statName: "Intensity Rating",
-		statValue: 501
+		statValue: 501,
+		unique: true
 	},
 	{
 		type: "air",
 		setName: "Prevention",
 		power: 2,
 		statName: "Focus Recovery Rating",
-		statValue: 402
+		statValue: 402,
+		uniquePerItem: true
 	},
 	{
 		type: "life",
 		setName: "Prevention",
 		power: 2,
 		statName: "Focus Pool",
-		statValue: 60
+		statValue: 60,
+		uniquePerItem: true
 	},
 	{
 		type: "logic",
 		setName: "Prevention",
 		power: 2,
 		statName: "Intensity Rating",
-		statValue: 402
+		statValue: 402,
+		uniquePerItem: true
 	},
 	{
 		type: "air",
