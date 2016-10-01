@@ -17,28 +17,30 @@ body {
 }
 
 .footer {
-	padding: 15px;
-	text-align: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	border-top: solid 1px #333333;
+	padding: 5px;
 
 	.link {
-		display: inline-block;
-
+		margin: 5px;
 		padding: 5px 8px;
+
 		background-color: #efefef;
 		box-shadow: 0 0 8px #000000;
-		border-radius: 15px;
 		border: solid 1px transparent;
+		border-radius: 15px;
 
-		font-size: 10px;
-		color: #000000;
+		font-size: 11px;
+		color: #222222;
 		text-decoration: none;
 
-		transition: 200ms all;
+		transition: 2s all;
 
 		&:hover {
-			background-color: #000000;
-			color: #efefef;
-			border: solid 1px #efefef;
+			box-shadow: 0 0 100px #880000;
 		};
 	}
 }
@@ -272,7 +274,6 @@ body {
 		position: fixed;
 		top: 0;
 		left: 50%;
-		height: 100%;
 		width: 50%;
 
 		.headline {
