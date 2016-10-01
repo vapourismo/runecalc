@@ -68,9 +68,11 @@ function gatherStats(runes) {
 			return;
 
 		const rune = Runes[runeID];
-		insertOrAdd(powers, rune.setName, rune.power);
-
 		const stat = transformStat(rune.statName, rune.statValue);
+
+		if (rune.setName && rune.power && rune.setName in Runes.sets)
+			insertOrAdd(powers, rune.setName, rune.power);
+
 		insertOrAdd(stats, stat.name, stat.value);
 	});
 
