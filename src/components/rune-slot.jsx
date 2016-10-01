@@ -16,6 +16,11 @@ export default class RuneSlot extends Component {
 		this.selectRune = this.selectRune.bind(this);
 		this.showRuneSelector = this.showRuneSelector.bind(this);
 		this.removeSlot = this.removeSlot.bind(this);
+		this.runeSelector = this.runeSelector.bind(this);
+	}
+
+	runeSelector(newRuneID) {
+		return this.props.selector(newRuneID, this.props.runeID);
 	}
 
 	removeRune(ev) {
@@ -35,7 +40,9 @@ export default class RuneSlot extends Component {
 	}
 
 	showRuneSelector() {
-		Overlay.show(<RuneSelector onSelect={this.selectRune} />);
+		Overlay.show(
+			<RuneSelector selector={this.runeSelector} onSelect={this.selectRune} />
+		);
 	}
 
 	removeSlot(ev) {

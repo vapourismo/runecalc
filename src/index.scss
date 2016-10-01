@@ -19,7 +19,8 @@ body {
 #overlay {
 	display: none;
 	justify-content: center;
-	align-items: center;
+	// align-items: center;
+	// flex-wrap: nowrap;
 
 	position: fixed;
 	top: 0;

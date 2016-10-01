@@ -7,6 +7,7 @@ import ReactDOM from "react-dom"
 import RuneSlot from "./components/rune-slot.jsx";
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
+import Runes from "./database/runes.jsx";
 import Stats from "./database/stats.jsx";
 import Overlay from "./overlay.jsx";
 import Storage from "./utilities/storage.jsx";
@@ -22,6 +23,7 @@ class Item extends Component {
 		};
 
 		this.addRuneSlot = this.addRuneSlot.bind(this);
+		this.runeSelector = this.runeSelector.bind(this);
 	}
 
 	signalChangedRunes(runes) {
@@ -50,6 +52,10 @@ class Item extends Component {
 		this.signalChangedRunes(this.props.runes.concat([null]));
 	}
 
+	runeSelector(newRuneID, oldRuneID) {
+		return this.props.selector(this.props.item, newRuneID, oldRuneID);
+	}
+
 	render() {
 		const title = this.props.item[0].toUpperCase() + this.props.item.substring(1);
 
@@ -62,6 +68,7 @@ class Item extends Component {
 							<RuneSlot
 								key={slot}
 								runeID={runeID}
+								selector={this.runeSelector}
 								onChangeRune={newRuneID => this.updateRuneSlot(slot, newRuneID)}
 								onRemoveSlot={() => this.removeRuneSlot(slot)} />
 						))}
@@ -79,6 +86,7 @@ class ItemSet extends Component {
 		super(props);
 
 		this.updateRunes = this.updateRunes.bind(this);
+		this.runeSelector = this.runeSelector.bind(this);
 	}
 
 	updateRunes(item, runes) {
@@ -93,36 +101,65 @@ class ItemSet extends Component {
 			this.props.onChangeLoadout(loadout);
 	}
 
+	runeSelector(item, newRuneID, oldRuneID) {
+		if (!(newRuneID in Runes))
+			return false;
+
+		const rune = Runes[newRuneID];
+
+		if (newRuneID == oldRuneID || (!rune.unique && !rune.uniquePerItem))
+			return true;
+
+		if ((rune.uniquePerItem || rune.unique) && this.props.loadout[item].indexOf(newRuneID) >= 0)
+			return false;
+
+		if (rune.unique) {
+			for (let i in this.props.loadout) {
+				if (this.props.loadout[i].indexOf(newRuneID) >= 0)
+					return false;
+			}
+		}
+
+		return true;
+	}
+
 	render() {
 		return (
 			<div className="item-set">
 				<Item
 					item="weapon"
 					runes={this.props.loadout.weapon}
+					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="head"
 					runes={this.props.loadout.head}
+					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="shoulders"
 					runes={this.props.loadout.shoulders}
+					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="chest"
 					runes={this.props.loadout.chest}
+					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="hands"
 					runes={this.props.loadout.hands}
+					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="legs"
 					runes={this.props.loadout.legs}
+					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="feet"
 					runes={this.props.loadout.feet}
+					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 			</div>
 		);
