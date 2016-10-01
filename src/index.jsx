@@ -6,6 +6,7 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom"
 import RuneSlot from "./components/rune-slot.jsx";
 import StatDisplay from "./components/stat-display.jsx";
+import Toolbar from "./components/toolbar.jsx";
 import Stats from "./database/stats.jsx";
 
 const Version = 0;
@@ -166,6 +167,19 @@ class Root extends Component {
 		}
 
 		this.changeLoadout = this.changeLoadout.bind(this);
+		this.resetLoadout = this.resetLoadout.bind(this);
+	}
+
+	resetLoadout() {
+		this.setState({
+			weapon: this.state.weapon.map(_ => null),
+			head: this.state.head.map(_ => null),
+			shoulders: this.state.shoulders.map(_ => null),
+			chest: this.state.chest.map(_ => null),
+			hands: this.state.hands.map(_ => null),
+			legs: this.state.legs.map(_ => null),
+			feet: this.state.feet.map(_ => null)
+		});
 	}
 
 	changeLoadout(loadout) {
@@ -182,6 +196,7 @@ class Root extends Component {
 
 		return (
 			<div className="root">
+				<Toolbar onReset={this.resetLoadout} />
 				<ItemSet loadout={this.state} onChangeLoadout={this.changeLoadout} />
 				<div className="stat-overview">
 					<div className="headline">
