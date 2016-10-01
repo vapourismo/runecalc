@@ -125,16 +125,16 @@ class Root extends Component {
 		const savedLoadout = JSON.parse(localStorage.getItem("loadout"));
 
 		if (
-		    savedLoadout
-		    && savedLoadout.version == Version
-		    && savedLoadout.loadout instanceof Object
-		    && savedLoadout.loadout.weapon instanceof Array
-		    && savedLoadout.loadout.head instanceof Array
-		    && savedLoadout.loadout.shoulders instanceof Array
-		    && savedLoadout.loadout.chest instanceof Array
-		    && savedLoadout.loadout.hands instanceof Array
-		    && savedLoadout.loadout.legs instanceof Array
-		    && savedLoadout.loadout.feet instanceof Array
+			savedLoadout
+			&& savedLoadout.version == Version
+			&& savedLoadout.loadout instanceof Object
+			&& savedLoadout.loadout.weapon instanceof Array
+			&& savedLoadout.loadout.head instanceof Array
+			&& savedLoadout.loadout.shoulders instanceof Array
+			&& savedLoadout.loadout.chest instanceof Array
+			&& savedLoadout.loadout.hands instanceof Array
+			&& savedLoadout.loadout.legs instanceof Array
+			&& savedLoadout.loadout.feet instanceof Array
 		) {
 			this.state = {
 				weapon: savedLoadout.loadout.weapon,
