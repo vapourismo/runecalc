@@ -19,8 +19,6 @@ body {
 #overlay {
 	display: none;
 	justify-content: center;
-	// align-items: center;
-	// flex-wrap: nowrap;
 
 	position: fixed;
 	top: 0;
@@ -108,11 +106,30 @@ body {
 		background-color: #333333;
 		box-shadow: inset 0 0 5px #000;
 
+		&.power-1 {
+			border-color: #3A608A;
+		}
+
+		&.power-2 {
+			border-color: #68446E;
+		}
+
+		&.power-3 {
+			border-color: #DAA65C;
+		}
+
 		margin: 2px;
 
 		.icon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
 			width: 100%;
 			height: 100%;
+
+			font-size: 20px;
+			color: #333333;
 
 			&.logic {
 				background-color: #B6DB40;
