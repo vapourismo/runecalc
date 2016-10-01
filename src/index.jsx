@@ -6,6 +6,8 @@ import RuneSlot from "./components/rune-slot.jsx";
 import StatDisplay from "./components/stat-display.jsx";
 import Stats from "./database/stats.jsx";
 
+const Version = 0;
+
 class Item extends Component {
 	constructor(props) {
 		super(props);
@@ -98,7 +100,7 @@ class ItemSet extends Component {
 					runes={this.props.loadout.chest}
 					onChangeRunes={newRunes => this.updateRunes("chest", newRunes)} />
 				<Item
-					title="Hands"
+					title="feet"
 					runes={this.props.loadout.hands}
 					onChangeRunes={newRunes => this.updateRunes("hands", newRunes)} />
 				<Item
@@ -118,15 +120,49 @@ class Root extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			weapon: [null, null, null],
-			head: [null, null, null],
-			shoulders: [null, null, null],
-			chest: [null, null, null],
-			hands: [null, null, null],
-			legs: [null, null, null],
-			feet: [null, null, null]
-		};
+		const savedLoadout = JSON.parse(localStorage.getItem("loadout"));
+
+		if (savedLoadout
+		    && savedLoadout.version == Version
+		    && savedLoadout.loadout instanceof Object
+		    && savedLoadout.loadout.weapon instanceof Array
+		    && savedLoadout.loadout.head instanceof Array
+		    && savedLoadout.loadout.shoulders instanceof Array
+		    && savedLoadout.loadout.chest instanceof Array
+		    && savedLoadout.loadout.hands instanceof Array
+		    && savedLoadout.loadout.legs instanceof Array
+		    && savedLoadout.loadout.feet instanceof Array) {
+			this.state = {
+				weapon: savedLoadout.loadout.weapon,
+				head: savedLoadout.loadout.head,
+				shoulders: savedLoadout.loadout.shoulders,
+				chest: savedLoadout.loadout.chest,
+				hands: savedLoadout.loadout.hands,
+				legs: savedLoadout.loadout.legs,
+				feet: savedLoadout.loadout.feet
+			};
+		} else {
+			this.state = {
+				weapon: [null, null, null],
+				head: [null, null, null],
+				shoulders: [null, null, null],
+				chest: [null, null, null],
+				hands: [null, null, null],
+				legs: [null, null, null],
+				feet: [null, null, null]
+			};
+		}
+
+		this.changeLoadout = this.changeLoadout.bind(this);
+	}
+
+	changeLoadout(loadout) {
+		this.setState(loadout);
+
+		localStorage.setItem("loadout", JSON.stringify({
+			version: Version,
+			loadout
+		}));
 	}
 
 	render() {
@@ -134,7 +170,7 @@ class Root extends Component {
 
 		return (
 			<div className="root">
-				<ItemSet loadout={this.state} onChangeLoadout={this.setState.bind(this)} />
+				<ItemSet loadout={this.state} onChangeLoadout={this.changeLoadout} />
 				<div className="stat-overview">
 					<div className="headline">
 						Summary
