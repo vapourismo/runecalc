@@ -16,7 +16,7 @@ export default class Rune extends Component {
 		return (
 			<div className="rune">
 				<div className="symbol">
-					<div className={`rune ${rune.type}`}></div>
+					<div className={`icon ${rune.type}`}></div>
 				</div>
 				<div className="description">
 					<div className="name">
