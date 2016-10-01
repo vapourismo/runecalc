@@ -167,8 +167,8 @@ runes.sets = {
 		runes: runes.fromSet("Voice From Beyond"),
 		powers: [
 			{name: "Focus Recovery Rate",      value: 0.1},
-			{name: "Voice From Beyond Tier 1", value: true},
-			{name: "Voice From Beyond Tier 2", value: true}
+			{name: "Voice From Beyond Tier 1", value: ""},
+			{name: "Voice From Beyond Tier 2", value: ""}
 		]
 	},
 	"Vim": {
