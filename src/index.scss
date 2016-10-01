@@ -46,21 +46,20 @@ body {
 	padding: 15px;
 }
 
-.slot {
+.rune {
 	display: flex;
 	flex-direction: row;
 	width: 350px;
 
 	padding: 2px;
-	border-bottom: solid 1px #666666;
-
-	cursor: pointer;
+	border-bottom: solid 1px #333333;
 
 	&:hover {
 		background-color: #333333;
+		border-bottom: solid 1px #efefef;
 	}
 
-	.holder {
+	.symbol {
 		display: inline-block;
 		width: 48px;
 		height: 48px;
@@ -131,5 +130,99 @@ body {
 		padding: 5px;
 		margin: 2px;
 		font-size: 16px;
+	}
+}
+
+#overlay {
+	display: none;
+	justify-content: center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	z-index: 99999999;
+}
+
+.rune-selector {
+	display: flex;
+	flex-direction: column;
+	background-color: #333;
+
+	padding: 15px;
+	margin: 15px;
+
+	.headline {
+		text-align: center;
+		font-size: 16px;
+		border-bottom: solid 1px #666666;
+
+		padding: 5px;
+	}
+
+	.body {
+		overflow: auto;
+
+		display: flex;
+		flex-direction: column;
+
+		.set {
+			cursor: pointer;
+			padding: 10px;
+			border-bottom: solid 1px #333333;
+			font-size: 14px;
+
+			&:hover {
+				background-color: #333333;
+				border-bottom: solid 1px #efefef;
+			}
+		}
+
+		.rune {
+			cursor: pointer;
+		}
+	}
+}
+
+.slot {
+	display: inline-block;
+
+	.headline {
+		font-size: 14px;
+		padding: 10px;
+		border-bottom: solid 1px #666666;
+		text-align: center;
+	}
+
+	.body {
+		display: flex;
+		flex-direction: row;
+
+		.runes {
+			border-right: solid 1px #333333;
+		}
+
+		.summary {
+			.property {
+				display: flex;
+				flex-direction: row;
+
+				.name, .value {
+					padding: 5px 10px;
+					font-size: 14px;
+				}
+
+				.name {
+					flex: 1;
+					text-align: left;
+				}
+
+				.value {
+					text-align: center;
+				}
+			}
+		}
 	}
 }

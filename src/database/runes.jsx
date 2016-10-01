@@ -24,7 +24,7 @@ const runes = [
 		power: 1
 	},
 	{
-		type: "life",
+		type: "logic",
 		setName: "Voice From Beyond",
 		statName: "Intensity Rating",
 		statValue: 501,
@@ -32,17 +32,24 @@ const runes = [
 	}
 ];
 
-function runesFromSet(name) {
-	return runes.filter(rune => rune.setName == name);
-}
+runes.fromSet = function fromSet(name) {
+	const result = [];
+
+	runes.forEach(function (rune, runeID) {
+		if (rune.setName == name)
+			result.push(runeID);
+	});
+
+	return result;
+};
 
 runes.sets = {
 	"Voice From Beyond": {
-		runes: runesFromSet("Voice from Beyond"),
+		runes: runes.fromSet("Voice From Beyond"),
 		powers: [
-			{"Focus Recovery Rate": 0.1},
-			{"Voice From Beyond Tier 1": true},
-			{"Voice From Beyond Tier 2": true}
+			{name: "Focus Recovery Rate",      value: 0.1},
+			{name: "Voice From Beyond Tier 1", value: true},
+			{name: "Voice From Beyond Tier 2", value: true}
 		]
 	}
 };

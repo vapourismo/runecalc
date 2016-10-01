@@ -2,53 +2,50 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom"
-import Runes from "./runes.jsx";
+import update from "react-addons-update";
+import RuneSlot from "./components/rune-slot.jsx";
+import LoadoutSummary from "./components/loadout-summary.jsx";
 
-class Slot extends Component {
-	render() {
-		if (this.props.runeID != null && this.props.runeID in Runes) {
-			const rune = Runes[this.props.runeID];
 
-			return (
-				<div className="slot">
-					<div className="holder">
-						<div className={`rune ${rune.type}`}></div>
-					</div>
-					<div className="description">
-						<div className="name">
-							{rune.statName}
-						</div>
-						<div className="set-name">
-							+{rune.power} {rune.setName}
-						</div>
-					</div>
-					<div className="rating">
-						{rune.statValue}
-					</div>
-				</div>
-			);
-		} else {
-			return (
-				<div className="slot">
-					<div className="holder"></div>
-				</div>
-			);
-		}
+class Item extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			runes: [null, null, null]
+		};
 	}
-}
 
-class SiteRoot extends Component {
+	updateRune(slot, runeID) {
+		const obj = {};
+		obj[slot] = {$set: runeID};
+
+		this.setState({
+			runes: update(this.state.runes, obj)
+		});
+	}
+
 	render() {
 		return (
-			<div>
-				<Slot runeID={0} />
-				<Slot runeID={1} />
-				<Slot />
+			<div className="slot">
+				<div className="headline">Head</div>
+				<div className="body">
+					<div className="runes">
+						{this.state.runes.map((runeID, slot) => (
+							<RuneSlot
+								key={slot}
+								runeID={runeID}
+								onChangeRune={newRuneID => this.updateRune(slot, newRuneID)} />
+						))}
+					</div>
+					<LoadoutSummary
+						runes={this.state.runes} />
+				</div>
 			</div>
 		);
 	}
 }
 
 window.addEventListener("load", function () {
-	ReactDOM.render(<SiteRoot />, document.getElementById("canvas"));
+	ReactDOM.render(<Item />, document.getElementById("canvas"));
 });
