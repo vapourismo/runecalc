@@ -1,3 +1,5 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
 "use strict";
 
 import Runes from "./runes.jsx";
