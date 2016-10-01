@@ -8,6 +8,7 @@ import RuneSlot from "./components/rune-slot.jsx";
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
 import Stats from "./database/stats.jsx";
+import Overlay from "./overlay.jsx";
 
 const Version = 0;
 
@@ -127,47 +128,31 @@ class ItemSet extends Component {
 	}
 }
 
+class SaveLoadoutDialog extends Component {
+	render() {
+		return (
+			<div>Hello</div>
+		);
+	}
+}
+
 class Root extends Component {
 	constructor(props) {
 		super(props);
 
-		const savedLoadout = JSON.parse(localStorage.getItem("loadout"));
-
-		if (
-			savedLoadout
-			&& savedLoadout.version == Version
-			&& savedLoadout.loadout instanceof Object
-			&& savedLoadout.loadout.weapon instanceof Array
-			&& savedLoadout.loadout.head instanceof Array
-			&& savedLoadout.loadout.shoulders instanceof Array
-			&& savedLoadout.loadout.chest instanceof Array
-			&& savedLoadout.loadout.hands instanceof Array
-			&& savedLoadout.loadout.legs instanceof Array
-			&& savedLoadout.loadout.feet instanceof Array
-		) {
-			this.state = {
-				weapon: savedLoadout.loadout.weapon,
-				head: savedLoadout.loadout.head,
-				shoulders: savedLoadout.loadout.shoulders,
-				chest: savedLoadout.loadout.chest,
-				hands: savedLoadout.loadout.hands,
-				legs: savedLoadout.loadout.legs,
-				feet: savedLoadout.loadout.feet
-			};
-		} else {
-			this.state = {
-				weapon: [null, null, null],
-				head: [null, null, null],
-				shoulders: [null, null, null],
-				chest: [null, null, null],
-				hands: [null, null, null],
-				legs: [null, null, null],
-				feet: [null, null, null]
-			};
-		}
+		this.state = {
+			weapon: [null, null, null],
+			head: [null, null, null],
+			shoulders: [null, null, null],
+			chest: [null, null, null],
+			hands: [null, null, null],
+			legs: [null, null, null],
+			feet: [null, null, null]
+		};
 
 		this.changeLoadout = this.changeLoadout.bind(this);
 		this.resetLoadout = this.resetLoadout.bind(this);
+		this.saveLoadout = this.saveLoadout.bind(this);
 	}
 
 	resetLoadout() {
@@ -182,13 +167,12 @@ class Root extends Component {
 		});
 	}
 
+	saveLoadout() {
+		Overlay.show(<SaveLoadoutDialog />);
+	}
+
 	changeLoadout(loadout) {
 		this.setState(loadout);
-
-		localStorage.setItem("loadout", JSON.stringify({
-			version: Version,
-			loadout
-		}));
 	}
 
 	render() {
@@ -196,7 +180,9 @@ class Root extends Component {
 
 		return (
 			<div className="root">
-				<Toolbar onReset={this.resetLoadout} />
+				<Toolbar
+					onReset={this.resetLoadout}
+					onSave={this.saveLoadout} />
 				<ItemSet loadout={this.state} onChangeLoadout={this.changeLoadout} />
 				<div className="stat-overview">
 					<div className="headline">

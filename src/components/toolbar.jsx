@@ -3,12 +3,15 @@
 "use strict";
 
 import React, {Component} from "react";
+import Storage from "../utilities/storage.jsx"
 
 export default class Toolbar extends Component {
 	constructor(props) {
 		super(props);
 
 		this.triggerReset = this.triggerReset.bind(this);
+		this.triggerSave = this.triggerSave.bind(this);
+		this.triggerLoad = this.triggerLoad.bind(this);
 	}
 
 	triggerReset() {
@@ -16,15 +19,35 @@ export default class Toolbar extends Component {
 			this.props.onReset();
 	}
 
+	triggerSave() {
+		if (this.props.onSave)
+			this.props.onSave();
+	}
+
+	triggerLoad() {
+		if (this.props.onLoad)
+			this.props.onLoad();
+	}
+
 	render() {
-		return (
-			<div className="toolbar">
-				<div className="filler left"></div>
-				<div className="button" onClick={this.triggerReset}>Reset</div>
-				<div className="button">Save</div>
-				<div className="button">Load</div>
-				<div className="filler"></div>
-			</div>
-		);
+		if (Storage.isAvailable) {
+			return (
+				<div className="toolbar">
+					<div className="filler left"></div>
+					<div className="button" onClick={this.triggerReset}>Reset</div>
+					<div className="button" onClick={this.triggerSave}>Save</div>
+					<div className="button" onClick={this.triggerLoad}>Load</div>
+					<div className="filler"></div>
+				</div>
+			);
+		} else {
+			return (
+				<div className="toolbar">
+					<div className="filler left"></div>
+					<div className="button" onClick={this.triggerReset}>Reset</div>
+					<div className="filler"></div>
+				</div>
+			);
+		}
 	}
 }
