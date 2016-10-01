@@ -21,4 +21,9 @@ function hide() {
 	elem.style.display = "none";
 }
 
+window.addEventListener("click", function (ev) {
+	if (ev.target && ev.target.id == "overlay")
+		hide();
+});
+
 export default {show, hide};
