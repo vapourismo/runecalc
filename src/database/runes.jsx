@@ -175,24 +175,24 @@ runes.sets = {
 		runes: runes.fromSet("Vim"),
 		powers: [
 			{name: "Health Multiplier",     value: 1},
-			{name: "Crit-Hit",              value: 0.31},
+			{name: "Crit-Hit Chance",       value: 0.31},
 			{name: "Focus Pool Multiplier", value: 4.80}
 		]
 	},
 	"Ruination": {
 		runes: runes.fromSet("Ruination"),
 		powers: [
-			{name: "Health Multiplier", value: 1},
-			{name: "Crit-Hit",          value: 0.31},
-			{name: "Crit-Hit Severity", value: 3}
+			{name: "Health Multiplier",        value: 1},
+			{name: "Crit-Hit Chance",          value: 0.31},
+			{name: "Crit-Hit Chance Severity", value: 3}
 		]
 	},
 	"Rejuvenation": {
 		runes: runes.fromSet("Rejuvenation"),
 		powers: [
 			{name: "Health Multiplier", value: 1},
-			{name: "Multi-Hit",         value: 0.75},
-			{name: "Crit-Hit",          value: 0.75}
+			{name: "Multi-Hit Chance",  value: 0.75},
+			{name: "Crit-Hit Chance",   value: 0.75}
 		]
 	},
 	"Intensification": {
@@ -208,14 +208,14 @@ runes.sets = {
 		powers: [
 			{name: "Health Multiplier",  value: 1},
 			{name: "Multi-Hit Severity", value: 1.20},
-			{name: "Multi-Hit",          value: 1.80}
+			{name: "Multi-Hit Chance",   value: 1.80}
 		]
 	},
 	"Resumption": {
 		runes: runes.fromSet("Resumption"),
 		powers: [
 			{name: "Health Multiplier",   value: 1},
-			{name: "Multi-Hit",           value: 0.75},
+			{name: "Multi-Hit Chance",    value: 0.75},
 			{name: "Focus Recovery Rate", value: 0.15}
 		]
 	}

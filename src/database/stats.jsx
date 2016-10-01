@@ -110,11 +110,13 @@ function roundTwoDigits(value) {
 function formatStat(name, value) {
 	switch (name) {
 		case "Focus Recovery Rate":
+		case "Focus Pool Multiplier":
 		case "Multi-Hit Chance":
 		case "Multi-Hit Severity":
 		case "Crit-Hit Chance":
 		case "Crit-Hit Severity":
 		case "Intensity":
+		case "Health Multiplier":
 			return roundTwoDigits(value) + "%";
 
 		default:
