@@ -136,14 +136,21 @@ class LoadLoadoutDialog extends Component {
 	}
 
 	render() {
+		let loadouts;
+
+		if (this.props.names.length > 0)
+			loadouts = this.props.names.map(name => (
+				<div key={name} className="loadout" onClick={() => this.loadLoadout(name)}>
+					{name}
+				</div>
+			));
+		else
+			loadouts = <div className="empty-message">Empty list</div>;
+
 		return (
 			<div className="load-loadout-dialog">
 				<div className="headline">Select a loadout</div>
-				{Object.keys(Storage.state.loadouts).map(name => (
-					<div key={name} className="loadout" onClick={() => this.loadLoadout(name)}>
-						{name}
-					</div>
-				))}
+				{loadouts}
 			</div>
 		);
 	}
@@ -159,6 +166,8 @@ class SaveLoadoutDialog extends Component {
 	saveLoadout() {
 		if (this.inputCom && this.inputCom.value != "" && this.props.onSave)
 			this.props.onSave(this.inputCom.value);
+		else if (this.inputCom)
+			this.inputCom.focus();
 	}
 
 	overrideLoadout(name) {
@@ -167,15 +176,22 @@ class SaveLoadoutDialog extends Component {
 	}
 
 	render() {
+		let loadouts;
+
+		if (this.props.names.length > 0)
+			loadouts = this.props.names.map(name => (
+				<div key={name} className="loadout" onClick={() => this.overrideLoadout(name)}>
+					{name}
+				</div>
+			));
+		else
+			loadouts = <div className="empty-message">Empty list</div>;
+
 		return (
 			<div className="save-loadout-dialog">
 				<div className="existing-loadouts">
 					<div className="headline">Override existing loadout</div>
-					{this.props.names.map(name => (
-						<div key={name} className="loadout" onClick={() => this.overrideLoadout(name)}>
-							{name}
-						</div>
-					))}
+					{loadouts}
 				</div>
 				<div className="new-loadout">
 					<div className="headline">Create new loadout</div>
