@@ -88,14 +88,14 @@ function gatherStats(runes) {
 }
 
 function mergeStats(arrStats) {
-	const stats = {};
+	const allStats = {};
 
 	arrStats.forEach(stats => {
 		for (let key in stats)
-			insertOrAdd(stats, key, stats[key]);
+			insertOrAdd(allStats, key, stats[key]);
 	});
 
-	return stats;
+	return allStats;
 }
 
 function roundTwoDigits(value) {
