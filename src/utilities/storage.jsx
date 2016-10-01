@@ -41,7 +41,6 @@ if (isAvailable) {
 	if (version == null || state == null || version > currentVersion) {
 		state = defaultState;
 	} else if (version < currentVersion) {
-		console.log(version, currentVersion);
 		for (let i = version; i < currentVersion; i++)
 			state = migrations[i](state);
 	} else if (!(state instanceof Object)) {

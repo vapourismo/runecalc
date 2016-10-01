@@ -14,5 +14,9 @@
     "watch-js": "webpack -w",
     "watch-css": "node-sass -w -o . src/index.scss",
     "build-client": "webpack && node-sass -o . src/index.scss"
+  },
+  "devDependencies": {
+    "eslint": "^3.7.0",
+    "eslint-plugin-react": "^6.3.0"
   }
 }

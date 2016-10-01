@@ -2,8 +2,8 @@
 
 "use strict";
 
-import React, {Component} from "react";
-import Storage from "../utilities/storage.jsx"
+import {Component} from "react";
+import Storage from "../utilities/storage.jsx";
 
 export default class Toolbar extends Component {
 	constructor(props) {

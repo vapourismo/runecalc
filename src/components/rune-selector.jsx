@@ -2,7 +2,7 @@
 
 "use strict";
 
-import React, {Component} from "react";
+import {Component} from "react";
 import Runes from "../database/runes.jsx";
 import BackStack from "../utilities/back-stack.jsx";
 import Rune from "./rune.jsx";

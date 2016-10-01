@@ -2,7 +2,7 @@
 
 "use strict";
 
-import ReactDOM from "react-dom"
+import ReactDOM from "react-dom";
 
 import BackStack from "./utilities/back-stack.jsx";
 
