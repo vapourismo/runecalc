@@ -23,7 +23,7 @@ class Item extends Component {
 
 	signalChangedRunes(runes) {
 		if (this.props.onChangeRunes)
-			this.props.onChangeRunes(runes);
+			this.props.onChangeRunes(this.props.item, runes);
 	}
 
 	updateRuneSlot(slot, runeID) {
@@ -48,9 +48,11 @@ class Item extends Component {
 	}
 
 	render() {
+		const title = this.props.item[0].toUpperCase() + this.props.item.substring(1);
+
 		return (
 			<div className="item">
-				<div className="headline">{this.props.title}</div>
+				<div className="headline">{title}</div>
 				<div className="body">
 					<div className="runes">
 						{this.props.runes.map((runeID, slot) => (
@@ -70,6 +72,12 @@ class Item extends Component {
 }
 
 class ItemSet extends Component {
+	constructor(props) {
+		super(props);
+
+		this.updateRunes = this.updateRunes.bind(this);
+	}
+
 	updateRunes(item, runes) {
 		const loadout = {};
 
@@ -86,33 +94,33 @@ class ItemSet extends Component {
 		return (
 			<div className="item-set">
 				<Item
-					title="Weapon"
+					item="weapon"
 					runes={this.props.loadout.weapon}
-					onChangeRunes={newRunes => this.updateRunes("weapon", newRunes)} />
+					onChangeRunes={this.updateRunes} />
 				<Item
-					title="Head"
+					item="head"
 					runes={this.props.loadout.head}
-					onChangeRunes={newRunes => this.updateRunes("head", newRunes)} />
+					onChangeRunes={this.updateRunes} />
 				<Item
-					title="Shoulders"
+					item="shoulders"
 					runes={this.props.loadout.shoulders}
-					onChangeRunes={newRunes => this.updateRunes("shoulders", newRunes)} />
+					onChangeRunes={this.updateRunes} />
 				<Item
-					title="Chest"
+					item="chest"
 					runes={this.props.loadout.chest}
-					onChangeRunes={newRunes => this.updateRunes("chest", newRunes)} />
+					onChangeRunes={this.updateRunes} />
 				<Item
-					title="Feet"
+					item="hands"
 					runes={this.props.loadout.hands}
-					onChangeRunes={newRunes => this.updateRunes("hands", newRunes)} />
+					onChangeRunes={this.updateRunes} />
 				<Item
-					title="Legs"
+					item="legs"
 					runes={this.props.loadout.legs}
-					onChangeRunes={newRunes => this.updateRunes("legs", newRunes)} />
+					onChangeRunes={this.updateRunes} />
 				<Item
-					title="Feet"
+					item="feet"
 					runes={this.props.loadout.feet}
-					onChangeRunes={newRunes => this.updateRunes("feet", newRunes)} />
+					onChangeRunes={this.updateRunes} />
 			</div>
 		);
 	}
