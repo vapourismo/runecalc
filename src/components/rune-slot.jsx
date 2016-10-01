@@ -56,6 +56,14 @@ export default class RuneSlot extends Component {
 			return (
 				<div className="rune" onClick={this.showRuneSelector} onContextMenu={this.removeSlot}>
 					<div className="symbol"></div>
+					<div className="description">
+						<div className="hint">
+							Left-click to select a rune
+						</div>
+						<div className="hint">
+							Right-click to remove the slot
+						</div>
+					</div>
 				</div>
 			);
 		}
