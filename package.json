@@ -12,6 +12,7 @@
   },
   "scripts": {
     "watch-js": "webpack -w",
-    "watch-css": "node-sass -w -o . src/index.scss"
+    "watch-css": "node-sass -w -o . src/index.scss",
+    "build-client": "webpack && node-sass -o . src/index.scss"
   }
 }
