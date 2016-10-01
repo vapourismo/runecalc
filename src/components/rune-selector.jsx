@@ -42,17 +42,18 @@ export default class RuneSelector extends Component {
 	}
 
 	render() {
-		if (this.state.selectedSet && this.state.selectedSet in Runes.sets) {
-			const selector = this.props.selector || (runeID => runeID in Runes);
+		const selector = this.props.selector || (runeID => runeID in Runes);
 
-			const availableRunes = Runes.sets[this.state.selectedSet].runes.map(runeID => {
-				if (selector(runeID))
-					return (
+		if (this.state.selectedSet && this.state.selectedSet in Runes.sets) {
+			const availableRunes = (
+				Runes.sets[this.state.selectedSet].runes.filter(selector).map(
+					runeID => (
 						<div key={runeID} onClick={() => this.selectRune(runeID)}>
 							<Rune runeID={runeID} />
 						</div>
-					);
-			});
+					)
+				)
+			);
 
 			return (
 				<div className="rune-selector">
@@ -63,11 +64,15 @@ export default class RuneSelector extends Component {
 				</div>
 			);
 		} else {
-			const availableSets = Object.keys(Runes.sets).map(setName => (
-				<div key={setName} className="set" onClick={() => this.selectSet(setName)}>
-					{setName}
-				</div>
-			));
+			const availableSets = Object.keys(Runes.sets).filter(
+				setName => Runes.sets[setName].runes.some(selector)
+			).map(
+				setName => (
+					<div key={setName} className="set" onClick={() => this.selectSet(setName)}>
+						{setName}
+					</div>
+				)
+			);
 
 			return (
 				<div className="rune-selector">

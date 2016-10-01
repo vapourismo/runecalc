@@ -9,6 +9,7 @@ const runes = [
 		statName: "Multi-Hit Severity Rating",
 		statValue: 501,
 		power: 2,
+		items: ["head", "shoulders", "legs"],
 		unique: true
 	},
 	{
@@ -16,21 +17,24 @@ const runes = [
 		setName: "Voice From Beyond",
 		statName: "Focus Pool",
 		statValue: 75,
-		power: 1
+		power: 1,
+		items: ["head", "shoulders", "legs"]
 	},
 	{
 		type: "air",
 		setName: "Voice From Beyond",
 		statName: "Focus Recovery Rating",
 		statValue: 501,
-		power: 1
+		power: 1,
+		items: ["head", "shoulders", "legs"],
 	},
 	{
 		type: "logic",
 		setName: "Voice From Beyond",
 		statName: "Intensity Rating",
 		statValue: 501,
-		power: 1
+		power: 1,
+		items: ["head", "shoulders", "legs"]
 	},
 	{
 		type: "life",
@@ -162,6 +166,7 @@ const runes = [
 		power: 3,
 		statName: "Focus Recovery Rating",
 		statValue: 501,
+		items: ["head", "shoulders", "legs"],
 		unique: true
 	},
 	{
@@ -170,6 +175,7 @@ const runes = [
 		power: 3,
 		statName: "Focus Pool",
 		statValue: 75,
+		items: ["head", "shoulders", "legs"],
 		unique: true
 	},
 	{
@@ -178,6 +184,7 @@ const runes = [
 		power: 3,
 		statName: "Intensity Rating",
 		statValue: 501,
+		items: ["head", "shoulders", "legs"],
 		unique: true
 	},
 	{

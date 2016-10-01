@@ -107,6 +107,9 @@ class ItemSet extends Component {
 
 		const rune = Runes[newRuneID];
 
+		if (rune.items && rune.items.indexOf(item) < 0)
+			return false;
+
 		if (newRuneID == oldRuneID || (!rune.unique && !rune.uniquePerItem))
 			return true;
 
