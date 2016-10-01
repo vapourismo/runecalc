@@ -1,5 +1,7 @@
 "use strict";
 
+import Runes from "./runes.jsx";
+
 const focusRecFactor    = 0.2 / 1000;
 const multiHitFactor    = 6   / 1000;
 const multiHitSevFactor = 4   / 1000;
@@ -50,4 +52,72 @@ function transformStat(name, value) {
 	}
 }
 
-export default {transformStat};
+function insertOrAdd(obj, key, value) {
+	if (key in obj)
+		obj[key] += value;
+	else
+		obj[key] = value;
+}
+
+function gatherStats(runes) {
+	const powers = {};
+	const stats = {};
+
+	runes.forEach(runeID => {
+		if (runeID == null || !(runeID in Runes))
+			return;
+
+		const rune = Runes[runeID];
+		insertOrAdd(powers, rune.setName, rune.power);
+
+		const stat = transformStat(rune.statName, rune.statValue);
+		insertOrAdd(stats, stat.name, stat.value);
+	});
+
+	for (let setName in powers) {
+		if (!(setName in Runes.sets))
+			continue;
+
+		let setPowers = Runes.sets[setName].powers;
+
+		for (let i = 0; i < powers[setName] && i < setPowers.length; i++)
+			insertOrAdd(stats, setPowers[i].name, setPowers[i].value);
+	}
+
+	return stats;
+}
+
+function mergeStats(arrStats) {
+	const stats = {};
+
+	arrStats.forEach(stats => {
+		for (let key in stats)
+			insertOrAdd(stats, key, stats[key]);
+	});
+
+	return stats;
+}
+
+function roundTwoDigits(value) {
+	if (typeof(value) == "number")
+		return Math.round(value * 100) / 100;
+	else
+		return value;
+}
+
+function formatStat(name, value) {
+	switch (name) {
+		case "Focus Recovery Rate":
+		case "Multi-Hit Chance":
+		case "Multi-Hit Severity":
+		case "Crit-Hit Chance":
+		case "Crit-Hit Severity":
+		case "Intensity":
+			return roundTwoDigits(value) + "%";
+
+		default:
+			return roundTwoDigits(value);
+	}
+}
+
+export default {transformStat, gatherStats, mergeStats, formatStat};
