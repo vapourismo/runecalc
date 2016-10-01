@@ -2,7 +2,7 @@
 
 "use strict";
 
-import {Component} from "react";
+import React, {Component} from "react";
 import Runes from "../database/runes.jsx";
 
 export default class Rune extends Component {

@@ -2,7 +2,7 @@
 
 "use strict";
 
-import {Component} from "react";
+import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import RuneSlot from "./components/rune-slot.jsx";
 import StatDisplay from "./components/stat-display.jsx";
