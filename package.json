@@ -7,7 +7,6 @@
     "babel-preset-react": "^6.16.0",
     "node-sass": "^3.10.1",
     "react": "^15.3.2",
-    "react-addons-update": "^15.3.2",
     "react-dom": "^15.3.2",
     "webpack": "^1.13.2"
   },
