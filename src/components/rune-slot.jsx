@@ -50,13 +50,22 @@ export default class RuneSlot extends Component {
 	render() {
 		if (this.props.runeID != null && this.props.runeID in Runes) {
 			return (
-				<div onContextMenu={this.removeRune} onClick={this.showRuneSelector}>
+				<div
+					onClick={this.showRuneSelector}
+					onContextMenu={this.removeRune}
+					title="Left-click to replace me, Right-click to remove me"
+				>
 					<Rune runeID={this.props.runeID} />
 				</div>
 			);
 		} else {
 			return (
-				<div className="rune" onClick={this.showRuneSelector} onContextMenu={this.removeSlot}>
+				<div
+					className="rune"
+					onClick={this.showRuneSelector}
+					onContextMenu={this.removeSlot}
+					title="Left-click to select a rune, Right-click to remove the slot"
+				>
 					<div className="symbol"></div>
 					<div className="description">
 						<div className="hint">
