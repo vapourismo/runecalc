@@ -27,8 +27,8 @@ class Item extends Component {
 
 	render() {
 		return (
-			<div className="slot">
-				<div className="headline">Head</div>
+			<div className="item">
+				<div className="headline">{this.props.title}</div>
 				<div className="body">
 					<div className="runes">
 						{this.state.runes.map((runeID, slot) => (
@@ -38,14 +38,46 @@ class Item extends Component {
 								onChangeRune={newRuneID => this.updateRune(slot, newRuneID)} />
 						))}
 					</div>
-					<LoadoutSummary
-						runes={this.state.runes} />
+					<LoadoutSummary runes={this.state.runes} />
 				</div>
 			</div>
 		);
 	}
 }
 
+class ItemSet extends Component {
+	render() {
+		return (
+			<div className="item-set">
+				<Item title="Weapon" />
+				<Item title="Head" />
+				<Item title="Shoulders" />
+				<Item title="Chest" />
+				<Item title="Hands" />
+				<Item title="Legs" />
+				<Item title="Feet" />
+			</div>
+		);
+	}
+}
+
+class StatOverview extends Component {
+	render() {
+		return <div className="stat-overview"></div>;
+	}
+}
+
+class Root extends Component {
+	render() {
+		return (
+			<div className="root">
+				<ItemSet />
+				<StatOverview />
+			</div>
+		);
+	}
+}
+
 window.addEventListener("load", function () {
-	ReactDOM.render(<Item />, document.getElementById("canvas"));
+	ReactDOM.render(<Root />, document.getElementById("canvas"));
 });

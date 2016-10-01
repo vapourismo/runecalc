@@ -43,7 +43,6 @@ body {
 
 #canvas {
 	flex: 1;
-	padding: 15px;
 }
 
 .rune {
@@ -186,7 +185,7 @@ body {
 	}
 }
 
-.slot {
+.item {
 	display: inline-block;
 
 	.headline {
@@ -202,12 +201,19 @@ body {
 
 		.runes {
 			border-right: solid 1px #333333;
+
+			.rune {
+				cursor: pointer;
+			}
 		}
 
 		.summary {
+			width: 100%;
+
 			.property {
 				display: flex;
 				flex-direction: row;
+				border-bottom: solid 1px #333333;
 
 				.name, .value {
 					padding: 5px 10px;
@@ -224,5 +230,25 @@ body {
 				}
 			}
 		}
+	}
+}
+
+.root {
+	display: flex;
+	flex-direction: row;
+
+	.item-set {
+		flex: 1;
+		padding: 10px;
+
+		.item {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+	}
+
+	.stat-overview {
+		flex: 1;
+		padding: 10px;
 	}
 }
