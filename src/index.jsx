@@ -9,6 +9,7 @@ import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
 import Stats from "./database/stats.jsx";
 import Overlay from "./overlay.jsx";
+import Storage from "./utilities/storage.jsx";
 
 const Version = 0;
 
@@ -128,12 +129,78 @@ class ItemSet extends Component {
 	}
 }
 
-class SaveLoadoutDialog extends Component {
+class LoadLoadoutDialog extends Component {
+	loadLoadout(name) {
+		if (this.props.onLoad)
+			this.props.onLoad(name);
+	}
+
 	render() {
 		return (
-			<div>Hello</div>
+			<div className="load-loadout-dialog">
+				<div className="headline">Select a loadout</div>
+				{Object.keys(Storage.state.loadouts).map(name => (
+					<div key={name} className="loadout" onClick={() => this.loadLoadout(name)}>
+						{name}
+					</div>
+				))}
+			</div>
 		);
 	}
+}
+
+class SaveLoadoutDialog extends Component {
+	constructor(props) {
+		super(props);
+
+		this.saveLoadout = this.saveLoadout.bind(this);
+	}
+
+	saveLoadout() {
+		if (this.inputCom && this.inputCom.value != "" && this.props.onSave)
+			this.props.onSave(this.inputCom.value);
+	}
+
+	overrideLoadout(name) {
+		if (this.props.onSave)
+			this.props.onSave(name);
+	}
+
+	render() {
+		return (
+			<div className="save-loadout-dialog">
+				<div className="existing-loadouts">
+					<div className="headline">Override existing loadout</div>
+					{this.props.names.map(name => (
+						<div key={name} className="loadout" onClick={() => this.overrideLoadout(name)}>
+							{name}
+						</div>
+					))}
+				</div>
+				<div className="new-loadout">
+					<div className="headline">Create new loadout</div>
+					<input
+						className="text-input"
+						type="text"
+						ref={com => this.inputCom = com}
+						placeholder="Type name here" />
+					<div className="submit" onClick={this.saveLoadout}>Save</div>
+				</div>
+			</div>
+		);
+	}
+}
+
+function copyLoadout(loadout) {
+	return {
+		weapon: loadout.weapon.map(x => x),
+		head: loadout.head.map(x => x),
+		shoulders: loadout.shoulders.map(x => x),
+		chest: loadout.chest.map(x => x),
+		hands: loadout.hands.map(x => x),
+		legs: loadout.legs.map(x => x),
+		feet: loadout.feet.map(x => x)
+	};
 }
 
 class Root extends Component {
@@ -152,6 +219,9 @@ class Root extends Component {
 
 		this.changeLoadout = this.changeLoadout.bind(this);
 		this.resetLoadout = this.resetLoadout.bind(this);
+		this.showSaveDialog = this.showSaveDialog.bind(this);
+		this.showLoadDialog = this.showLoadDialog.bind(this);
+		this.loadLoadout = this.loadLoadout.bind(this);
 		this.saveLoadout = this.saveLoadout.bind(this);
 	}
 
@@ -167,8 +237,32 @@ class Root extends Component {
 		});
 	}
 
-	saveLoadout() {
-		Overlay.show(<SaveLoadoutDialog />);
+	saveLoadout(name) {
+		Overlay.hide();
+
+		Storage.state.loadouts[name] = copyLoadout(this.state);
+		Storage.save();
+	}
+
+	showSaveDialog() {
+		Overlay.show(
+			<SaveLoadoutDialog
+				names={Object.keys(Storage.state.loadouts)}
+				onSave={this.saveLoadout} />
+		);
+	}
+
+	loadLoadout(name) {
+		Overlay.hide();
+		this.setState(copyLoadout(Storage.state.loadouts[name]));
+	}
+
+	showLoadDialog() {
+		Overlay.show(
+			<LoadLoadoutDialog
+				names={Object.keys(Storage.state.loadouts)}
+				onLoad={this.loadLoadout} />
+		);
 	}
 
 	changeLoadout(loadout) {
@@ -182,7 +276,8 @@ class Root extends Component {
 			<div className="root">
 				<Toolbar
 					onReset={this.resetLoadout}
-					onSave={this.saveLoadout} />
+					onLoad={this.showLoadDialog}
+					onSave={this.showSaveDialog} />
 				<ItemSet loadout={this.state} onChangeLoadout={this.changeLoadout} />
 				<div className="stat-overview">
 					<div className="headline">

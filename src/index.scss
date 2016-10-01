@@ -222,6 +222,113 @@ body {
 	}
 }
 
+.text-input {
+	display: block;
+
+	padding: 10px;
+	width: 100%;
+	min-width: 0;
+
+	background-color: #222222;
+	border: none;
+	outline: none;
+	border-bottom: solid 1px #333333;
+
+	color: #efefef;
+	font-size: 14px;
+
+	&:focus, &:hover {
+		background-color: #333333;
+		border-bottom: solid 1px #efefef;
+	}
+}
+
+.save-loadout-dialog {
+	display: flex;
+	flex-direction: row;
+	background-color: #222222;
+	border: solid 1px #efefef;
+	box-shadow: 0 0 10px #000000;
+
+	margin: 15px;
+
+	.headline {
+		text-align: center;
+		font-size: 16px;
+		border-bottom: solid 1px #666666;
+
+		padding: 10px;
+	}
+
+	.existing-loadouts {
+		padding: 15px;
+
+		.loadout {
+			font-size: 14px;
+			padding: 10px;
+			border-bottom: solid 1px #333333;
+			cursor: pointer;
+
+			&:hover {
+				background-color: #333333;
+				border-bottom: solid 1px #efefef;
+			}
+		}
+	}
+
+	.new-loadout {
+		padding: 15px;
+
+		.text-input {
+			text-align: center;
+		}
+
+		.submit {
+			text-align: center;
+			font-size: 14px;
+			padding: 10px;
+			border-bottom: solid 1px #333333;
+			cursor: pointer;
+
+			&:hover {
+				background-color: #333333;
+				border-bottom: solid 1px #efefef;
+			}
+		}
+	}
+}
+
+.load-loadout-dialog {
+	display: flex;
+	flex-direction: column;
+	background-color: #222222;
+	border: solid 1px #efefef;
+	box-shadow: 0 0 10px #000000;
+
+	margin: 15px;
+	padding: 15px;
+
+	.headline {
+		text-align: center;
+		font-size: 16px;
+		border-bottom: solid 1px #666666;
+
+		padding: 10px;
+	}
+
+	.loadout {
+		font-size: 14px;
+		padding: 10px;
+		border-bottom: solid 1px #333333;
+		cursor: pointer;
+
+		&:hover {
+			background-color: #333333;
+			border-bottom: solid 1px #efefef;
+		}
+	}
+}
+
 .item {
 	display: inline-block;
 
@@ -316,7 +423,6 @@ body {
 		}
 	}
 }
-
 
 .root {
 	.toolbar {
