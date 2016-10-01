@@ -4,6 +4,7 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom"
 import RuneSlot from "./components/rune-slot.jsx";
 import StatDisplay from "./components/stat-display.jsx";
+import Stats from "./database/stats.jsx";
 
 class Item extends Component {
 	constructor(props) {
@@ -65,6 +66,55 @@ class Item extends Component {
 }
 
 class ItemSet extends Component {
+	updateRunes(item, runes) {
+		const loadout = {};
+
+		for (let key in this.props.loadout)
+			loadout[key] = this.props.loadout[key];
+
+		loadout[item] = runes;
+
+		if (this.props.onChangeLoadout)
+			this.props.onChangeLoadout(loadout);
+	}
+
+	render() {
+		return (
+			<div className="item-set">
+				<Item
+					title="Weapon"
+					runes={this.props.loadout.weapon}
+					onChangeRunes={newRunes => this.updateRunes("weapon", newRunes)} />
+				<Item
+					title="Head"
+					runes={this.props.loadout.head}
+					onChangeRunes={newRunes => this.updateRunes("head", newRunes)} />
+				<Item
+					title="Shoulders"
+					runes={this.props.loadout.shoulders}
+					onChangeRunes={newRunes => this.updateRunes("shoulders", newRunes)} />
+				<Item
+					title="Chest"
+					runes={this.props.loadout.chest}
+					onChangeRunes={newRunes => this.updateRunes("chest", newRunes)} />
+				<Item
+					title="Hands"
+					runes={this.props.loadout.hands}
+					onChangeRunes={newRunes => this.updateRunes("hands", newRunes)} />
+				<Item
+					title="Legs"
+					runes={this.props.loadout.legs}
+					onChangeRunes={newRunes => this.updateRunes("legs", newRunes)} />
+				<Item
+					title="Feet"
+					runes={this.props.loadout.feet}
+					onChangeRunes={newRunes => this.updateRunes("feet", newRunes)} />
+			</div>
+		);
+	}
+}
+
+class Root extends Component {
 	constructor(props) {
 		super(props);
 
@@ -79,57 +129,17 @@ class ItemSet extends Component {
 		};
 	}
 
-	updateRunes(item, runes) {
-		this.state[item] = runes;
-		this.forceUpdate();
-	}
-
 	render() {
-		return (
-			<div className="item-set">
-				<Item
-					title="Weapon"
-					runes={this.state.weapon}
-					onChangeRunes={newRunes => this.updateRunes("weapon", newRunes)} />
-				<Item
-					title="Head"
-					runes={this.state.head}
-					onChangeRunes={newRunes => this.updateRunes("head", newRunes)} />
-				<Item
-					title="Shoulders"
-					runes={this.state.shoulders}
-					onChangeRunes={newRunes => this.updateRunes("shoulders", newRunes)} />
-				<Item
-					title="Chest"
-					runes={this.state.chest}
-					onChangeRunes={newRunes => this.updateRunes("chest", newRunes)} />
-				<Item
-					title="Hands"
-					runes={this.state.hands}
-					onChangeRunes={newRunes => this.updateRunes("hands", newRunes)} />
-				<Item
-					title="Legs"
-					runes={this.state.legs}
-					onChangeRunes={newRunes => this.updateRunes("legs", newRunes)} />
-				<Item
-					title="Feet"
-					runes={this.state.feet}
-					onChangeRunes={newRunes => this.updateRunes("feet", newRunes)} />
-			</div>
-		);
-	}
-}
+		const allStats = Stats.mergeStats(Object.values(this.state).map(Stats.gatherStats));
 
-class Root extends Component {
-	render() {
 		return (
 			<div className="root">
-				<ItemSet />
+				<ItemSet loadout={this.state} onChangeLoadout={this.setState.bind(this)} />
 				<div className="stat-overview">
 					<div className="headline">
 						Summary
 					</div>
-					<StatDisplay stats={{"Awesomeness": "100%"}} />
+					<StatDisplay stats={allStats} />
 				</div>
 			</div>
 		);
