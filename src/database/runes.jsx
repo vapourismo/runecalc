@@ -150,6 +150,69 @@ const runes = [
 		power: 1,
 		statName: "Multi-Hit Rating",
 		statValue: 501
+	},
+	{
+		type: "air",
+		setName: "Prevention",
+		power: 3,
+		statName: "Focus Recovery Rating",
+		statValue: 501
+	},
+	{
+		type: "life",
+		setName: "Prevention",
+		power: 3,
+		statName: "Focus Pool",
+		statValue: 75
+	},
+	{
+		type: "logic",
+		setName: "Prevention",
+		power: 3,
+		statName: "Intensity Rating",
+		statValue: 501
+	},
+	{
+		type: "air",
+		setName: "Prevention",
+		power: 2,
+		statName: "Focus Recovery Rating",
+		statValue: 402
+	},
+	{
+		type: "life",
+		setName: "Prevention",
+		power: 2,
+		statName: "Focus Pool",
+		statValue: 60
+	},
+	{
+		type: "logic",
+		setName: "Prevention",
+		power: 2,
+		statName: "Intensity Rating",
+		statValue: 402
+	},
+	{
+		type: "air",
+		setName: "Prevention",
+		power: 1,
+		statName: "Focus Recovery Rating",
+		statValue: 402
+	},
+	{
+		type: "life",
+		setName: "Prevention",
+		power: 1,
+		statName: "Focus Pool",
+		statValue: 60
+	},
+	{
+		type: "logic",
+		setName: "Prevention",
+		power: 1,
+		statName: "Intensity Rating",
+		statValue: 402
 	}
 ];
 
@@ -219,6 +282,19 @@ runes.sets = {
 			{name: "Health Multiplier",   value: 1},
 			{name: "Multi-Hit Chance",    value: 0.75},
 			{name: "Focus Recovery Rate", value: 0.15}
+		]
+	},
+	"Prevention": {
+		runes: runes.fromSet("Prevention"),
+		powers: [
+			null,
+			{name: "Intensity", value: 0.21},
+			{name: "Focus Pool Multiplier", value: 1.2},
+			{name: "Prevention Tier 1", value: ""},
+			{name: "Focus Recovery Rate", value: 0.02},
+			{name: "Focus Pool Multiplier", value: 1.65},
+			{name: "Intensity", value: 0.36},
+			{name: "Prevention Tier 2", value: ""}
 		]
 	}
 };

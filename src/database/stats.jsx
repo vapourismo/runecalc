@@ -85,7 +85,8 @@ function gatherStats(runes) {
 		let setPowers = Runes.sets[setName].powers;
 
 		for (let i = 0; i < powers[setName] && i < setPowers.length; i++)
-			insertOrAdd(stats, setPowers[i].name, setPowers[i].value);
+			if (setPowers[i])
+				insertOrAdd(stats, setPowers[i].name, setPowers[i].value);
 	}
 
 	return stats;
