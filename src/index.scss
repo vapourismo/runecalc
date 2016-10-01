@@ -423,11 +423,17 @@ body {
 }
 
 .toolbar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 
 	padding: 10px;
+	padding-bottom: 0px;
+	background-color: #222222;
 
 	.button {
 		display: inline-block;
@@ -456,10 +462,11 @@ body {
 	}
 }
 
-.root {
-	.toolbar {
-		width: 50%;
-	}
+.contents {
+	display: flex;
+	flex-direction: row;
+
+	margin-top: 50px;
 
 	.item-set {
 		width: 50%;
@@ -474,7 +481,6 @@ body {
 	.stat-overview {
 		padding: 10px;
 		position: fixed;
-		top: 0;
 		left: 50%;
 		width: 50%;
 

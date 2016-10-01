@@ -12,8 +12,6 @@ import Stats from "./database/stats.jsx";
 import Overlay from "./overlay.jsx";
 import Storage from "./utilities/storage.jsx";
 
-const Version = 0;
-
 class Item extends Component {
 	constructor(props) {
 		super(props);
@@ -329,17 +327,19 @@ class Root extends Component {
 		const allStats = Stats.mergeStats(Object.values(this.state).map(Stats.gatherStats));
 
 		return (
-			<div className="root">
+			<div>
 				<Toolbar
 					onReset={this.resetLoadout}
 					onLoad={this.showLoadDialog}
 					onSave={this.showSaveDialog} />
-				<ItemSet loadout={this.state} onChangeLoadout={this.changeLoadout} />
-				<div className="stat-overview">
-					<div className="headline">
-						Summary
+				<div className="contents">
+					<ItemSet loadout={this.state} onChangeLoadout={this.changeLoadout} />
+					<div className="stat-overview">
+						<div className="headline">
+							Summary
+						</div>
+						<StatDisplay stats={allStats} />
 					</div>
-					<StatDisplay stats={allStats} />
 				</div>
 			</div>
 		);

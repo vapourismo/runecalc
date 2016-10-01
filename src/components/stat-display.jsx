@@ -3,7 +3,6 @@
 "use strict";
 
 import React, {Component} from "react";
-import Runes from "../database/runes.jsx";
 import Stats from "../database/stats.jsx";
 
 export default class StatDisplay extends Component {
