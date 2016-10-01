@@ -13,6 +13,7 @@ export default class RuneSlot extends Component {
 		this.removeRune = this.removeRune.bind(this);
 		this.selectRune = this.selectRune.bind(this);
 		this.showRuneSelector = this.showRuneSelector.bind(this);
+		this.removeSlot = this.removeSlot.bind(this);
 	}
 
 	removeRune(ev) {
@@ -35,6 +36,15 @@ export default class RuneSlot extends Component {
 		Overlay.show(<RuneSelector onSelect={this.selectRune} />);
 	}
 
+	removeSlot(ev) {
+		if (ev) ev.preventDefault();
+
+		if (this.props.onRemoveSlot)
+			this.props.onRemoveSlot();
+
+		return false;
+	}
+
 	render() {
 		if (this.props.runeID != null && this.props.runeID in Runes) {
 			return (
@@ -44,7 +54,7 @@ export default class RuneSlot extends Component {
 			);
 		} else {
 			return (
-				<div className="rune" onClick={this.showRuneSelector}>
+				<div className="rune" onClick={this.showRuneSelector} onContextMenu={this.removeSlot}>
 					<div className="symbol"></div>
 				</div>
 			);

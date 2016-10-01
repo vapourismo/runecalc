@@ -48,7 +48,6 @@ body {
 .rune {
 	display: flex;
 	flex-direction: row;
-	width: 350px;
 
 	padding: 2px;
 	border-bottom: solid 1px #333333;
@@ -200,35 +199,48 @@ body {
 		flex-direction: row;
 
 		.runes {
+			flex: 1;
 			border-right: solid 1px #333333;
 
 			.rune {
 				cursor: pointer;
 			}
+
+			.add {
+				padding: 5px;
+				text-align: center;
+				cursor: pointer;
+
+				&:hover {
+					background-color: #333333;
+				}
+			}
 		}
 
 		.summary {
-			width: 100%;
+			flex: 1;
+		}
+	}
+}
 
-			.property {
-				display: flex;
-				flex-direction: row;
-				border-bottom: solid 1px #333333;
+.summary {
+	.property {
+		display: flex;
+		flex-direction: row;
+		border-bottom: solid 1px #333333;
 
-				.name, .value {
-					padding: 5px 10px;
-					font-size: 14px;
-				}
+		.name, .value {
+			padding: 5px 10px;
+			font-size: 14px;
+		}
 
-				.name {
-					flex: 1;
-					text-align: left;
-				}
+		.name {
+			flex: 1;
+			text-align: left;
+		}
 
-				.value {
-					text-align: center;
-				}
-			}
+		.value {
+			text-align: center;
 		}
 	}
 }
@@ -250,5 +262,13 @@ body {
 	.stat-overview {
 		flex: 1;
 		padding: 10px;
+
+		.headline {
+			text-align: center;
+			font-size: 14px;
+			border-bottom: solid 1px #666666;
+
+			padding: 10px;
+		}
 	}
 }
