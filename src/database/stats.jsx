@@ -4,16 +4,57 @@
 
 import Runes from "./runes.jsx";
 
-const focusRecFactor    = 0.2 / 1000;
-const multiHitFactor    = 6   / 1000;
-const multiHitSevFactor = 4   / 1000;
-const critHitFactor     = 2.5 / 1000;
-const critHitSevFactor  = 10  / 1000;
-const intensityFactor   = 2.8 / 1000;
-const critMitFactor     = 15  / 1000;
+const focusRecFactor      = 0.2  / 1000;
+const multiHitFactor      = 6    / 1000;
+const multiHitSevFactor   = 4    / 1000;
+const critHitFactor       = 2.5  / 1000;
+const critHitSevFactor    = 10   / 1000;
+const intensityFactor     = 2.8  / 1000;
+const critMitFactor       = 15   / 1000;
+const strikethroughFactor = 3    / 1000;
+const lifestealFactor     = 2.1  / 1000;
+const vigorFactor         = 2.8  / 1000;
+const glanceFactor        = 2.75 / 1000;
+const deflectFactor       = 1.5  / 1000;
 
 function transformStat(name, value) {
 	switch (name) {
+		case "Glance Rating":
+			return {
+				name: "Glance Chance",
+				value: value * glanceFactor
+			};
+
+		case "Crit-Mitigation Rating":
+			return {
+				name: "Crit-Mitigation",
+				value: value * critMitFactor
+			};
+
+		case "Deflect Rating":
+			return {
+				name: "Deflect Chance",
+				value: value * deflectFactor
+			};
+
+		case "Strikethrough Rating":
+			return {
+				name: "Strikethrough",
+				value: value * strikethroughFactor
+			};
+
+		case "Lifesteal Rating":
+			return {
+				name: "Lifesteal",
+				value: value * lifestealFactor
+			};
+
+		case "Vigor Rating":
+			return {
+				name: "Vigor",
+				value: value * vigorFactor
+			};
+
 		case "Focus Recovery Rating":
 			return {
 				name: "Focus Recovery Rate",
@@ -48,12 +89,6 @@ function transformStat(name, value) {
 			return {
 				name: "Intensity",
 				value: value * intensityFactor
-			};
-
-		case "Critical Mitigation Rating":
-			return {
-				name: "Critical Mitigation",
-				value: value * critMitFactor
 			};
 
 		default:
