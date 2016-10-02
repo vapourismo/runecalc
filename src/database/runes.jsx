@@ -2,7 +2,6 @@
 
 "use strict";
 
-
 const statColors = {
 	"Armor":                     "earth",
 	"Armor Pierce Rating":       "air",
@@ -25,6 +24,12 @@ const statColors = {
 };
 
 const statValues = {
+	80: {
+		"Armor": 134,
+		"Health": 485,
+		"Focus Pool": 40,
+		[null]: 269
+	},
 	100: {
 		"Armor": 164,
 		"Health": 593,
@@ -154,6 +159,44 @@ function makeRMTSet(name, stats, powers) {
 			uniquePerItem: true
 		});
 	});
+
+	runes.sets[name] = {
+		runes: runes.fromSet(name),
+		powers
+	};
+}
+
+function makeNonRMTSet(name, stats, powers) {
+	[80, 100, 120].forEach(lvl => {
+		const valueTable = statValues[lvl];
+
+		stats.forEach(statName => {
+			if (!(statName in statColors))
+				console.error("Stat", statName, "does not have an associated color");
+
+			const statColor = statColors[statName];
+			const statValue = statName in valueTable ? valueTable[statName] : valueTable[null];
+
+			runes.push({
+				type: statColor,
+				setName: name,
+				power: 2,
+				statName,
+				statValue,
+				uniquePerItem: true
+			});
+
+			runes.push({
+				type: statColor,
+				setName: name,
+				power: 1,
+				statName,
+				statValue
+			});
+		});
+	});
+
+	powers.unshift(null);
 
 	runes.sets[name] = {
 		runes: runes.fromSet(name),
@@ -1016,3 +1059,196 @@ makeRMTSet(
 		{name: "Multi-Hit Chance", value: 1.80}
 	]
 )
+
+// Non-RMT Sets
+makeNonRMTSet(
+	"Striker",
+	[
+		"Multi-Hit Rating",
+		"Strikethrough Rating",
+		"Health"
+	],
+	[
+		{name: "Multi-Hit Chance", value: 0.35},
+		{name: "Multi-Hit Severity", value: 0.40},
+		{name: "Strikethrough", value: 0.27},
+		{name: "Multi-Hit Severity", value: 0.50},
+		{name: "Multi-Hit Chance", value: 0.55}
+	]
+);
+
+makeNonRMTSet(
+	"Defiance",
+	[
+		"Glance Rating",
+		"Armor",
+		"Strikethrough Rating"
+	],
+	[
+		{name: "Glance Chance", value: 0.49},
+		{name: "Glance Mitigation", value: 0.14},
+		{name: "Armor Multiplier", value: 0.45},
+		{name: "Glance Mitigation", value: 0.17},
+		{name: "Glance Chance", value: 0.76}
+	]
+);
+
+makeNonRMTSet(
+	"Pulse",
+	[
+		"Crit-Hit Rating",
+		"Intensity Rating",
+		"Multi-Hit Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 0.17},
+		{name: "Multi-Hit Severity", value: 0.40},
+		{name: "Crit-Hit Chance", value: 0.22},
+		{name: "Multi-Hit Severity", value: 0.50},
+		{name: "Crit-Hit Chance", value: 0.28}
+	]
+);
+
+makeNonRMTSet(
+	"Havoc",
+	[
+		"Crit-Hit Rating",
+		"Multi-Hit Rating",
+		"Strikethrough Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 0.17},
+		{name: "Crit-Hit Chance", value: 0.20},
+		{name: "Multi-Hit Chance", value: 0.45},
+		{name: "Crit-Hit Chance", value: 0.25},
+		{name: "Multi-Hit Chance", value: 0.55}
+	]
+);
+
+makeNonRMTSet(
+	"Elusion",
+	[
+		"Deflect Rating",
+		"Health",
+		"Strikethrough Rating"
+	],
+	[
+		{name: "Deflect Chance", value: 0.10},
+		{name: "Health Multiplier", value: 0.20},
+		{name: "Armor Multiplier", value: 0.45},
+		{name: "Health Multiplier", value: 0.25},
+		{name: "Deflect Chance", value: 0.16}
+	]
+);
+
+makeNonRMTSet(
+	"Resurgence",
+	[
+		"Crit-Hit Rating",
+		"Focus Pool",
+		"Health"
+	],
+	[
+		{name: "Crit-Hit Chance", value: 0.18},
+		{name: "Focus Recovery Rate", value: 0.02},
+		{name: "Crit-Hit Severity", value: 0.90},
+		{name: "Focus Recovery Rate", value: 0.02},
+		{name: "Crit-Hit Chance", value: 0.28}
+	]
+);
+
+makeNonRMTSet(
+	"Onslaught",
+	[
+		"Vigor Rating",
+		"Lifesteal Rating",
+		"Strikethrough Rating"
+	],
+	[
+		{name: "Vigor", value: 0.21},
+		{name: "Strikethrough", value: 0.24},
+		{name: "lifesteal", value: 0.18},
+		{name: "Strikethrough", value: 0.30},
+		{name: "Vigor", value: 0.33}
+	]
+);
+
+makeNonRMTSet(
+	"Alleviation",
+	[
+		"Crit-Mitigation Rating",
+		"Health",
+		"Armor"
+	],
+	[
+		{name: "Crit-Mitigation", value: 1.05},
+		{name: "Health Multiplier", value: 0.20},
+		{name: "Armor Multiplier", value: 0.45},
+		{name: "Health Multiplier", value: 0.25},
+		{name: "Crit-Mitigation", value: 1.65}
+	]
+);
+
+makeNonRMTSet(
+	"Concentration",
+	[
+		"Intensity Rating",
+		"Focus Pool",
+		"Focus Recovery Rating"
+	],
+	[
+		{name: "Intensity", value: 0.21},
+		{name: "Focus Recovery Rate", value: 0.02},
+		{name: "Health Multiplier", value: 0.22},
+		{name: "Focus Pool Multiplier", value: 1.50},
+		{name: "Intensity", value: 0.33}
+	]
+);
+
+makeNonRMTSet(
+	"Devastation",
+	[
+		"Crit-Hit Rating",
+		"Crit-Hit Severity Rating",
+		"Health"
+	],
+	[
+		{name: "Strikethrough", value: 0.21},
+		{name: "Crit-Hit Chance", value: 0.20},
+		{name: "Crit-Hit Severity", value: 0.90},
+		{name: "Crit-Hit Chance", value: 0.25},
+		{name: "Crit-Hit Severity", value: 1.10}
+	]
+);
+
+makeNonRMTSet(
+	"Provoker",
+	[
+		"Deflect Rating",
+		"Glance Rating",
+		"Multi-Hit Rating"
+	],
+	[
+		{name: "Multi-Hit Chance", value: 0.35},
+		{name: "Glance Chance", value: 0.55},
+		{name: "Deflect Chance", value: 0.14},
+		{name: "Glance Chance", value: 0.69},
+		{name: "Deflect Chance", value: 0.16}
+	]
+);
+
+makeNonRMTSet(
+	"Cynosure",
+	[
+		"Multi-Hit Rating",
+		"Focus Recovery Rating",
+		"Health"
+	],
+	[
+		{name: "Multi-Hit Chance", value: 0.35},
+		{name: "Focus Pool Multiplier", value: 1.20},
+		{name: "Multi-Hit Severity", value: 0.45},
+		{name: "Focus Pool Multiplier", value: 1.50},
+		{name: "Multi-Hit Chance", value: 0.55}
+	]
+);
