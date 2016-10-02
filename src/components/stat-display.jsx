@@ -14,6 +14,8 @@ export default class StatDisplay extends Component {
 		else if (this.props.stats)
 			stats = this.props.stats;
 
+		stats = Stats.transformStats(stats);
+
 		let counter = 0;
 		const lines = Object.keys(stats).sort().map(name => {
 			return (

@@ -257,18 +257,31 @@ function copyLoadout(loadout) {
 	};
 }
 
+function modPowerConverter(stats) {
+	if ("Crit-Hit Severity Rating" in stats) {
+		Stats.insertOrAdd(
+			stats,
+			"Multi-Hit Severity Rating",
+			stats["Crit-Hit Severity Rating"] /= 2
+		);
+	}
+}
+
 class Root extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			weapon: [null, null, null],
-			head: [null, null, null],
-			shoulders: [null, null, null],
-			chest: [null, null, null],
-			hands: [null, null, null],
-			legs: [null, null, null],
-			feet: [null, null, null]
+			loadout: {
+				weapon: [null, null, null],
+				head: [null, null, null],
+				shoulders: [null, null, null],
+				chest: [null, null, null],
+				hands: [null, null, null],
+				legs: [null, null, null],
+				feet: [null, null, null]
+			},
+			ampPowerConverter: false
 		};
 
 		this.changeLoadout = this.changeLoadout.bind(this);
@@ -281,20 +294,22 @@ class Root extends Component {
 
 	resetLoadout() {
 		this.setState({
-			weapon: this.state.weapon.map(_ => null),
-			head: this.state.head.map(_ => null),
-			shoulders: this.state.shoulders.map(_ => null),
-			chest: this.state.chest.map(_ => null),
-			hands: this.state.hands.map(_ => null),
-			legs: this.state.legs.map(_ => null),
-			feet: this.state.feet.map(_ => null)
+			loadout: {
+				weapon: this.state.loadout.weapon.map(_ => null),
+				head: this.state.loadout.head.map(_ => null),
+				shoulders: this.state.loadout.shoulders.map(_ => null),
+				chest: this.state.loadout.chest.map(_ => null),
+				hands: this.state.loadout.hands.map(_ => null),
+				legs: this.state.loadout.legs.map(_ => null),
+				feet: this.state.loadout.feet.map(_ => null)
+			}
 		});
 	}
 
 	saveLoadout(name) {
 		Overlay.hide();
 
-		Storage.state.loadouts[name] = copyLoadout(this.state);
+		Storage.state.loadouts[name] = copyLoadout(this.state.loadout);
 		Storage.save();
 	}
 
@@ -308,7 +323,7 @@ class Root extends Component {
 
 	loadLoadout(name) {
 		Overlay.hide();
-		this.setState(copyLoadout(Storage.state.loadouts[name]));
+		this.setState({loadout: copyLoadout(Storage.state.loadouts[name])});
 	}
 
 	showLoadDialog() {
@@ -320,11 +335,16 @@ class Root extends Component {
 	}
 
 	changeLoadout(loadout) {
-		this.setState(loadout);
+		this.setState({loadout});
 	}
 
 	render() {
-		const allStats = Stats.mergeStats(Object.values(this.state).map(Stats.gatherStats));
+		let allStats = Stats.mergeStats(Object.values(this.state.loadout).map(Stats.gatherStats));
+
+		if (this.state.ampPowerConverter)
+			modPowerConverter(allStats);
+
+		allStats = Stats.transformStats(allStats);
 
 		return (
 			<div>
@@ -333,7 +353,7 @@ class Root extends Component {
 					onLoad={this.showLoadDialog}
 					onSave={this.showSaveDialog} />
 				<div className="contents">
-					<ItemSet loadout={this.state} onChangeLoadout={this.changeLoadout} />
+					<ItemSet loadout={this.state.loadout} onChangeLoadout={this.changeLoadout} />
 					<div className="stat-overview">
 						<div className="headline">
 							Summary

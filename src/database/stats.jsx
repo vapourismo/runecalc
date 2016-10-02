@@ -61,6 +61,17 @@ function transformStat(name, value) {
 	}
 }
 
+function transformStats(stats) {
+	const newStats = {};
+
+	for (let name in stats) {
+		let result = transformStat(name, stats[name]);
+		insertOrAdd(newStats, result.name, result.value);
+	}
+
+	return newStats;
+}
+
 function insertOrAdd(obj, key, value) {
 	if (key in obj)
 		obj[key] += value;
@@ -77,12 +88,11 @@ function gatherStats(runes) {
 			return;
 
 		const rune = Runes[runeID];
-		const stat = transformStat(rune.statName, rune.statValue);
 
 		if (rune.setName && rune.power && rune.setName in Runes.sets)
 			insertOrAdd(powers, rune.setName, rune.power);
 
-		insertOrAdd(stats, stat.name, stat.value);
+		insertOrAdd(stats, rune.statName, rune.statValue);
 	});
 
 	for (let setName in powers) {
@@ -134,4 +144,4 @@ function formatStat(name, value) {
 	}
 }
 
-export default {transformStat, gatherStats, mergeStats, formatStat};
+export default {transformStat, transformStats, gatherStats, mergeStats, formatStat, insertOrAdd};
