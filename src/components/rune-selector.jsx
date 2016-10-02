@@ -66,7 +66,7 @@ export default class RuneSelector extends Component {
 		} else {
 			const availableSets = Object.keys(Runes.sets).filter(
 				setName => Runes.sets[setName].runes.some(selector)
-			).map(
+			).sort().map(
 				setName => (
 					<div key={setName} className="set" onClick={() => this.selectSet(setName)}>
 						{setName}
