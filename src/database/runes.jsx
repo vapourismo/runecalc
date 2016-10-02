@@ -123,7 +123,35 @@ function makeRMTClassSet(name, stats, powers) {
 			power: idx == 0 ? 2 : 1,
 			statName,
 			statValue,
-			unique: true
+			unique: true,
+			items: ["head", "shoulders", "legs"]
+		});
+	});
+
+	runes.sets[name] = {
+		runes: runes.fromSet(name),
+		powers
+	};
+}
+
+function makeRMTSet(name, stats, powers) {
+	const valueTable = statValues[140];
+
+	stats.forEach((statName, idx) => {
+		if (!(statName in statColors))
+			console.error("Stat", statName, "does not have an associated color");
+
+		const statColor = statColors[statName];
+		const statValue = statName in valueTable ? valueTable[statName] : valueTable[null];
+
+		runes.push({
+			type: statColor,
+			setName: name,
+			power: idx == 0 ? 2 : 1,
+			statName,
+			statValue,
+			unique: idx == 0,
+			uniquePerItem: true
 		});
 	});
 
@@ -807,3 +835,184 @@ makeRMTClassSet(
 		{name: "Keelhaul Tier 2", value: ""}
 	]
 );
+
+// RMT Sets
+makeRMTSet(
+	"Pallliated",
+	[
+		"Crit-Mitigation Rating",
+		"Crit-Mitigation Rating",
+		"Armor",
+		"Health"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Armor Multiplier", value: 0.65},
+		{name: "Crit-Mitigation", value: 4.50}
+	]
+)
+
+makeRMTSet(
+	"Intensification",
+	[
+		"Intensity Rating",
+		"Focus Pool",
+		"Focus Recovery Rating",
+		"Intensity Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Focus Pool Multiplier", value: 2.00},
+		{name: "Intensity", value: 0.84}
+	]
+)
+
+makeRMTSet(
+	"Resumption",
+	[
+		"Focus Recovery Rating",
+		"Focus Recovery Rating",
+		"Multi-Hit Rating",
+		"Health"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Multi-Hit Chance", value: 0.75},
+		{name: "Focus Recovery Rate", value: 0.15}
+	]
+)
+
+makeRMTSet(
+	"Gleaming",
+	[
+		"Glance Mitigation Rating",
+		"Glance Rating",
+		"Armor",
+		"Health"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Glance Chance", value: 0.73},
+		{name: "Glance Mitigation", value: 0.60}
+	]
+)
+
+makeRMTSet(
+	"Ruination",
+	[
+		"Crit-Hit Severity Rating",
+		"Crit-Hit Severity Rating",
+		"Strikethrough Rating",
+		"Crit-Hit Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Crit-Hit Chance", value: 0.32},
+		{name: "Crit-Hit Severity", value: 3.00}
+	]
+)
+
+makeRMTSet(
+	"Evasion",
+	[
+		"Deflect Rating",
+		"Deflect Rating",
+		"Health",
+		"Armor"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Armor Multiplier", value: 0.65},
+		{name: "Deflect Chance", value: 0.45}
+	]
+)
+
+makeRMTSet(
+	"Pandemic",
+	[
+		"Vigor Rating",
+		"Vigor Rating",
+		"Multi-Hit Rating",
+		"Crit-Hit Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Crit-Hit Chance", value: 0.31},
+		{name: "Vigor", value: 0.84}
+	]
+)
+
+makeRMTSet(
+	"Siphoning",
+	[
+		"Lifesteal Rating",
+		"Lifesteal Rating",
+		"Strikethrough Rating",
+		"Vigor Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Strikethrough", value: 0.38},
+		{name: "Lifesteal", value: 0.63}
+	]
+)
+
+makeRMTSet(
+	"Hardiness",
+	[
+		"Health",
+		"Health",
+		"Armor",
+		"Deflect Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Glance Chance", value: 0.73},
+		{name: "Deflect Chance", value: 0.45}
+	]
+)
+
+makeRMTSet(
+	"Rejuvenation",
+	[
+		"Crit-Hit Rating",
+		"Crit-Hit Rating",
+		"Intensity Rating",
+		"Multi-Hit Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Multi-Hit Chance", value: 0.75},
+		{name: "Crit-Hit Chance", value: 0.75}
+	]
+)
+
+makeRMTSet(
+	"Vim",
+	[
+		"Focus Pool",
+		"Focus Pool",
+		"Crit-Hit Rating",
+		"Crit-Hit Severity Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Crit-Hit Chance", value: 0.31},
+		{name: "Focus Pool Multiplier", value: 4.80}
+	]
+)
+
+makeRMTSet(
+	"Basher",
+	[
+		"Multi-Hit Severity Rating",
+		"Multi-Hit Rating",
+		"Vigor Rating",
+		"Strikethrough Rating"
+	],
+	[
+		{name: "Health Multiplier", value: 1},
+		{name: "Multi-Hit Severity", value: 1.20},
+		{name: "Multi-Hit Chance", value: 1.80}
+	]
+)
