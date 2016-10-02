@@ -17,7 +17,9 @@ export default class StatDisplay extends Component {
 		stats = Stats.transformStats(stats);
 
 		let counter = 0;
-		const lines = Object.keys(stats).sort().map(name => {
+		const lines = Object.keys(stats).sort(
+			(a, b) => stats[a] < stats[b] ? 1 : (stats[a] == stats[b] ? 0 : -1)
+		).map(name => {
 			return (
 				<div key={counter++} className="property">
 					<div className="name">
