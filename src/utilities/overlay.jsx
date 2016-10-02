@@ -4,7 +4,7 @@
 
 import ReactDOM from "react-dom";
 
-import BackStack from "./utilities/back-stack.jsx";
+import BackStack from "./back-stack.jsx";
 
 function show(content) {
 	const elem = document.getElementById("overlay");

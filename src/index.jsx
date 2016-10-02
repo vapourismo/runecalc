@@ -9,7 +9,7 @@ import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
 import Runes from "./database/runes.jsx";
 import Stats from "./database/stats.jsx";
-import Overlay from "./overlay.jsx";
+import Overlay from "./utilities/overlay.jsx";
 import Storage from "./utilities/storage.jsx";
 
 class Item extends Component {

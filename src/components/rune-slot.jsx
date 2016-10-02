@@ -4,7 +4,7 @@
 
 import React, {Component} from "react";
 import Runes from "../database/runes.jsx";
-import Overlay from "../overlay.jsx";
+import Overlay from "../utilities/overlay.jsx";
 import RuneSelector from "./rune-selector.jsx";
 import Rune from "./rune.jsx";
 
