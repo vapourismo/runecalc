@@ -171,6 +171,12 @@ function formatStat(name, value) {
 		case "Crit-Hit Chance":
 		case "Crit-Hit Severity":
 		case "Intensity":
+		case "Strikethrough":
+		case "Vigor":
+		case "Lifesteal":
+		case "Glance Chance":
+		case "Deflect Chance":
+		case "Crit-Mitigation":
 		case "Health Multiplier":
 			return roundTwoDigits(value) + "%";
 
