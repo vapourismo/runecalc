@@ -10,6 +10,7 @@ const multiHitSevFactor = 4   / 1000;
 const critHitFactor     = 2.5 / 1000;
 const critHitSevFactor  = 10  / 1000;
 const intensityFactor   = 2.8 / 1000;
+const critMitFactor     = 15  / 1000;
 
 function transformStat(name, value) {
 	switch (name) {
@@ -47,6 +48,12 @@ function transformStat(name, value) {
 			return {
 				name: "Intensity",
 				value: value * intensityFactor
+			};
+
+		case "Critical Mitigation Rating":
+			return {
+				name: "Critical Mitigation",
+				value: value * critMitFactor
 			};
 
 		default:
