@@ -476,7 +476,7 @@ body {
 	margin-top: 50px;
 
 	.item-set {
-		width: 66%;
+		flex: 2;
 		padding: 10px;
 
 		.item {
@@ -485,18 +485,20 @@ body {
 		}
 	}
 
-	.stat-overview {
-		padding: 10px;
-		position: fixed;
-		left: 66%;
-		width: 34%;
+	.side-bar {
+		flex: 1;
 
-		.headline {
-			text-align: center;
-			font-size: 14px;
-			border-bottom: solid 1px #666666;
-
+		.section {
 			padding: 10px;
+			margin-bottom: 10px;
+
+			.headline {
+				text-align: center;
+				font-size: 14px;
+				border-bottom: solid 1px #666666;
+
+				padding: 10px;
+			}
 		}
 	}
 }

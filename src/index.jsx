@@ -11,6 +11,7 @@ import Runes from "./database/runes.jsx";
 import Stats from "./database/stats.jsx";
 import Overlay from "./utilities/overlay.jsx";
 import Storage from "./utilities/storage.jsx";
+import FilterList from "./components/filter-list.jsx";
 
 class Item extends Component {
 	constructor(props) {
@@ -354,11 +355,19 @@ class Root extends Component {
 					onSave={this.showSaveDialog} />
 				<div className="contents">
 					<ItemSet loadout={this.state.loadout} onChangeLoadout={this.changeLoadout} />
-					<div className="stat-overview">
-						<div className="headline">
-							Summary
+					<div className="side-bar">
+						<div className="section">
+							<div className="headline">
+								Summary
+							</div>
+							<StatDisplay stats={allStats} />
 						</div>
-						<StatDisplay stats={allStats} />
+						<div className="section">
+							<div className="headline">
+								Filters
+							</div>
+							<FilterList />
+						</div>
 					</div>
 				</div>
 			</div>
