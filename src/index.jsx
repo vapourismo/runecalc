@@ -4,13 +4,10 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import RuneSlot from "./components/rune-slot.jsx";
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
-import Runes from "./database/runes.jsx";
 import Stats from "./database/stats.jsx";
 import Overlay from "./utilities/overlay.jsx";
-import Storage from "./utilities/storage.jsx";
 import ItemSet from "./components/item-set.jsx";
 import Option from "./components/option.jsx";
 import SaveLoadoutDialog from "./components/save-loadout-dialog.jsx";

@@ -3,15 +3,8 @@
 "use strict";
 
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
-import RuneSlot from "./rune-slot.jsx";
-import StatDisplay from "./stat-display.jsx";
 import Item from "./item.jsx";
-import Toolbar from "./toolbar.jsx";
 import Runes from "../database/runes.jsx";
-import Stats from "../database/stats.jsx";
-import Overlay from "../utilities/overlay.jsx";
-import Storage from "../utilities/storage.jsx";
 
 export default class ItemSet extends Component {
 	constructor(props) {

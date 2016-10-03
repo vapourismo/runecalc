@@ -893,7 +893,7 @@ makeRMTSet(
 		{name: "Armor Multiplier", value: 0.65},
 		{name: "Crit-Mitigation", value: 4.50}
 	]
-)
+);
 
 makeRMTSet(
 	"Intensification",
@@ -908,7 +908,7 @@ makeRMTSet(
 		{name: "Focus Pool Multiplier", value: 2.00},
 		{name: "Intensity", value: 0.84}
 	]
-)
+);
 
 makeRMTSet(
 	"Resumption",
@@ -923,7 +923,7 @@ makeRMTSet(
 		{name: "Multi-Hit Chance", value: 0.75},
 		{name: "Focus Recovery Rate", value: 0.15}
 	]
-)
+);
 
 makeRMTSet(
 	"Gleaming",
@@ -938,7 +938,7 @@ makeRMTSet(
 		{name: "Glance Chance", value: 0.73},
 		{name: "Glance Mitigation", value: 0.60}
 	]
-)
+);
 
 makeRMTSet(
 	"Ruination",
@@ -953,7 +953,7 @@ makeRMTSet(
 		{name: "Crit-Hit Chance", value: 0.32},
 		{name: "Crit-Hit Severity", value: 3.00}
 	]
-)
+);
 
 makeRMTSet(
 	"Evasion",
@@ -968,7 +968,7 @@ makeRMTSet(
 		{name: "Armor Multiplier", value: 0.65},
 		{name: "Deflect Chance", value: 0.45}
 	]
-)
+);
 
 makeRMTSet(
 	"Pandemic",
@@ -983,7 +983,7 @@ makeRMTSet(
 		{name: "Crit-Hit Chance", value: 0.31},
 		{name: "Vigor", value: 0.84}
 	]
-)
+);
 
 makeRMTSet(
 	"Siphoning",
@@ -998,7 +998,7 @@ makeRMTSet(
 		{name: "Strikethrough", value: 0.38},
 		{name: "Lifesteal", value: 0.63}
 	]
-)
+);
 
 makeRMTSet(
 	"Hardiness",
@@ -1013,7 +1013,7 @@ makeRMTSet(
 		{name: "Glance Chance", value: 0.73},
 		{name: "Deflect Chance", value: 0.45}
 	]
-)
+);
 
 makeRMTSet(
 	"Rejuvenation",
@@ -1028,7 +1028,7 @@ makeRMTSet(
 		{name: "Multi-Hit Chance", value: 0.75},
 		{name: "Crit-Hit Chance", value: 0.75}
 	]
-)
+);
 
 makeRMTSet(
 	"Vim",
@@ -1043,7 +1043,7 @@ makeRMTSet(
 		{name: "Crit-Hit Chance", value: 0.31},
 		{name: "Focus Pool Multiplier", value: 4.80}
 	]
-)
+);
 
 makeRMTSet(
 	"Basher",
@@ -1058,7 +1058,7 @@ makeRMTSet(
 		{name: "Multi-Hit Severity", value: 1.20},
 		{name: "Multi-Hit Chance", value: 1.80}
 	]
-)
+);
 
 // Non-RMT Sets
 makeNonRMTSet(
