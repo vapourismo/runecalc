@@ -11,109 +11,130 @@ import Runes from "./database/runes.jsx";
 import Stats from "./database/stats.jsx";
 import Overlay from "./utilities/overlay.jsx";
 import Storage from "./utilities/storage.jsx";
-import FilterList from "./components/filter-list.jsx";
 import ItemSet from "./components/item-set.jsx";
 import SaveLoadoutDialog from "./components/save-loadout-dialog.jsx";
 import LoadLoadoutDialog from "./components/load-loadout-dialog.jsx";
 
-function copyLoadout(loadout) {
-	return {
-		weapon: loadout.weapon.map(x => x),
-		head: loadout.head.map(x => x),
-		shoulders: loadout.shoulders.map(x => x),
-		chest: loadout.chest.map(x => x),
-		hands: loadout.hands.map(x => x),
-		legs: loadout.legs.map(x => x),
-		feet: loadout.feet.map(x => x)
-	};
-}
+// function copyLoadout(loadout) {
+// 	return {
+// 		weapon: loadout.weapon.map(x => x),
+// 		head: loadout.head.map(x => x),
+// 		shoulders: loadout.shoulders.map(x => x),
+// 		chest: loadout.chest.map(x => x),
+// 		hands: loadout.hands.map(x => x),
+// 		legs: loadout.legs.map(x => x),
+// 		feet: loadout.feet.map(x => x)
+// 	};
+// }
 
-function modPowerConverter(stats) {
-	if ("Crit-Hit Severity Rating" in stats) {
-		Stats.insertOrAdd(
-			stats,
-			"Multi-Hit Severity Rating",
-			stats["Crit-Hit Severity Rating"] /= 2
-		);
-	}
-}
+// function modPowerConverter(stats) {
+// 	if ("Crit-Hit Severity Rating" in stats) {
+// 		Stats.insertOrAdd(
+// 			stats,
+// 			"Multi-Hit Severity Rating",
+// 			stats["Crit-Hit Severity Rating"] /= 2
+// 		);
+// 	}
+// }
 
 class Root extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			loadout: {
-				weapon: [null, null, null],
-				head: [null, null, null],
-				shoulders: [null, null, null],
-				chest: [null, null, null],
-				hands: [null, null, null],
-				legs: [null, null, null],
-				feet: [null, null, null]
-			},
-			ampPowerConverter: false
+			weapon: [null, null, null],
+			head: [null, null, null],
+			shoulders: [null, null, null],
+			chest: [null, null, null],
+			hands: [null, null, null],
+			legs: [null, null, null],
+			feet: [null, null, null],
+
+			powerConverter: false
 		};
 
 		this.changeLoadout = this.changeLoadout.bind(this);
 		this.resetLoadout = this.resetLoadout.bind(this);
 		this.showSaveDialog = this.showSaveDialog.bind(this);
+		this.hideSaveDialog = this.hideSaveDialog.bind(this);
 		this.showLoadDialog = this.showLoadDialog.bind(this);
 		this.loadLoadout = this.loadLoadout.bind(this);
-		this.saveLoadout = this.saveLoadout.bind(this);
 	}
 
 	resetLoadout() {
 		this.setState({
-			loadout: {
-				weapon: this.state.loadout.weapon.map(_ => null),
-				head: this.state.loadout.head.map(_ => null),
-				shoulders: this.state.loadout.shoulders.map(_ => null),
-				chest: this.state.loadout.chest.map(_ => null),
-				hands: this.state.loadout.hands.map(_ => null),
-				legs: this.state.loadout.legs.map(_ => null),
-				feet: this.state.loadout.feet.map(_ => null)
-			}
+			weapon: this.state.weapon.map(_ => null),
+			head: this.state.head.map(_ => null),
+			shoulders: this.state.shoulders.map(_ => null),
+			chest: this.state.chest.map(_ => null),
+			hands: this.state.hands.map(_ => null),
+			legs: this.state.legs.map(_ => null),
+			feet: this.state.feet.map(_ => null)
 		});
 	}
 
-	saveLoadout(name) {
-		Overlay.hide();
-
-		Storage.state.loadouts[name] = copyLoadout(this.state.loadout);
-		Storage.save();
-	}
-
 	showSaveDialog() {
-		Overlay.show(
-			<SaveLoadoutDialog
-				names={Object.keys(Storage.state.loadouts)}
-				onSave={this.saveLoadout} />
-		);
+		Overlay.show(<SaveLoadoutDialog loadout={this.state} onSave={this.hideSaveDialog} />);
 	}
 
-	loadLoadout(name) {
+	hideSaveDialog() {
 		Overlay.hide();
-		this.setState({loadout: copyLoadout(Storage.state.loadouts[name])});
 	}
 
 	showLoadDialog() {
-		Overlay.show(
-			<LoadLoadoutDialog
-				names={Object.keys(Storage.state.loadouts)}
-				onLoad={this.loadLoadout} />
-		);
+		Overlay.show(<LoadLoadoutDialog onLoad={this.loadLoadout} />);
 	}
 
-	changeLoadout(loadout) {
-		this.setState({loadout});
+	loadLoadout(loadout) {
+		Overlay.hide();
+		this.setState(loadout);
+	}
+
+	changeLoadout(item, runes) {
+		switch (item) {
+			case "weapon":
+				this.setState({weapon: runes});
+				break;
+
+			case "head":
+				this.setState({head: runes});
+				break;
+
+			case "shoulders":
+				this.setState({shoulders: runes});
+				break;
+
+			case "chest":
+				this.setState({chest: runes});
+				break;
+
+			case "hands":
+				this.setState({hands: runes});
+				break;
+
+			case "legs":
+				this.setState({legs: runes});
+				break;
+
+			case "feet":
+				this.setState({feet: runes});
+				break;
+		}
 	}
 
 	render() {
-		let allStats = Stats.mergeStats(Object.values(this.state.loadout).map(Stats.gatherStats));
+		let allStats = Stats.mergeStats([
+			Stats.gatherStats(this.state.weapon),
+			Stats.gatherStats(this.state.head),
+			Stats.gatherStats(this.state.shoulders),
+			Stats.gatherStats(this.state.chest),
+			Stats.gatherStats(this.state.hands),
+			Stats.gatherStats(this.state.legs),
+			Stats.gatherStats(this.state.feet),
+		]);
 
-		if (this.state.ampPowerConverter)
-			modPowerConverter(allStats);
+		// if (this.state.powerConverter)
+		// 	modPowerConverter(allStats);
 
 		allStats = Stats.transformStats(allStats);
 
@@ -124,7 +145,17 @@ class Root extends Component {
 					onLoad={this.showLoadDialog}
 					onSave={this.showSaveDialog} />
 				<div className="contents">
-					<ItemSet loadout={this.state.loadout} onChangeLoadout={this.changeLoadout} />
+					<ItemSet
+						items={{
+							weapon: this.state.weapon,
+							head: this.state.head,
+							shoulders: this.state.shoulders,
+							chest: this.state.chest,
+							hands: this.state.hands,
+							legs: this.state.legs,
+							feet: this.state.feet
+						}}
+						onChangeLoadout={this.changeLoadout} />
 					<div className="side-bar">
 						<div className="section">
 							<div className="headline">
@@ -134,9 +165,8 @@ class Root extends Component {
 						</div>
 						<div className="section">
 							<div className="headline">
-								Filters
+								Options
 							</div>
-							<FilterList />
 						</div>
 					</div>
 				</div>

@@ -14,15 +14,16 @@ import Storage from "../utilities/storage.jsx";
 
 export default class LoadLoadoutDialog extends Component {
 	loadLoadout(name) {
-		if (this.props.onLoad)
-			this.props.onLoad(name);
+		if (name in Storage.state.loadouts && this.props.onLoad)
+			this.props.onLoad(Storage.state.loadouts[name]);
 	}
 
 	render() {
+		const names = Object.keys(Storage.state.loadouts);
 		let loadouts;
 
-		if (this.props.names.length > 0)
-			loadouts = this.props.names.map(name => (
+		if (names.length > 0)
+			loadouts = names.map(name => (
 				<div key={name} className="loadout" onClick={() => this.loadLoadout(name)}>
 					{name}
 				</div>

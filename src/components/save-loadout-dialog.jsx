@@ -21,21 +21,25 @@ export default class SaveLoadoutDialog extends Component {
 
 	saveLoadout() {
 		if (this.inputCom && this.inputCom.value != "" && this.props.onSave)
-			this.props.onSave(this.inputCom.value);
+			this.overrideLoadout(this.inputCom.value);
 		else if (this.inputCom)
 			this.inputCom.focus();
 	}
 
 	overrideLoadout(name) {
+		Storage.state.loadouts[name] = this.props.loadout;
+		Storage.save();
+
 		if (this.props.onSave)
-			this.props.onSave(name);
+			this.props.onSave();
 	}
 
 	render() {
+		const names = Object.keys(Storage.state.loadouts);
 		let loadouts;
 
-		if (this.props.names.length > 0)
-			loadouts = this.props.names.map(name => (
+		if (names.length > 0)
+			loadouts = names.map(name => (
 				<div key={name} className="loadout" onClick={() => this.overrideLoadout(name)}>
 					{name}
 				</div>

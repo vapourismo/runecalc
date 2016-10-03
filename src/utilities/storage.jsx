@@ -22,13 +22,18 @@ function setItem(key, data) {
 	localStorage.setItem(key, JSON.stringify(data));
 }
 
-const currentVersion = 1;
+const currentVersion = 2;
 
 const defaultState = {
 	loadouts: {}
 };
 
 const migrations = [
+	function (state) {
+		return {
+			loadouts: {}
+		};
+	},
 	function (state) {
 		return {
 			loadouts: {}

@@ -22,15 +22,8 @@ export default class ItemSet extends Component {
 	}
 
 	updateRunes(item, runes) {
-		const loadout = {};
-
-		for (let key in this.props.loadout)
-			loadout[key] = this.props.loadout[key];
-
-		loadout[item] = runes;
-
 		if (this.props.onChangeLoadout)
-			this.props.onChangeLoadout(loadout);
+			this.props.onChangeLoadout(item, runes);
 	}
 
 	runeSelector(item, newRuneID, oldRuneID) {
@@ -45,12 +38,12 @@ export default class ItemSet extends Component {
 		if (newRuneID == oldRuneID || (!rune.unique && !rune.uniquePerItem))
 			return true;
 
-		if ((rune.uniquePerItem || rune.unique) && this.props.loadout[item].indexOf(newRuneID) >= 0)
+		if ((rune.uniquePerItem || rune.unique) && this.props.items[item].indexOf(newRuneID) >= 0)
 			return false;
 
 		if (rune.unique) {
-			for (let i in this.props.loadout) {
-				if (this.props.loadout[i].indexOf(newRuneID) >= 0)
+			for (let i in this.props.items) {
+				if (this.props.items[i].indexOf(newRuneID) >= 0)
 					return false;
 			}
 		}
@@ -63,37 +56,37 @@ export default class ItemSet extends Component {
 			<div className="item-set">
 				<Item
 					item="weapon"
-					runes={this.props.loadout.weapon}
+					runes={this.props.items.weapon}
 					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="head"
-					runes={this.props.loadout.head}
+					runes={this.props.items.head}
 					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="shoulders"
-					runes={this.props.loadout.shoulders}
+					runes={this.props.items.shoulders}
 					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="chest"
-					runes={this.props.loadout.chest}
+					runes={this.props.items.chest}
 					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="hands"
-					runes={this.props.loadout.hands}
+					runes={this.props.items.hands}
 					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="legs"
-					runes={this.props.loadout.legs}
+					runes={this.props.items.legs}
 					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 				<Item
 					item="feet"
-					runes={this.props.loadout.feet}
+					runes={this.props.items.feet}
 					selector={this.runeSelector}
 					onChangeRunes={this.updateRunes} />
 			</div>
