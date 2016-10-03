@@ -12,30 +12,19 @@ import Stats from "./database/stats.jsx";
 import Overlay from "./utilities/overlay.jsx";
 import Storage from "./utilities/storage.jsx";
 import ItemSet from "./components/item-set.jsx";
+import Option from "./components/option.jsx";
 import SaveLoadoutDialog from "./components/save-loadout-dialog.jsx";
 import LoadLoadoutDialog from "./components/load-loadout-dialog.jsx";
 
-// function copyLoadout(loadout) {
-// 	return {
-// 		weapon: loadout.weapon.map(x => x),
-// 		head: loadout.head.map(x => x),
-// 		shoulders: loadout.shoulders.map(x => x),
-// 		chest: loadout.chest.map(x => x),
-// 		hands: loadout.hands.map(x => x),
-// 		legs: loadout.legs.map(x => x),
-// 		feet: loadout.feet.map(x => x)
-// 	};
-// }
-
-// function modPowerConverter(stats) {
-// 	if ("Crit-Hit Severity Rating" in stats) {
-// 		Stats.insertOrAdd(
-// 			stats,
-// 			"Multi-Hit Severity Rating",
-// 			stats["Crit-Hit Severity Rating"] /= 2
-// 		);
-// 	}
-// }
+function modPowerConverter(stats) {
+	if ("Crit-Hit Severity Rating" in stats) {
+		Stats.insertOrAdd(
+			stats,
+			"Multi-Hit Severity Rating",
+			stats["Crit-Hit Severity Rating"] /= 2
+		);
+	}
+}
 
 class Root extends Component {
 	constructor(props) {
@@ -133,8 +122,8 @@ class Root extends Component {
 			Stats.gatherStats(this.state.feet),
 		]);
 
-		// if (this.state.powerConverter)
-		// 	modPowerConverter(allStats);
+		if (this.state.powerConverter)
+			modPowerConverter(allStats);
 
 		allStats = Stats.transformStats(allStats);
 
@@ -166,6 +155,14 @@ class Root extends Component {
 						<div className="section">
 							<div className="headline">
 								Options
+							</div>
+							<div className="options">
+								<Option
+									state={this.state.powerConverter}
+									onToggle={newState => this.setState({powerConverter: newState})}
+								>
+									Power Converter AMP
+								</Option>
 							</div>
 						</div>
 					</div>
