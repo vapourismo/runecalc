@@ -8,6 +8,7 @@
     "node-sass": "^3.10.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "redux": "^3.6.0",
     "webpack": "^1.13.2"
   },
   "scripts": {

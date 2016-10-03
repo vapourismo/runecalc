@@ -4,6 +4,8 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
+import * as Redux from "redux";
+
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
 import Stats from "./database/stats.jsx";
@@ -23,48 +25,100 @@ function modPowerConverter(stats) {
 	}
 }
 
-class Root extends Component {
+const defaultLoadoutState = {
+	weapon: [null, null, null],
+	head: [null, null, null],
+	shoulders: [null, null, null],
+	chest: [null, null, null],
+	hands: [null, null, null],
+	legs: [null, null, null],
+	feet: [null, null, null]
+};
+
+function reduceLoadoutStore(state = defaultLoadoutState, action) {
+	switch (action.type) {
+		case "modify_item":
+			if (action.item in state)
+				return Object.assign({}, state, {[action.item]: action.runes});
+			else
+				return state;
+
+		case "reset":
+			return defaultLoadoutState;
+
+		case "load":
+			const stateCopy = Object.assign({}, state);
+
+			for (let item in action.loadout)
+				if (item in state)
+					stateCopy[item] = action.loadout[item];
+
+
+			return stateCopy;
+
+		default:
+			return state;
+	}
+}
+
+class StatSummary extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			weapon: [null, null, null],
-			head: [null, null, null],
-			shoulders: [null, null, null],
-			chest: [null, null, null],
-			hands: [null, null, null],
-			legs: [null, null, null],
-			feet: [null, null, null],
+			runes: []
+		};
+	}
 
+	componentDidMount() {
+		this.storeLease = this.props.loadoutStore.subscribe(
+			() => {
+				const loadoutState = this.props.loadoutStore.getState();
+				this.setState({runes: Object.values(loadoutState)});
+			}
+		);
+	}
+
+	componentWillUnmount() {
+		if (this.storeLease) this.storeLease();
+	}
+
+	render() {
+		let allStats = Stats.mergeStats(this.state.runes.map(Stats.gatherStats));
+
+		if (this.state.powerConverter)
+			modPowerConverter(allStats);
+
+		allStats = Stats.transformStats(allStats);
+
+		return (
+			<StatDisplay stats={allStats} />
+		);
+	}
+}
+
+class Root extends Component {
+	constructor(props) {
+		super(props);
+
+		this.loadoutStore = Redux.createStore(reduceLoadoutStore);
+
+		this.state = {
 			powerConverter: false
 		};
 
-		this.changeLoadout = this.changeLoadout.bind(this);
 		this.resetLoadout = this.resetLoadout.bind(this);
 		this.showSaveDialog = this.showSaveDialog.bind(this);
-		this.hideSaveDialog = this.hideSaveDialog.bind(this);
 		this.showLoadDialog = this.showLoadDialog.bind(this);
 		this.loadLoadout = this.loadLoadout.bind(this);
 	}
 
 	resetLoadout() {
-		this.setState({
-			weapon: this.state.weapon.map(_ => null),
-			head: this.state.head.map(_ => null),
-			shoulders: this.state.shoulders.map(_ => null),
-			chest: this.state.chest.map(_ => null),
-			hands: this.state.hands.map(_ => null),
-			legs: this.state.legs.map(_ => null),
-			feet: this.state.feet.map(_ => null)
-		});
+		this.loadoutStore.dispatch({type: "reset"});
 	}
 
 	showSaveDialog() {
-		Overlay.show(<SaveLoadoutDialog loadout={this.state} onSave={this.hideSaveDialog} />);
-	}
-
-	hideSaveDialog() {
-		Overlay.hide();
+		Overlay.show(<SaveLoadoutDialog loadout={this.loadoutStore.getState()} onSave={Overlay.hide} />);
 	}
 
 	showLoadDialog() {
@@ -73,57 +127,10 @@ class Root extends Component {
 
 	loadLoadout(loadout) {
 		Overlay.hide();
-		this.setState(loadout);
-	}
-
-	changeLoadout(item, runes) {
-		switch (item) {
-			case "weapon":
-				this.setState({weapon: runes});
-				break;
-
-			case "head":
-				this.setState({head: runes});
-				break;
-
-			case "shoulders":
-				this.setState({shoulders: runes});
-				break;
-
-			case "chest":
-				this.setState({chest: runes});
-				break;
-
-			case "hands":
-				this.setState({hands: runes});
-				break;
-
-			case "legs":
-				this.setState({legs: runes});
-				break;
-
-			case "feet":
-				this.setState({feet: runes});
-				break;
-		}
+		this.loadoutStore.dispatch({type: "load", loadout});
 	}
 
 	render() {
-		let allStats = Stats.mergeStats([
-			Stats.gatherStats(this.state.weapon),
-			Stats.gatherStats(this.state.head),
-			Stats.gatherStats(this.state.shoulders),
-			Stats.gatherStats(this.state.chest),
-			Stats.gatherStats(this.state.hands),
-			Stats.gatherStats(this.state.legs),
-			Stats.gatherStats(this.state.feet),
-		]);
-
-		if (this.state.powerConverter)
-			modPowerConverter(allStats);
-
-		allStats = Stats.transformStats(allStats);
-
 		return (
 			<div>
 				<Toolbar
@@ -131,37 +138,27 @@ class Root extends Component {
 					onLoad={this.showLoadDialog}
 					onSave={this.showSaveDialog} />
 				<div className="contents">
-					<ItemSet
-						items={{
-							weapon: this.state.weapon,
-							head: this.state.head,
-							shoulders: this.state.shoulders,
-							chest: this.state.chest,
-							hands: this.state.hands,
-							legs: this.state.legs,
-							feet: this.state.feet
-						}}
-						onChangeLoadout={this.changeLoadout} />
+					<ItemSet loadoutStore={this.loadoutStore} />
 					<div className="side-bar">
 						<div className="section">
 							<div className="headline">
 								Summary
 							</div>
-							<StatDisplay stats={allStats} />
+							<StatSummary loadoutStore={this.loadoutStore} />
 						</div>
-						<div className="section">
+						{/*<div className="section">
 							<div className="headline">
 								Options
 							</div>
 							<div className="options">
-								<Option
+								{<Option
 									state={this.state.powerConverter}
 									onToggle={newState => this.setState({powerConverter: newState})}
 								>
 									Power Converter AMP
-								</Option>
+								</Option>}
 							</div>
-						</div>
+						</div>*/}
 					</div>
 				</div>
 			</div>

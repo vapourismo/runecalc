@@ -10,38 +10,59 @@ export default class Item extends Component {
 	constructor(props) {
 		super(props);
 
+		const loadoutState = props.loadoutStore.getState();
+
 		this.state = {
-			runes: [null]
+			runes: loadoutState[props.item] || [null]
 		};
 
 		this.addRuneSlot = this.addRuneSlot.bind(this);
 		this.runeSelector = this.runeSelector.bind(this);
 	}
 
-	signalChangedRunes(runes) {
-		if (this.props.onChangeRunes)
-			this.props.onChangeRunes(this.props.item, runes);
+	componentDidMount() {
+		this.storeLease = this.props.loadoutStore.subscribe(
+			() => {
+				const loadoutState = this.props.loadoutStore.getState();
+
+				this.setState({
+					runes: loadoutState[this.props.item] || [null]
+				});
+			}
+		);
 	}
 
-	updateRuneSlot(slot, runeID) {
-		const runes = this.props.runes.map(x => x);
-		runes[slot] = runeID;
-
-		this.signalChangedRunes(runes);
+	componentWillUnmount() {
+		if (this.storeLease) this.storeLease();
 	}
 
-	removeRuneSlot(slot) {
-		if (slot >= this.props.runes.length)
-			return;
-
-		const runes = this.props.runes.map(x => x);
-		runes.splice(slot, 1);
-
-		this.signalChangedRunes(runes);
+	signalChange(runes) {
+		this.props.loadoutStore.dispatch({
+			type: "modify_item",
+			item: this.props.item,
+			runes
+		});
 	}
 
 	addRuneSlot() {
-		this.signalChangedRunes(this.props.runes.concat([null]));
+		this.signalChange(this.state.runes.concat([null]));
+	}
+
+	updateRuneSlot(slot, runeID) {
+		if (slot >= this.state.runes.length)
+			return;
+
+		this.signalChange(Object.assign([], this.state.runes, {[slot]: runeID}));
+	}
+
+	removeRuneSlot(slot) {
+		if (slot >= this.state.runes.length)
+			return;
+
+		const runes = Object.assign([], this.state.runes);
+		runes.splice(slot, 1);
+
+		this.signalChange(runes);
 	}
 
 	runeSelector(newRuneID, oldRuneID) {
@@ -56,17 +77,21 @@ export default class Item extends Component {
 				<div className="headline">{title}</div>
 				<div className="body">
 					<div className="runes">
-						{this.props.runes.map((runeID, slot) => (
-							<RuneSlot
-								key={slot}
-								runeID={runeID}
-								selector={this.runeSelector}
-								onChangeRune={newRuneID => this.updateRuneSlot(slot, newRuneID)}
-								onRemoveSlot={() => this.removeRuneSlot(slot)} />
-						))}
+						{
+							this.state.runes.map(
+								(runeID, slot) => (
+									<RuneSlot
+										key={slot}
+										runeID={runeID}
+										selector={this.runeSelector}
+										onChangeRune={(newRuneID) => this.updateRuneSlot(slot, newRuneID)}
+										onRemoveSlot={() => this.removeRuneSlot(slot)} />
+								)
+							)
+						}
 						<div className="add" onClick={this.addRuneSlot}>+</div>
 					</div>
-					<StatDisplay runes={this.props.runes} />
+					<StatDisplay runes={this.state.runes} />
 				</div>
 			</div>
 		);
