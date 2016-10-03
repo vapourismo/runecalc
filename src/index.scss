@@ -16,6 +16,9 @@ body {
 	color: #efefef;
 }
 
+
+// Fixed single instance component
+
 #overlay {
 	display: none;
 	justify-content: center;
@@ -88,17 +91,38 @@ body {
 	}
 }
 
-.rune {
-	display: flex;
-	flex-direction: row;
+// Reusable styles
 
-	padding: 2px;
+.interactable {
+	transition: 300ms all;
+
 	border-bottom: solid 1px #333333;
 
 	&:hover {
 		background-color: #333333;
 		border-bottom: solid 1px #efefef;
 	}
+}
+
+.headline {
+	padding: 10px;
+	border-bottom: solid 1px #666666;
+
+	background-color: #252525;
+
+	font-size: 14px;
+	text-align: center;
+}
+
+// Components
+
+.rune {
+	@extend .interactable;
+
+	display: flex;
+	flex-direction: row;
+
+	padding: 2px;
 
 	.symbol {
 		display: inline-block;
@@ -210,14 +234,6 @@ body {
 	padding: 15px;
 	margin: 15px;
 
-	.headline {
-		text-align: center;
-		font-size: 16px;
-		border-bottom: solid 1px #666666;
-
-		padding: 10px;
-	}
-
 	.body {
 		overflow: auto;
 
@@ -225,15 +241,11 @@ body {
 		flex-direction: column;
 
 		.set {
+			@extend .interactable;
+
 			cursor: pointer;
 			padding: 10px;
-			border-bottom: solid 1px #333333;
 			font-size: 14px;
-
-			&:hover {
-				background-color: #333333;
-				border-bottom: solid 1px #efefef;
-			}
 		}
 
 		.rune {
@@ -271,14 +283,6 @@ body {
 	box-shadow: 0 0 10px #000000;
 
 	margin: 15px;
-
-	.headline {
-		text-align: center;
-		font-size: 16px;
-		border-bottom: solid 1px #666666;
-
-		padding: 10px;
-	}
 
 	.existing-loadouts {
 		padding: 15px;
@@ -335,14 +339,6 @@ body {
 	margin: 15px;
 	padding: 15px;
 
-	.headline {
-		text-align: center;
-		font-size: 16px;
-		border-bottom: solid 1px #666666;
-
-		padding: 10px;
-	}
-
 	.empty-message {
 		padding: 10px;
 		font-size: 12px;
@@ -365,13 +361,6 @@ body {
 
 .item {
 	display: inline-block;
-
-	.headline {
-		font-size: 14px;
-		padding: 10px;
-		border-bottom: solid 1px #666666;
-		text-align: center;
-	}
 
 	.body {
 		display: flex;
@@ -404,14 +393,10 @@ body {
 
 .summary {
 	.property {
+		@extend .interactable;
+
 		display: flex;
 		flex-direction: row;
-		border-bottom: solid 1px #333333;
-
-		&:hover {
-			background-color: #333333;
-			border-bottom: solid 1px #efefef;
-		}
 
 		.name, .value {
 			padding: 5px 10px;
@@ -438,25 +423,22 @@ body {
 	flex-direction: row;
 	justify-content: center;
 
-	padding: 10px;
 	padding-bottom: 0px;
 	background-color: #222222;
+	box-shadow: 0 3px 10px #111111;
 
 	.button {
-		display: inline-block;
+		@extend .interactable;
+		@extend .headline;
 
-		cursor: pointer;
+		display: inline-block;
 
 		padding: 10px;
 		margin-right: 1px;
 
-		font-size: 14px;
-		border-bottom: solid 1px #666666;
+		cursor: pointer;
 
-		&:hover {
-			background-color: #333333;
-			border-bottom: solid 1px #efefef;
-		}
+		font-size: 14px;
 	}
 
 	.filler {
@@ -491,14 +473,6 @@ body {
 		.section {
 			padding: 10px;
 			margin-bottom: 10px;
-
-			.headline {
-				text-align: center;
-				font-size: 14px;
-				border-bottom: solid 1px #666666;
-
-				padding: 10px;
-			}
 		}
 	}
 }
