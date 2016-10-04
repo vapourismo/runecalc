@@ -4,108 +4,49 @@
 
 import Runes from "./runes.jsx";
 
-const focusRecFactor      = 0.2  / 1000;
-const multiHitFactor      = 6    / 1000;
-const multiHitSevFactor   = 4    / 1000;
-const critHitFactor       = 2.5  / 1000;
-const critHitSevFactor    = 10   / 1000;
-const intensityFactor     = 2.8  / 1000;
-const critMitFactor       = 15   / 1000;
-const strikethroughFactor = 3    / 1000;
-const lifestealFactor     = 2.1  / 1000;
-const vigorFactor         = 2.8  / 1000;
-const glanceFactor        = 2.75 / 1000;
-const deflectFactor       = 1.5  / 1000;
+function genRatingConv(base, softcap, coeff, drsev) {
+	const baseRating = base / coeff;
+	const softcapRating = softcap / coeff;
 
-function transformStat(name, value) {
-	switch (name) {
-		case "Glance Rating":
-			return {
-				name: "Glance Chance",
-				value: value * glanceFactor
-			};
-
-		case "Crit-Mitigation Rating":
-			return {
-				name: "Crit-Mitigation",
-				value: value * critMitFactor
-			};
-
-		case "Deflect Rating":
-			return {
-				name: "Deflect Chance",
-				value: value * deflectFactor
-			};
-
-		case "Strikethrough Rating":
-			return {
-				name: "Strikethrough",
-				value: value * strikethroughFactor
-			};
-
-		case "Lifesteal Rating":
-			return {
-				name: "Lifesteal",
-				value: value * lifestealFactor
-			};
-
-		case "Vigor Rating":
-			return {
-				name: "Vigor",
-				value: value * vigorFactor
-			};
-
-		case "Focus Recovery Rating":
-			return {
-				name: "Focus Recovery Rate",
-				value: value * focusRecFactor
-			};
-
-		case "Multi-Hit Rating":
-			return {
-				name: "Multi-Hit Chance",
-				value: value * multiHitFactor
-			};
-
-		case "Multi-Hit Severity Rating":
-			return {
-				name: "Multi-Hit Severity",
-				value: value * multiHitSevFactor
-			};
-
-		case "Crit-Hit Rating":
-			return {
-				name: "Crit-Hit Chance",
-				value: value * critHitFactor
-			};
-
-		case "Crit-Hit Severity Rating":
-			return {
-				name: "Crit-Hit Severity",
-				value: value * critHitSevFactor
-			};
-
-		case "Intensity Rating":
-			return {
-				name: "Intensity",
-				value: value * intensityFactor
-			};
-
-		default:
-			return {name, value};
-	}
+	return function (rating) {
+		if (baseRating + rating > softcapRating) {
+			const diff = (baseRating + rating) - softcapRating;
+			return softcap + (diff * coeff * Math.cos((Math.PI / 2) * (diff / (diff + drsev))));
+		} else {
+			return (baseRating + rating) * coeff;
+		}
+	};
 }
 
-function transformStats(stats) {
-	const newStats = {};
-
-	for (let name in stats) {
-		let result = transformStat(name, stats[name]);
-		insertOrAdd(newStats, result.name, result.value);
-	}
-
-	return newStats;
+function genCappedRatingConv(base, softcap, coeff) {
+	return function (rating) {
+		return Math.min(base + rating * coeff, softcap);
+	};
 }
+
+const ConvertibleRatings = {
+	"Armor":                 genRatingConv(0,   0,   8    / 1000, 7250),
+	"Critical Hit Chance":   genRatingConv(5,   30,  2.5  / 1000, 7000),
+	"Critical Hit Severity": genRatingConv(150, 300, 10   / 1000, 5500),
+	"Critical Mitigation":   genRatingConv(0,   150, 15   / 1000, 2750),
+	"Deflect Chance":        genRatingConv(5,   30,  1.5  / 1000, 7000),
+	"Focus Recovery Rate":   genRatingConv(0.5, 1.5, 0.2  / 1000, 2000),
+	"Glance Chance":         genRatingConv(5,   30,  2.75 / 1000, 4000),
+	"Intensity":             genRatingConv(0,   30,  2.8  / 1000, 5000),
+	"Life Steal":            genRatingConv(0,   10,  2.1  / 1000, 6200),
+	"Multi-Hit Chance":      genRatingConv(5,   60,  6    / 1000, 5000),
+	"Strikethrough":         genRatingConv(0,   30,  3    / 1000, 5000),
+	"Vigor":                 genRatingConv(0,   30,  2.8  / 1000, 5000),
+	"Armor Pierce":          genCappedRatingConv(0,  100, 3.25 / 1000),
+	"CC Resilience":         genCappedRatingConv(0,  25,  4    / 1000),
+	"Glance Mitigation":     genCappedRatingConv(50, 75,  5.5  / 1000),
+	"Multi-Hit Severity":    genCappedRatingConv(30, 100, 4    / 1000),
+	"Reflect Chance":        genCappedRatingConv(0,  100, 5    / 1000),
+	"Focus Pool":            pool => pool + 1000,
+	"Health":                health => health + 10000
+};
+
+window._ConvertibleRatings = ConvertibleRatings;
 
 function insertOrAdd(obj, key, value) {
 	if (key in obj)
@@ -114,45 +55,73 @@ function insertOrAdd(obj, key, value) {
 		obj[key] = value;
 }
 
-function gatherStats(runes) {
-	const powers = {};
-	const stats = {};
+function translateRatingsToStats(ratings) {
+	const ratingsCopy = {};
+
+	for (let name in ratings)
+		if (name in ConvertibleRatings)
+			ratingsCopy[name] = ConvertibleRatings[name](ratings[name]);
+		else
+			ratingsCopy[name] = ratings[name];
+
+	return ratingsCopy;
+}
+
+function applyStatBonuses(stats, bonuses) {
+	for (let name in bonuses) {
+		if (name in stats)
+			stats[name] += bonuses[name];
+		else if (name in ConvertibleRatings)
+			stats[name] = ConvertibleRatings[name](0) + bonuses[name];
+		else
+			stats[name] = bonuses[name];
+	}
+}
+
+function applyStatMultipliers(stats, multipliers) {
+	for (let name in multipliers)
+		if (name in stats)
+			stats[name] *= 1 + (multipliers[name] / 100)
+		else if (name in ConvertibleRatings)
+			stats[name] = ConvertibleRatings[name](0) * (1 + (multipliers[name] / 100));
+}
+
+function merge(target, source) {
+	for (let key in source)
+		insertOrAdd(target, key, source[key]);
+}
+
+function analyzeItem(runes) {
+	const setPowers = {};
+	const ratings = {};
 
 	runes.forEach(runeID => {
-		if (runeID == null || !(runeID in Runes))
-			return;
+		if (runeID in Runes) {
+			const rune = Runes[runeID];
 
-		const rune = Runes[runeID];
-
-		if (rune.setName && rune.power && rune.setName in Runes.sets)
-			insertOrAdd(powers, rune.setName, rune.power);
-
-		insertOrAdd(stats, rune.statName, rune.statValue);
+			insertOrAdd(setPowers, rune.setName, rune.power || 0);
+			insertOrAdd(ratings, rune.statName, rune.statValue);
+		}
 	});
 
-	for (let setName in powers) {
+	const bonuses = {};
+	const multipliers = {};
+
+	for (let setName in setPowers) {
 		if (!(setName in Runes.sets))
 			continue;
 
-		let setPowers = Runes.sets[setName].powers;
+		let powers = Runes.sets[setName].powers.filter((power, idx) => power != null && idx < setPowers[setName]);
 
-		for (let i = 0; i < powers[setName] && i < setPowers.length; i++)
-			if (setPowers[i])
-				insertOrAdd(stats, setPowers[i].name, setPowers[i].value);
+		powers.forEach(power => {
+			if (power.type === "bonus")
+				insertOrAdd(bonuses, power.name, power.value);
+			else if (power.type === "multiplier")
+				insertOrAdd(multipliers, power.name, power.value);
+		});
 	}
 
-	return stats;
-}
-
-function mergeStats(arrStats) {
-	const allStats = {};
-
-	arrStats.forEach(stats => {
-		for (let key in stats)
-			insertOrAdd(allStats, key, stats[key]);
-	});
-
-	return allStats;
+	return {ratings, bonuses, multipliers};
 }
 
 function roundTwoDigits(value) {
@@ -163,26 +132,31 @@ function roundTwoDigits(value) {
 }
 
 function formatStat(name, value) {
+	value = roundTwoDigits(value);
+
 	switch (name) {
-		case "Focus Recovery Rate":
-		case "Focus Pool Multiplier":
-		case "Multi-Hit Chance":
-		case "Multi-Hit Severity":
-		case "Crit-Hit Chance":
-		case "Crit-Hit Severity":
-		case "Intensity":
-		case "Strikethrough":
-		case "Vigor":
-		case "Lifesteal":
-		case "Glance Chance":
-		case "Deflect Chance":
-		case "Crit-Mitigation":
-		case "Health Multiplier":
-			return roundTwoDigits(value) + "%";
+		case "Focus Pool":
+		case "Health":
+		case "Suit Power":
+			return value;
 
 		default:
-			return roundTwoDigits(value);
+			if (value !== "")
+				return value + "%";
+			else
+				return value;
 	}
 }
 
-export default {transformStat, transformStats, gatherStats, mergeStats, formatStat, insertOrAdd};
+export default {
+	translateRatingsToStats,
+
+	applyStatBonuses,
+	applyStatMultipliers,
+
+	merge,
+
+	analyzeItem,
+
+	formatStat
+};

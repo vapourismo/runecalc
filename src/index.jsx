@@ -6,6 +6,7 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 
 import AppStore from "./app-store.jsx";
+import Runes from "./database/runes.jsx";
 
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
@@ -30,7 +31,7 @@ class StatSummary extends Component {
 		super(props);
 
 		this.state = {
-			runes: []
+			stats: {}
 		};
 	}
 
@@ -38,7 +39,34 @@ class StatSummary extends Component {
 		this.storeLease = AppStore.subscribe(
 			() => {
 				const loadoutState = AppStore.getState().items;
-				this.setState({runes: Object.values(loadoutState)});
+
+				const items = [
+					loadoutState.weapon,
+					loadoutState.head,
+					loadoutState.shoulders,
+					loadoutState.chest,
+					loadoutState.hands,
+					loadoutState.legs,
+					loadoutState.feet
+				];
+
+				const ratings = {};
+				const bonuses = {};
+				const multipliers = {};
+
+				items.forEach(item => {
+					const info = Stats.analyzeItem(item);
+
+					Stats.merge(ratings, info.ratings);
+					Stats.merge(bonuses, info.bonuses);
+					Stats.merge(multipliers, info.multipliers);
+				});
+
+				const stats = Stats.translateRatingsToStats(ratings);
+				Stats.applyStatBonuses(stats, bonuses);
+				Stats.applyStatMultipliers(stats, multipliers);
+
+				this.setState({stats});
 			}
 		);
 	}
@@ -48,16 +76,7 @@ class StatSummary extends Component {
 	}
 
 	render() {
-		let allStats = Stats.mergeStats(this.state.runes.map(Stats.gatherStats));
-
-		if (this.state.powerConverter)
-			modPowerConverter(allStats);
-
-		allStats = Stats.transformStats(allStats);
-
-		return (
-			<StatDisplay stats={allStats} />
-		);
+		return <StatDisplay stats={this.state.stats} />
 	}
 }
 

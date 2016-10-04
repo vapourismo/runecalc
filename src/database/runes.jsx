@@ -3,24 +3,24 @@
 "use strict";
 
 const statColors = {
-	"Armor":                     "earth",
-	"Armor Pierce Rating":       "air",
-	"Crit-Hit Rating":           "fire",
-	"Crit-Hit Severity Rating":  "earth",
-	"Crit-Mitigation Rating":    "logic",
-	"Deflect Rating":            "air",
-	"Focus Pool":                "life",
-	"Focus Recovery Rating":     "air",
-	"Glance Mitigation Rating":  "fire",
-	"Glance Rating":             "water",
-	"Health":                    "life",
-	"Intensity Rating":          "logic",
-	"Lifesteal Rating":          "life",
-	"Multi-Hit Rating":          "water",
-	"Multi-Hit Severity Rating": "earth",
-	"Strikethrough Rating":      "air",
-	"Suit Power":                "logic",
-	"Vigor Rating":              "logic"
+	"Armor":                 "earth",
+	"Armor Pierce":          "air",
+	"Critical Hit Chance":   "fire",
+	"Critical Hit Severity": "earth",
+	"Critical Mitigation":   "logic",
+	"Deflect Chance":        "air",
+	"Focus Pool":            "life",
+	"Focus Recovery Rate":   "air",
+	"Glance Mitigation":     "fire",
+	"Glance Chance":         "water",
+	"Health":                "life",
+	"Intensity":             "logic",
+	"Life Steal":            "life",
+	"Multi-Hit Chance":      "water",
+	"Multi-Hit Severity":    "earth",
+	"Strikethrough":         "air",
+	"Suit Power":            "logic",
+	"Vigor":                 "logic"
 };
 
 const statValues = {
@@ -222,38 +222,38 @@ makeNonRMTClassSet(
 	120,
 	"Technician",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Vigor", value: 0.21},
-		{name: "Strikethrough", value: 0.24},
-		{name: "Technician Tier 1", value: ""},
-		{name: "Vigor", value: 0.30},
-		{name: "Strikethrough", value: 0.33},
-		{name: "Vigor", value: 0.36},
-		{name: "Technician Tier 2", value: ""}
+		{type: "bonus", name: "Vigor", value: 0.21},
+		{type: "bonus", name: "Strikethrough", value: 0.24},
+		{type: "special", name: "Technician Tier 1", value: ""},
+		{type: "bonus", name: "Vigor", value: 0.30},
+		{type: "bonus", name: "Strikethrough", value: 0.33},
+		{type: "bonus", name: "Vigor", value: 0.36},
+		{type: "special", name: "Technician Tier 2", value: ""}
 	]
 );
 makeNonRMTClassSet(
 	120,
 	"Fiendish",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Vigor", value: 0.21},
-		{name: "Strikethrough", value: 0.24},
-		{name: "Fiendish Tier 1", value: ""},
-		{name: "Vigor", value: 0.30},
-		{name: "Strikethrough", value: 0.33},
-		{name: "Vigor", value: 0.36},
-		{name: "Fiendish Tier 2", value: ""}
+		{type: "bonus", name: "Vigor", value: 0.21},
+		{type: "bonus", name: "Strikethrough", value: 0.24},
+		{type: "special", name: "Fiendish Tier 1", value: ""},
+		{type: "bonus", name: "Vigor", value: 0.30},
+		{type: "bonus", name: "Strikethrough", value: 0.33},
+		{type: "bonus", name: "Vigor", value: 0.36},
+		{type: "special", name: "Fiendish Tier 2", value: ""}
 	]
 );
 
@@ -261,19 +261,19 @@ makeNonRMTClassSet(
 	120,
 	"Atomic Charge",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Multi-Hit Rating",
-		"Vigor Rating"
+		"Multi-Hit Chance",
+		"Vigor"
 	],
 	[
-		{name: "Multi-Hit Chance", value: 0.35},
-		{name: "Multi-Hit Severity", value: 0.40},
-		{name: "Atomic Charge Tier 1", value: ""},
-		{name: "Strikethrough", value: 0.30},
-		{name: "Multi-Hit Chance", value: 0.55},
-		{name: "Multi-Hit Severity", value: 0.60},
-		{name: "Atomic Charge Tier 2", value: ""}
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.40},
+		{type: "special", name: "Atomic Charge Tier 1", value: ""},
+		{type: "bonus", name: "Strikethrough", value: 0.30},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.55},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.60},
+		{type: "special", name: "Atomic Charge Tier 2", value: ""}
 	]
 );
 
@@ -281,19 +281,19 @@ makeNonRMTClassSet(
 	120,
 	"Flame Surge",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Multi-Hit Rating",
-		"Crit-Hit Rating"
+		"Multi-Hit Chance",
+		"Critical Hit Chance"
 	],
 	[
-		{name: "Multi-Hit Chance", value: 0.35},
-		{name: "Crit-Hit Chance", value: 0.20},
-		{name: "Flame Surge Tier 1", value: ""},
-		{name: "Strikethrough", value: 0.30},
-		{name: "Crit-Hit Chance", value: 0.28},
-		{name: "Multi-Hit Chance", value: 0.60},
-		{name: "Flame Surge Tier 2", value: ""}
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.20},
+		{type: "special", name: "Flame Surge Tier 1", value: ""},
+		{type: "bonus", name: "Strikethrough", value: 0.30},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.60},
+		{type: "special", name: "Flame Surge Tier 2", value: ""}
 	]
 );
 
@@ -301,19 +301,19 @@ makeNonRMTClassSet(
 	120,
 	"Eviscerator",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Crit-Hit Severity Rating",
-		"Crit-Hit Rating"
+		"Critical Hit Severity",
+		"Critical Hit Chance"
 	],
 	[
-		{name: "Crit-Hit Chance", value: 0.18},
-		{name: "Crit-Hit Severity", value: 0.80},
-		{name: "Eviscerator Tier 1", value: ""},
-		{name: "Strikethrough", value: 0.30},
-		{name: "Crit-Hit Chance", value: 0.28},
-		{name: "Crit-Hit Severity", value: 1.20},
-		{name: "Eviscerator Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Crit-Hit Severity", value: 0.80},
+		{type: "special", name: "Eviscerator Tier 1", value: ""},
+		{type: "bonus", name: "Strikethrough", value: 0.30},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
+		{type: "bonus", name: "Crit-Hit Severity", value: 1.20},
+		{type: "special", name: "Eviscerator Tier 2", value: ""}
 	]
 );
 
@@ -321,19 +321,19 @@ makeNonRMTClassSet(
 	120,
 	"Burning Rage",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Crit-Hit Severity Rating",
-		"Crit-Hit Rating"
+		"Critical Hit Severity",
+		"Critical Hit Chance"
 	],
 	[
-		{name: "Crit-Hit Chance", value: 0.18},
-		{name: "Crit-Hit Severity", value: 0.80},
-		{name: "Burning Rage Tier 1", value: ""},
-		{name: "Strikethrough", value: 0.30},
-		{name: "Crit-Hit Chance", value: 0.28},
-		{name: "Crit-Hit Severity", value: 1.20},
-		{name: "Burning Rage Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Crit-Hit Severity", value: 0.80},
+		{type: "special", name: "Burning Rage Tier 1", value: ""},
+		{type: "bonus", name: "Strikethrough", value: 0.30},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
+		{type: "bonus", name: "Crit-Hit Severity", value: 1.20},
+		{type: "special", name: "Burning Rage Tier 2", value: ""}
 	]
 );
 
@@ -341,19 +341,19 @@ makeNonRMTClassSet(
 	120,
 	"Hardened",
 	[
-		"Crit-Hit Rating",
+		"Critical Hit Chance",
 		"Health",
 		"Focus Pool",
-		"Crit-Hit Severity Rating"
+		"Critical Hit Severity"
 	],
 	[
-		{name: "Crit-Hit Chance", value: 0.18},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Hardened Tier 1", value: ""},
-		{name: "Crit-Hit Severity", value: 1.00},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Crit-Hit Chance", value: 0.30},
-		{name: "Hardened Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "special", name: "Hardened Tier 1", value: ""},
+		{type: "bonus", name: "Crit-Hit Severity", value: 1.00},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.30},
+		{type: "special", name: "Hardened Tier 2", value: ""}
 	]
 );
 
@@ -361,19 +361,19 @@ makeNonRMTClassSet(
 	120,
 	"Resource Probes",
 	[
-		"Focus Recovery Rating",
+		"Focus Recovery Rate",
 		"Health",
 		"Focus Pool",
-		"Intensity Rating"
+		"Intensity"
 	],
 	[
-		{name: "Intensity", value: 0.21},
-		{name: "Focus Pool Multiplier", value: 1.20},
-		{name: "Resource Probes Tier 1", value: ""},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Focus Pool Multiplier", value: 1.65},
-		{name: "Intensity", value: 0.36},
-		{name: "Resource Probes Tier 2", value: ""}
+		{type: "bonus", name: "Intensity", value: 0.21},
+		{type: "multiplier", name: "Focus Pool", value: 1.20},
+		{type: "special", name: "Resource Probes Tier 1", value: ""},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "multiplier", name: "Focus Pool", value: 1.65},
+		{type: "bonus", name: "Intensity", value: 0.36},
+		{type: "special", name: "Resource Probes Tier 2", value: ""}
 	]
 );
 
@@ -381,19 +381,19 @@ makeNonRMTClassSet(
 	120,
 	"Prevention",
 	[
-		"Focus Recovery Rating",
+		"Focus Recovery Rate",
 		"Health",
 		"Focus Pool",
-		"Intensity Rating"
+		"Intensity"
 	],
 	[
-		{name: "Intensity", value: 0.21},
-		{name: "Focus Pool Multiplier", value: 1.20},
-		{name: "Prevention Tier 1", value: ""},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Focus Pool Multiplier", value: 1.65},
-		{name: "Intensity", value: 0.36},
-		{name: "Prevention Tier 2", value: ""}
+		{type: "bonus", name: "Intensity", value: 0.21},
+		{type: "multiplier", name: "Focus Pool", value: 1.20},
+		{type: "special", name: "Prevention Tier 1", value: ""},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "multiplier", name: "Focus Pool", value: 1.65},
+		{type: "bonus", name: "Intensity", value: 0.36},
+		{type: "special", name: "Prevention Tier 2", value: ""}
 	]
 );
 
@@ -401,19 +401,19 @@ makeNonRMTClassSet(
 	120,
 	"Mecha Shield",
 	[
-		"Multi-Hit Rating",
-		"Glance Rating",
+		"Multi-Hit Chance",
+		"Glance Chance",
 		"Armor",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Glance Chance", value: 0.21},
-		{name: "Glance Mitigation", value: 0.40},
-		{name: "Mecha Shield Tier 1", value: ""},
-		{name: "Armor", value: 0.50},
-		{name: "Glance Chance", value: 0.33},
-		{name: "Glance Mitigation", value: 0.60},
-		{name: "Mecha Shield Tier 2", value: ""}
+		{type: "bonus", name: "Glance Chance", value: 0.21},
+		{type: "bonus", name: "Glance Mitigation", value: 0.40},
+		{type: "special", name: "Mecha Shield Tier 1", value: ""},
+		{type: "bonus", name: "Armor", value: 0.50},
+		{type: "bonus", name: "Glance Chance", value: 0.33},
+		{type: "bonus", name: "Glance Mitigation", value: 0.60},
+		{type: "special", name: "Mecha Shield Tier 2", value: ""}
 	]
 );
 
@@ -421,19 +421,19 @@ makeNonRMTClassSet(
 	120,
 	"Furor",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Deflect Rating",
-		"Crit-Mitigation Rating"
+		"Deflect Chance",
+		"Critical Mitigation"
 	],
 	[
-		{name: "Deflect Chance", value: 0.10},
-		{name: "Health Multiplier", value: 0.20},
-		{name: "Furor Tier 1", value: ""},
-		{name: "Crit-Mitigation", value: 1.50},
-		{name: "Health Multiplier", value: 0.28},
-		{name: "Deflect Chance", value: 0.18},
-		{name: "Furor Tier 2", value: ""}
+		{type: "bonus", name: "Deflect Chance", value: 0.10},
+		{type: "multiplier", name: "Health", value: 0.20},
+		{type: "special", name: "Furor Tier 1", value: ""},
+		{type: "bonus", name: "Crit-Mitigation", value: 1.50},
+		{type: "multiplier", name: "Health", value: 0.28},
+		{type: "bonus", name: "Deflect Chance", value: 0.18},
+		{type: "special", name: "Furor Tier 2", value: ""}
 	]
 );
 
@@ -441,19 +441,19 @@ makeNonRMTClassSet(
 	120,
 	"Vanguard",
 	[
-		"Glance Rating",
-		"Multi-Hit Rating",
+		"Glance Chance",
+		"Multi-Hit Chance",
 		"Armor",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Glance Chance", value: 0.21},
-		{name: "Glance Mitigation", value: 0.40},
-		{name: "Vanguard Tier 1", value: ""},
-		{name: "Armor", value: 0.50},
-		{name: "Glance Chance", value: 0.33},
-		{name: "Glance Mitigation", value: 0.60},
-		{name: "Vanguard Tier 2", value: ""}
+		{type: "bonus", name: "Glance Chance", value: 0.21},
+		{type: "bonus", name: "Glance Mitigation", value: 0.40},
+		{type: "special", name: "Vanguard Tier 1", value: ""},
+		{type: "bonus", name: "Armor", value: 0.50},
+		{type: "bonus", name: "Glance Chance", value: 0.33},
+		{type: "bonus", name: "Glance Mitigation", value: 0.60},
+		{type: "special", name: "Vanguard Tier 2", value: ""}
 	]
 );
 
@@ -462,19 +462,19 @@ makeNonRMTClassSet(
 	100,
 	"Eradication",
 	[
-		"Multi-Hit Rating",
-		"Strikethrough Rating",
+		"Multi-Hit Chance",
+		"Strikethrough",
 		"Health",
-		"Vigor Rating"
+		"Vigor"
 	],
 	[
-		{name: "Multi-Hit Chance", value: 0.35},
-		{name: "Multi-Hit Severity", value: 0.40},
-		{name: "Eradication Tier 1", value: ""},
-		{name: "Strikethrough", value: 0.30},
-		{name: "Multi-Hit Chance", value: 0.55},
-		{name: "Multi-Hit Severity", value: 0.60},
-		{name: "Eradication Tier 2", value: ""}
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.40},
+		{type: "special", name: "Eradication Tier 1", value: ""},
+		{type: "bonus", name: "Strikethrough", value: 0.30},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.55},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.60},
+		{type: "special", name: "Eradication Tier 2", value: ""}
 	]
 );
 
@@ -482,19 +482,19 @@ makeNonRMTClassSet(
 	100,
 	"Mental Prowess",
 	[
-		"Crit-Hit Rating",
-		"Strikethrough Rating",
+		"Critical Hit Chance",
+		"Strikethrough",
 		"Health",
-		"Crit-Hit Severity Rating"
+		"Critical Hit Severity"
 	],
 	[
-		{name: "Crit-Hit Chance", value: 0.18},
-		{name: "Crit-Hit Severity", value: 0.80},
-		{name: "Mental Prowess Tier 1", value: ""},
-		{name: "Strikethrough", value: 0.30},
-		{name: "Crit-Hit Chance", value: 0.28},
-		{name: "Crit-Hit Severity", value: 1.20},
-		{name: "Mental Prowess Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Crit-Hit Severity", value: 0.80},
+		{type: "special", name: "Mental Prowess Tier 1", value: ""},
+		{type: "bonus", name: "Strikethrough", value: 0.30},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
+		{type: "bonus", name: "Crit-Hit Severity", value: 1.20},
+		{type: "special", name: "Mental Prowess Tier 2", value: ""}
 	]
 );
 
@@ -502,19 +502,19 @@ makeNonRMTClassSet(
 	100,
 	"Overcharge",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Vigor", value: 0.21},
-		{name: "Strikethrough", value: 0.24},
-		{name: "Overcharge Tier 1", value: ""},
-		{name: "Vigor", value: 0.30},
-		{name: "Strikethrough", value: 0.33},
-		{name: "Vigor", value: 0.36},
-		{name: "Overcharge Tier 2", value: ""}
+		{type: "bonus", name: "Vigor", value: 0.21},
+		{type: "bonus", name: "Strikethrough", value: 0.24},
+		{type: "special", name: "Overcharge Tier 1", value: ""},
+		{type: "bonus", name: "Vigor", value: 0.30},
+		{type: "bonus", name: "Strikethrough", value: 0.33},
+		{type: "bonus", name: "Vigor", value: 0.36},
+		{type: "special", name: "Overcharge Tier 2", value: ""}
 	]
 );
 
@@ -522,19 +522,19 @@ makeNonRMTClassSet(
 	100,
 	"Well Of Power",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Vigor", value: 0.21},
-		{name: "Strikethrough", value: 0.24},
-		{name: "Well of Power Tier 1", value: ""},
-		{name: "Vigor", value: 0.30},
-		{name: "Strikethrough", value: 0.33},
-		{name: "Vigor", value: 0.36},
-		{name: "Well of Power Tier 2", value: ""}
+		{type: "bonus", name: "Vigor", value: 0.21},
+		{type: "bonus", name: "Strikethrough", value: 0.24},
+		{type: "special", name: "Well of Power Tier 1", value: ""},
+		{type: "bonus", name: "Vigor", value: 0.30},
+		{type: "bonus", name: "Strikethrough", value: 0.33},
+		{type: "bonus", name: "Vigor", value: 0.36},
+		{type: "special", name: "Well of Power Tier 2", value: ""}
 	]
 );
 
@@ -542,19 +542,19 @@ makeNonRMTClassSet(
 	100,
 	"Assasin",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Vigor", value: 0.21},
-		{name: "Strikethrough", value: 0.24},
-		{name: "Assassin Tier 1", value: ""},
-		{name: "Vigor", value: 0.30},
-		{name: "Strikethrough", value: 0.33},
-		{name: "Vigor", value: 0.36},
-		{name: "Assassin Tier 2", value: ""}
+		{type: "bonus", name: "Vigor", value: 0.21},
+		{type: "bonus", name: "Strikethrough", value: 0.24},
+		{type: "special", name: "Assassin Tier 1", value: ""},
+		{type: "bonus", name: "Vigor", value: 0.30},
+		{type: "bonus", name: "Strikethrough", value: 0.33},
+		{type: "bonus", name: "Vigor", value: 0.36},
+		{type: "special", name: "Assassin Tier 2", value: ""}
 	]
 );
 
@@ -562,19 +562,19 @@ makeNonRMTClassSet(
 	100,
 	"Unity",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Vigor", value: 0.21},
-		{name: "Strikethrough", value: 0.24},
-		{name: "Unity Tier 1", value: ""},
-		{name: "Vigor", value: 0.30},
-		{name: "Strikethrough", value: 0.33},
-		{name: "Vigor", value: 0.36},
-		{name: "Unity Tier 2", value: ""}
+		{type: "bonus", name: "Vigor", value: 0.21},
+		{type: "bonus", name: "Strikethrough", value: 0.24},
+		{type: "special", name: "Unity Tier 1", value: ""},
+		{type: "bonus", name: "Vigor", value: 0.30},
+		{type: "bonus", name: "Strikethrough", value: 0.33},
+		{type: "bonus", name: "Vigor", value: 0.36},
+		{type: "special", name: "Unity Tier 2", value: ""}
 	]
 );
 
@@ -582,19 +582,19 @@ makeNonRMTClassSet(
 	100,
 	"Guardian",
 	[
-		"Intensity Rating",
-		"Focus Recovery Rating",
+		"Intensity",
+		"Focus Recovery Rate",
 		"Health",
 		"Focus Pool"
 	],
 	[
-		{name: "Intensity", value: 0.21},
-		{name: "Focus Pool Multiplier", value: 1.20},
-		{name: "Guardian Tier 1", value: ""},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Focus Pool Multiplier", value: 1.65},
-		{name: "Intensity", value: 0.36},
-		{name: "Guardian Tier 2", value: ""}
+		{type: "bonus", name: "Intensity", value: 0.21},
+		{type: "multiplier", name: "Focus Pool", value: 1.20},
+		{type: "special", name: "Guardian Tier 1", value: ""},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "multiplier", name: "Focus Pool", value: 1.65},
+		{type: "bonus", name: "Intensity", value: 0.36},
+		{type: "special", name: "Guardian Tier 2", value: ""}
 	]
 );
 
@@ -602,19 +602,19 @@ makeNonRMTClassSet(
 	100,
 	"Great Aegis",
 	[
-		"Focus Recovery Rating",
+		"Focus Recovery Rate",
 		"Health",
 		"Focus Pool",
-		"Multi-Hit Rating"
+		"Multi-Hit Chance"
 	],
 	[
-		{name: "Multi-Hit Chance", value: 0.35},
-		{name: "Focus Pool Multiplier", value: 1.20},
-		{name: "Great Aegis Tier 1", value: ""},
-		{name: "Multi-Hit Severity", value: 0.50},
-		{name: "Focus Pool Multiplier", value: 1.65},
-		{name: "Multi-Hit Chance", value: 0.60},
-		{name: "Great Aegis Tier 2", value: ""}
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
+		{type: "multiplier", name: "Focus Pool", value: 1.20},
+		{type: "special", name: "Great Aegis Tier 1", value: ""},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.50},
+		{type: "multiplier", name: "Focus Pool", value: 1.65},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.60},
+		{type: "special", name: "Great Aegis Tier 2", value: ""}
 	]
 );
 
@@ -622,19 +622,19 @@ makeNonRMTClassSet(
 	100,
 	"Surge Life",
 	[
-		"Crit-Hit Rating",
+		"Critical Hit Chance",
 		"Health",
-		"Multi-Hit Rating",
-		"Intensity Rating"
+		"Multi-Hit Chance",
+		"Intensity"
 	],
 	[
-		{name: "Crit-Hit Chance", value: 0.18},
-		{name: "Multi-Hit Chance", value: 0.40},
-		{name: "Surge Life Tier 1", value: ""},
-		{name: "Intensity", value: 0.30},
-		{name: "Multi-Hit Chance", value: 0.55},
-		{name: "Crit-Hit Chance", value: 0.30},
-		{name: "Surge Life Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.40},
+		{type: "special", name: "Surge Life Tier 1", value: ""},
+		{type: "bonus", name: "Intensity", value: 0.30},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.55},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.30},
+		{type: "special", name: "Surge Life Tier 2", value: ""}
 	]
 );
 
@@ -643,18 +643,18 @@ makeNonRMTClassSet(
 	"Unbreakable",
 	[
 		"Armor",
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Crit-Mitigation", value: 1.05},
-		{name: "Armor", value: 0.40},
-		{name: "Unbreakable Tier 1", value: ""},
-		{name: "Health Multiplier", value: 0.25},
-		{name: "Armor", value: 0.55},
-		{name: "Crit-Mitigation", value: 1.80},
-		{name: "Unbreakable Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Mitigation", value: 1.05},
+		{type: "bonus", name: "Armor", value: 0.40},
+		{type: "special", name: "Unbreakable Tier 1", value: ""},
+		{type: "multiplier", name: "Health", value: 0.25},
+		{type: "bonus", name: "Armor", value: 0.55},
+		{type: "bonus", name: "Crit-Mitigation", value: 1.80},
+		{type: "special", name: "Unbreakable Tier 2", value: ""}
 	]
 );
 
@@ -662,19 +662,19 @@ makeNonRMTClassSet(
 	100,
 	"Waller",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Health",
 		"Armor",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Crit-Mitigation", value: 1.05},
-		{name: "Armor", value: 0.40},
-		{name: "Waller Tier 1", value: ""},
-		{name: "Health Multiplier", value: 0.25},
-		{name: "Armor", value: 0.55},
-		{name: "Crit-Mitigation", value: 1.80},
-		{name: "Waller Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Mitigation", value: 1.05},
+		{type: "bonus", name: "Armor", value: 0.40},
+		{type: "special", name: "Waller Tier 1", value: ""},
+		{type: "multiplier", name: "Health", value: 0.25},
+		{type: "bonus", name: "Armor", value: 0.55},
+		{type: "bonus", name: "Crit-Mitigation", value: 1.80},
+		{type: "special", name: "Waller Tier 2", value: ""}
 	]
 );
 
@@ -682,19 +682,19 @@ makeNonRMTClassSet(
 	100,
 	"Energized Arms",
 	[
-		"Strikethrough Rating",
+		"Strikethrough",
 		"Armor",
 		"Health",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Crit-Mitigation", value: 1.05},
-		{name: "Armor", value: 0.40},
-		{name: "Energized Arms Tier 1", value: ""},
-		{name: "Health Multiplier", value: 0.25},
-		{name: "Armor", value: 0.55},
-		{name: "Crit-Mitigation", value: 1.80},
-		{name: "Energized Arms Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Mitigation", value: 1.05},
+		{type: "bonus", name: "Armor", value: 0.40},
+		{type: "special", name: "Energized Arms Tier 1", value: ""},
+		{type: "multiplier", name: "Health", value: 0.25},
+		{type: "bonus", name: "Armor", value: 0.55},
+		{type: "bonus", name: "Crit-Mitigation", value: 1.80},
+		{type: "special", name: "Energized Arms Tier 2", value: ""}
 	]
 );
 
@@ -702,120 +702,120 @@ makeNonRMTClassSet(
 makeRMTClassSet(
 	"Broadside",
 	[
-		"Multi-Hit Severity Rating",
-		"Strikethrough Rating",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Multi-Hit Severity",
+		"Strikethrough",
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Strikethrough", value: 1.50},
-		{name: "Broadside Tier 1", value: ""},
-		{name: "Broadside Tier 2", value: ""}
+		{type: "bonus", name: "Strikethrough", value: 1.50},
+		{type: "special", name: "Broadside Tier 1", value: ""},
+		{type: "special", name: "Broadside Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Deadlight",
 	[
-		"Glance Mitigation Rating",
-		"Glance Rating",
+		"Glance Mitigation",
+		"Glance Chance",
 		"Armor",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Crit-Mitigation", value: 7.50},
-		{name: "Deadlight Tier 1", value: ""},
-		{name: "Deadlight Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Mitigation", value: 7.50},
+		{type: "special", name: "Deadlight Tier 1", value: ""},
+		{type: "special", name: "Deadlight Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Deja Vu",
 	[
-		"Crit-Hit Severity Rating",
-		"Strikethrough Rating",
-		"Lifesteal Rating",
-		"Vigor Rating"
+		"Critical Hit Severity",
+		"Strikethrough",
+		"Life Steal",
+		"Vigor"
 	],
 	[
-		{name: "Strikethrough", value: 1.50},
-		{name: "Deja Tier 1", value: ""},
-		{name: "Deja Tier 2", value: ""}
+		{type: "bonus", name: "Strikethrough", value: 1.50},
+		{type: "special", name: "Deja Tier 1", value: ""},
+		{type: "special", name: "Deja Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Requiem",
 	[
-		"Multi-Hit Severity Rating",
-		"Crit-Hit Rating",
-		"Crit-Hit Severity Rating",
+		"Multi-Hit Severity",
+		"Critical Hit Chance",
+		"Critical Hit Severity",
 		"Focus Pool"
 	],
 	[
-		{name: "Focus Recovery Rate", value: 0.10},
-		{name: "Requiem Tier 1", value: ""},
-		{name: "Requiem Tier 2", value: ""}
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.10},
+		{type: "special", name: "Requiem Tier 1", value: ""},
+		{type: "special", name: "Requiem Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Reanimator",
 	[
-		"Multi-Hit Severity Rating",
-		"Focus Recovery Rating",
+		"Multi-Hit Severity",
+		"Focus Recovery Rate",
 		"Focus Pool",
-		"Intensity Rating"
+		"Intensity"
 	],
 	[
-		{name: "Focus Recovery Rate", value: 0.10},
-		{name: "Reanimator Tier 1", value: ""},
-		{name: "Reanimator Tier 2", value: ""}
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.10},
+		{type: "special", name: "Reanimator Tier 1", value: ""},
+		{type: "special", name: "Reanimator Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Scourge",
 	[
-		"Multi-Hit Severity Rating",
-		"Multi-Hit Rating",
-		"Strikethrough Rating",
-		"Vigor Rating"
+		"Multi-Hit Severity",
+		"Multi-Hit Chance",
+		"Strikethrough",
+		"Vigor"
 	],
 	[
-		{name: "Strikethrough", value: 1.50},
-		{name: "Scourge Tier 1", value: ""},
-		{name: "Scourge Tier 2", value: ""}
+		{type: "bonus", name: "Strikethrough", value: 1.50},
+		{type: "special", name: "Scourge Tier 1", value: ""},
+		{type: "special", name: "Scourge Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Bullet From Beyond",
 	[
-		"Armor Pierce Rating",
-		"Crit-Hit Rating",
-		"Multi-Hit Rating",
-		"Strikethrough Rating"
+		"Armor Pierce",
+		"Critical Hit Chance",
+		"Multi-Hit Chance",
+		"Strikethrough"
 	],
 	[
-		{name: "Strikethrough", value: 1.50},
-		{name: "Bullet Tier 1", value: ""},
-		{name: "Bullet Tier 2", value: ""}
+		{type: "bonus", name: "Strikethrough", value: 1.50},
+		{type: "special", name: "Bullet Tier 1", value: ""},
+		{type: "special", name: "Bullet Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Voice From Beyond",
 	[
-		"Multi-Hit Severity Rating",
-		"Focus Recovery Rating",
+		"Multi-Hit Severity",
+		"Focus Recovery Rate",
 		"Focus Pool",
-		"Intensity Rating"
+		"Intensity"
 	],
 	[
-		{name: "Focus Recovery Rate", value: 0.10},
-		{name: "Voice Tier 1", value: ""},
-		{name: "Voice Tier 2", value: ""}
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.10},
+		{type: "special", name: "Voice Tier 1", value: ""},
+		{type: "special", name: "Voice Tier 2", value: ""}
 	]
 );
 
@@ -823,14 +823,14 @@ makeRMTClassSet(
 	"Murder",
 	[
 		"Suit Power",
-		"Crit-Hit Rating",
-		"Crit-Hit Severity Rating",
-		"Strikethrough Rating"
+		"Critical Hit Chance",
+		"Critical Hit Severity",
+		"Strikethrough"
 	],
 	[
-		{name: "Strikethrough", value: 1.50},
-		{name: "Murder Tier 1", value: ""},
-		{name: "Murder Tier 2", value: ""}
+		{type: "bonus", name: "Strikethrough", value: 1.50},
+		{type: "special", name: "Murder Tier 1", value: ""},
+		{type: "special", name: "Murder Tier 2", value: ""}
 	]
 );
 
@@ -838,44 +838,44 @@ makeRMTClassSet(
 	"Graverobber",
 	[
 		"Suit Power",
-		"Deflect Rating",
+		"Deflect Chance",
 		"Health",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Crit-Mitigation", value: 7.50},
-		{name: "Graverobber Tier 1", value: ""},
-		{name: "Graverobber Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Mitigation", value: 7.50},
+		{type: "special", name: "Graverobber Tier 1", value: ""},
+		{type: "special", name: "Graverobber Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Captain's Curse",
 	[
-		"Glance Mitigation Rating",
-		"Glance Rating",
+		"Glance Mitigation",
+		"Glance Chance",
 		"Armor",
-		"Crit-Mitigation Rating"
+		"Critical Mitigation"
 	],
 	[
-		{name: "Crit-Mitigation", value: 7.50},
-		{name: "Captain Tier 1", value: ""},
-		{name: "Captain Tier 2", value: ""}
+		{type: "bonus", name: "Crit-Mitigation", value: 7.50},
+		{type: "special", name: "Captain Tier 1", value: ""},
+		{type: "special", name: "Captain Tier 2", value: ""}
 	]
 );
 
 makeRMTClassSet(
 	"Keelhaul",
 	[
-		"Armor Pierce Rating",
-		"Crit-Hit Rating",
-		"Crit-Hit Severity Rating",
-		"Strikethrough Rating"
+		"Armor Pierce",
+		"Critical Hit Chance",
+		"Critical Hit Severity",
+		"Strikethrough"
 	],
 	[
-		{name: "Strikethrough", value: 1.50},
-		{name: "Keelhaul Tier 1", value: ""},
-		{name: "Keelhaul Tier 2", value: ""}
+		{type: "bonus", name: "Strikethrough", value: 1.50},
+		{type: "special", name: "Keelhaul Tier 1", value: ""},
+		{type: "special", name: "Keelhaul Tier 2", value: ""}
 	]
 );
 
@@ -883,120 +883,120 @@ makeRMTClassSet(
 makeRMTSet(
 	"Pallliated",
 	[
-		"Crit-Mitigation Rating",
-		"Crit-Mitigation Rating",
+		"Critical Mitigation",
+		"Critical Mitigation",
 		"Armor",
 		"Health"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Armor Multiplier", value: 0.65},
-		{name: "Crit-Mitigation", value: 4.50}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "multiplier", name: "Armor", value: 0.65},
+		{type: "bonus", name: "Crit-Mitigation", value: 4.50}
 	]
 );
 
 makeRMTSet(
 	"Intensification",
 	[
-		"Intensity Rating",
+		"Intensity",
 		"Focus Pool",
-		"Focus Recovery Rating",
-		"Intensity Rating"
+		"Focus Recovery Rate",
+		"Intensity"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Focus Pool Multiplier", value: 2.00},
-		{name: "Intensity", value: 0.84}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "multiplier", name: "Focus Pool", value: 2.00},
+		{type: "bonus", name: "Intensity", value: 0.84}
 	]
 );
 
 makeRMTSet(
 	"Resumption",
 	[
-		"Focus Recovery Rating",
-		"Focus Recovery Rating",
-		"Multi-Hit Rating",
+		"Focus Recovery Rate",
+		"Focus Recovery Rate",
+		"Multi-Hit Chance",
 		"Health"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Multi-Hit Chance", value: 0.75},
-		{name: "Focus Recovery Rate", value: 0.15}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.75},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.15}
 	]
 );
 
 makeRMTSet(
 	"Gleaming",
 	[
-		"Glance Mitigation Rating",
-		"Glance Rating",
+		"Glance Mitigation",
+		"Glance Chance",
 		"Armor",
 		"Health"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Glance Chance", value: 0.73},
-		{name: "Glance Mitigation", value: 0.60}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Glance Chance", value: 0.73},
+		{type: "bonus", name: "Glance Mitigation", value: 0.60}
 	]
 );
 
 makeRMTSet(
 	"Ruination",
 	[
-		"Crit-Hit Severity Rating",
-		"Crit-Hit Severity Rating",
-		"Strikethrough Rating",
-		"Crit-Hit Rating"
+		"Critical Hit Severity",
+		"Critical Hit Severity",
+		"Strikethrough",
+		"Critical Hit Chance"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Crit-Hit Chance", value: 0.32},
-		{name: "Crit-Hit Severity", value: 3.00}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.32},
+		{type: "bonus", name: "Crit-Hit Severity", value: 3.00}
 	]
 );
 
 makeRMTSet(
 	"Evasion",
 	[
-		"Deflect Rating",
-		"Deflect Rating",
+		"Deflect Chance",
+		"Deflect Chance",
 		"Health",
 		"Armor"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Armor Multiplier", value: 0.65},
-		{name: "Deflect Chance", value: 0.45}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "multiplier", name: "Armor", value: 0.65},
+		{type: "bonus", name: "Deflect Chance", value: 0.45}
 	]
 );
 
 makeRMTSet(
 	"Pandemic",
 	[
-		"Vigor Rating",
-		"Vigor Rating",
-		"Multi-Hit Rating",
-		"Crit-Hit Rating"
+		"Vigor",
+		"Vigor",
+		"Multi-Hit Chance",
+		"Critical Hit Chance"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Crit-Hit Chance", value: 0.31},
-		{name: "Vigor", value: 0.84}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.31},
+		{type: "bonus", name: "Vigor", value: 0.84}
 	]
 );
 
 makeRMTSet(
 	"Siphoning",
 	[
-		"Lifesteal Rating",
-		"Lifesteal Rating",
-		"Strikethrough Rating",
-		"Vigor Rating"
+		"Life Steal",
+		"Life Steal",
+		"Strikethrough",
+		"Vigor"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Strikethrough", value: 0.38},
-		{name: "Lifesteal", value: 0.63}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Strikethrough", value: 0.38},
+		{type: "bonus", name: "Life Steal", value: 0.63}
 	]
 );
 
@@ -1006,27 +1006,27 @@ makeRMTSet(
 		"Health",
 		"Health",
 		"Armor",
-		"Deflect Rating"
+		"Deflect Chance"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Glance Chance", value: 0.73},
-		{name: "Deflect Chance", value: 0.45}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Glance Chance", value: 0.73},
+		{type: "bonus", name: "Deflect Chance", value: 0.45}
 	]
 );
 
 makeRMTSet(
 	"Rejuvenation",
 	[
-		"Crit-Hit Rating",
-		"Crit-Hit Rating",
-		"Intensity Rating",
-		"Multi-Hit Rating"
+		"Critical Hit Chance",
+		"Critical Hit Chance",
+		"Intensity",
+		"Multi-Hit Chance"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Multi-Hit Chance", value: 0.75},
-		{name: "Crit-Hit Chance", value: 0.75}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.75},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.75}
 	]
 );
 
@@ -1035,28 +1035,28 @@ makeRMTSet(
 	[
 		"Focus Pool",
 		"Focus Pool",
-		"Crit-Hit Rating",
-		"Crit-Hit Severity Rating"
+		"Critical Hit Chance",
+		"Critical Hit Severity"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Crit-Hit Chance", value: 0.31},
-		{name: "Focus Pool Multiplier", value: 4.80}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.31},
+		{type: "multiplier", name: "Focus Pool", value: 4.80}
 	]
 );
 
 makeRMTSet(
 	"Basher",
 	[
-		"Multi-Hit Severity Rating",
-		"Multi-Hit Rating",
-		"Vigor Rating",
-		"Strikethrough Rating"
+		"Multi-Hit Severity",
+		"Multi-Hit Chance",
+		"Vigor",
+		"Strikethrough"
 	],
 	[
-		{name: "Health Multiplier", value: 1},
-		{name: "Multi-Hit Severity", value: 1.20},
-		{name: "Multi-Hit Chance", value: 1.80}
+		{type: "multiplier", name: "Health", value: 1},
+		{type: "bonus", name: "Multi-Hit Severity", value: 1.20},
+		{type: "bonus", name: "Multi-Hit Chance", value: 1.80}
 	]
 );
 
@@ -1064,191 +1064,191 @@ makeRMTSet(
 makeNonRMTSet(
 	"Striker",
 	[
-		"Multi-Hit Rating",
-		"Strikethrough Rating",
+		"Multi-Hit Chance",
+		"Strikethrough",
 		"Health"
 	],
 	[
-		{name: "Multi-Hit Chance", value: 0.35},
-		{name: "Multi-Hit Severity", value: 0.40},
-		{name: "Strikethrough", value: 0.27},
-		{name: "Multi-Hit Severity", value: 0.50},
-		{name: "Multi-Hit Chance", value: 0.55}
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.40},
+		{type: "bonus", name: "Strikethrough", value: 0.27},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.50},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.55}
 	]
 );
 
 makeNonRMTSet(
 	"Defiance",
 	[
-		"Glance Rating",
+		"Glance Chance",
 		"Armor",
-		"Strikethrough Rating"
+		"Strikethrough"
 	],
 	[
-		{name: "Glance Chance", value: 0.49},
-		{name: "Glance Mitigation", value: 0.14},
-		{name: "Armor Multiplier", value: 0.45},
-		{name: "Glance Mitigation", value: 0.17},
-		{name: "Glance Chance", value: 0.76}
+		{type: "bonus", name: "Glance Chance", value: 0.49},
+		{type: "bonus", name: "Glance Mitigation", value: 0.14},
+		{type: "multiplier", name: "Armor", value: 0.45},
+		{type: "bonus", name: "Glance Mitigation", value: 0.17},
+		{type: "bonus", name: "Glance Chance", value: 0.76}
 	]
 );
 
 makeNonRMTSet(
 	"Pulse",
 	[
-		"Crit-Hit Rating",
-		"Intensity Rating",
-		"Multi-Hit Rating"
+		"Critical Hit Chance",
+		"Intensity",
+		"Multi-Hit Chance"
 	],
 	[
-		{name: "Health Multiplier", value: 0.17},
-		{name: "Multi-Hit Severity", value: 0.40},
-		{name: "Crit-Hit Chance", value: 0.22},
-		{name: "Multi-Hit Severity", value: 0.50},
-		{name: "Crit-Hit Chance", value: 0.28}
+		{type: "multiplier", name: "Health", value: 0.17},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.40},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.22},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.50},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.28}
 	]
 );
 
 makeNonRMTSet(
 	"Havoc",
 	[
-		"Crit-Hit Rating",
-		"Multi-Hit Rating",
-		"Strikethrough Rating"
+		"Critical Hit Chance",
+		"Multi-Hit Chance",
+		"Strikethrough"
 	],
 	[
-		{name: "Health Multiplier", value: 0.17},
-		{name: "Crit-Hit Chance", value: 0.20},
-		{name: "Multi-Hit Chance", value: 0.45},
-		{name: "Crit-Hit Chance", value: 0.25},
-		{name: "Multi-Hit Chance", value: 0.55}
+		{type: "multiplier", name: "Health", value: 0.17},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.20},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.45},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.25},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.55}
 	]
 );
 
 makeNonRMTSet(
 	"Elusion",
 	[
-		"Deflect Rating",
+		"Deflect Chance",
 		"Health",
-		"Strikethrough Rating"
+		"Strikethrough"
 	],
 	[
-		{name: "Deflect Chance", value: 0.10},
-		{name: "Health Multiplier", value: 0.20},
-		{name: "Armor Multiplier", value: 0.45},
-		{name: "Health Multiplier", value: 0.25},
-		{name: "Deflect Chance", value: 0.16}
+		{type: "bonus", name: "Deflect Chance", value: 0.10},
+		{type: "multiplier", name: "Health", value: 0.20},
+		{type: "multiplier", name: "Armor", value: 0.45},
+		{type: "multiplier", name: "Health", value: 0.25},
+		{type: "bonus", name: "Deflect Chance", value: 0.16}
 	]
 );
 
 makeNonRMTSet(
 	"Resurgence",
 	[
-		"Crit-Hit Rating",
+		"Critical Hit Chance",
 		"Focus Pool",
 		"Health"
 	],
 	[
-		{name: "Crit-Hit Chance", value: 0.18},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Crit-Hit Severity", value: 0.90},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Crit-Hit Chance", value: 0.28}
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "bonus", name: "Crit-Hit Severity", value: 0.90},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.28}
 	]
 );
 
 makeNonRMTSet(
 	"Onslaught",
 	[
-		"Vigor Rating",
-		"Lifesteal Rating",
-		"Strikethrough Rating"
+		"Vigor",
+		"Life Steal",
+		"Strikethrough"
 	],
 	[
-		{name: "Vigor", value: 0.21},
-		{name: "Strikethrough", value: 0.24},
-		{name: "lifesteal", value: 0.18},
-		{name: "Strikethrough", value: 0.30},
-		{name: "Vigor", value: 0.33}
+		{type: "bonus", name: "Vigor", value: 0.21},
+		{type: "bonus", name: "Strikethrough", value: 0.24},
+		{type: "bonus", name: "Life Steal", value: 0.18},
+		{type: "bonus", name: "Strikethrough", value: 0.30},
+		{type: "bonus", name: "Vigor", value: 0.33}
 	]
 );
 
 makeNonRMTSet(
 	"Alleviation",
 	[
-		"Crit-Mitigation Rating",
+		"Critical Mitigation",
 		"Health",
 		"Armor"
 	],
 	[
-		{name: "Crit-Mitigation", value: 1.05},
-		{name: "Health Multiplier", value: 0.20},
-		{name: "Armor Multiplier", value: 0.45},
-		{name: "Health Multiplier", value: 0.25},
-		{name: "Crit-Mitigation", value: 1.65}
+		{type: "bonus", name: "Crit-Mitigation", value: 1.05},
+		{type: "multiplier", name: "Health", value: 0.20},
+		{type: "multiplier", name: "Armor", value: 0.45},
+		{type: "multiplier", name: "Health", value: 0.25},
+		{type: "bonus", name: "Crit-Mitigation", value: 1.65}
 	]
 );
 
 makeNonRMTSet(
 	"Concentration",
 	[
-		"Intensity Rating",
+		"Intensity",
 		"Focus Pool",
-		"Focus Recovery Rating"
+		"Focus Recovery Rate"
 	],
 	[
-		{name: "Intensity", value: 0.21},
-		{name: "Focus Recovery Rate", value: 0.02},
-		{name: "Health Multiplier", value: 0.22},
-		{name: "Focus Pool Multiplier", value: 1.50},
-		{name: "Intensity", value: 0.33}
+		{type: "bonus", name: "Intensity", value: 0.21},
+		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
+		{type: "multiplier", name: "Health", value: 0.22},
+		{type: "multiplier", name: "Focus Pool", value: 1.50},
+		{type: "bonus", name: "Intensity", value: 0.33}
 	]
 );
 
 makeNonRMTSet(
 	"Devastation",
 	[
-		"Crit-Hit Rating",
-		"Crit-Hit Severity Rating",
+		"Critical Hit Chance",
+		"Critical Hit Severity",
 		"Health"
 	],
 	[
-		{name: "Strikethrough", value: 0.21},
-		{name: "Crit-Hit Chance", value: 0.20},
-		{name: "Crit-Hit Severity", value: 0.90},
-		{name: "Crit-Hit Chance", value: 0.25},
-		{name: "Crit-Hit Severity", value: 1.10}
+		{type: "bonus", name: "Strikethrough", value: 0.21},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.20},
+		{type: "bonus", name: "Crit-Hit Severity", value: 0.90},
+		{type: "bonus", name: "Crit-Hit Chance", value: 0.25},
+		{type: "bonus", name: "Crit-Hit Severity", value: 1.10}
 	]
 );
 
 makeNonRMTSet(
 	"Provoker",
 	[
-		"Deflect Rating",
-		"Glance Rating",
-		"Multi-Hit Rating"
+		"Deflect Chance",
+		"Glance Chance",
+		"Multi-Hit Chance"
 	],
 	[
-		{name: "Multi-Hit Chance", value: 0.35},
-		{name: "Glance Chance", value: 0.55},
-		{name: "Deflect Chance", value: 0.14},
-		{name: "Glance Chance", value: 0.69},
-		{name: "Deflect Chance", value: 0.16}
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
+		{type: "bonus", name: "Glance Chance", value: 0.55},
+		{type: "bonus", name: "Deflect Chance", value: 0.14},
+		{type: "bonus", name: "Glance Chance", value: 0.69},
+		{type: "bonus", name: "Deflect Chance", value: 0.16}
 	]
 );
 
 makeNonRMTSet(
 	"Cynosure",
 	[
-		"Multi-Hit Rating",
-		"Focus Recovery Rating",
+		"Multi-Hit Chance",
+		"Focus Recovery Rate",
 		"Health"
 	],
 	[
-		{name: "Multi-Hit Chance", value: 0.35},
-		{name: "Focus Pool Multiplier", value: 1.20},
-		{name: "Multi-Hit Severity", value: 0.45},
-		{name: "Focus Pool Multiplier", value: 1.50},
-		{name: "Multi-Hit Chance", value: 0.55}
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
+		{type: "multiplier", name: "Focus Pool", value: 1.20},
+		{type: "bonus", name: "Multi-Hit Severity", value: 0.45},
+		{type: "multiplier", name: "Focus Pool", value: 1.50},
+		{type: "bonus", name: "Multi-Hit Chance", value: 0.55}
 	]
 );
