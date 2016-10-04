@@ -4,15 +4,19 @@
 
 import React, {Component} from "react";
 import Storage from "../utilities/storage.jsx";
+import Overlay from "../utilities/overlay.jsx";
 import AppStore from "../app-store.jsx";
 
 export default class LoadLoadoutDialog extends Component {
+	static show() {
+		Overlay.show(<LoadLoadoutDialog />);
+	}
+
 	loadLoadout(name) {
 		if (name in Storage.state.loadouts)
 			AppStore.dispatch({type: "load", items: Storage.state.loadouts[name]});
 
-		if (this.props.onLoad)
-			this.props.onLoad();
+		Overlay.hide();
 	}
 
 	render() {

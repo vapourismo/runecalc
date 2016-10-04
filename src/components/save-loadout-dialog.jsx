@@ -4,9 +4,14 @@
 
 import React, {Component} from "react";
 import Storage from "../utilities/storage.jsx";
+import Overlay from "../utilities/overlay.jsx";
 import AppStore from "../app-store.jsx";
 
 export default class SaveLoadoutDialog extends Component {
+	static show() {
+		Overlay.show(<SaveLoadoutDialog />);
+	}
+
 	constructor(props) {
 		super(props);
 
@@ -24,8 +29,7 @@ export default class SaveLoadoutDialog extends Component {
 		Storage.state.loadouts[name] = AppStore.getState().items;
 		Storage.save();
 
-		if (this.props.onSave)
-			this.props.onSave();
+		Overlay.hide();
 	}
 
 	render() {

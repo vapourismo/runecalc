@@ -10,7 +10,6 @@ import AppStore from "./app-store.jsx";
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
 import Stats from "./database/stats.jsx";
-import Overlay from "./utilities/overlay.jsx";
 import ItemSet from "./components/item-set.jsx";
 import Option from "./components/option.jsx";
 import SaveLoadoutDialog from "./components/save-loadout-dialog.jsx";
@@ -71,20 +70,10 @@ class Root extends Component {
 		};
 
 		this.resetLoadout = this.resetLoadout.bind(this);
-		this.showSaveDialog = this.showSaveDialog.bind(this);
-		this.showLoadDialog = this.showLoadDialog.bind(this);
 	}
 
 	resetLoadout() {
 		AppStore.dispatch({type: "reset"});
-	}
-
-	showSaveDialog() {
-		Overlay.show(<SaveLoadoutDialog onSave={Overlay.hide} />);
-	}
-
-	showLoadDialog() {
-		Overlay.show(<LoadLoadoutDialog onLoad={Overlay.hide} />);
 	}
 
 	render() {
@@ -92,8 +81,8 @@ class Root extends Component {
 			<div>
 				<Toolbar
 					onReset={this.resetLoadout}
-					onLoad={this.showLoadDialog}
-					onSave={this.showSaveDialog} />
+					onLoad={LoadLoadoutDialog.show}
+					onSave={SaveLoadoutDialog.show} />
 				<div className="contents">
 					<ItemSet />
 					<div className="side-bar">
