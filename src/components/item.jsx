@@ -92,7 +92,6 @@ export default class Item extends Component {
 						}
 						<div className="add" onClick={this.addRuneSlot}>+</div>
 					</div>
-					<StatDisplay runes={this.state.runes} />
 				</div>
 			</div>
 		);
