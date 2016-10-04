@@ -4,6 +4,7 @@
 
 import React, {Component} from "react";
 import Storage from "../utilities/storage.jsx";
+import AppStore from "../app-store.jsx";
 
 export default class SaveLoadoutDialog extends Component {
 	constructor(props) {
@@ -20,7 +21,7 @@ export default class SaveLoadoutDialog extends Component {
 	}
 
 	overrideLoadout(name) {
-		Storage.state.loadouts[name] = this.props.loadout;
+		Storage.state.loadouts[name] = AppStore.getState().items;
 		Storage.save();
 
 		if (this.props.onSave)

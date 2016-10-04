@@ -4,7 +4,8 @@
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
-import * as Redux from "redux";
+
+import AppStore from "./app-store.jsx";
 
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
@@ -25,68 +26,6 @@ function modPowerConverter(stats) {
 	}
 }
 
-const defaultLoadoutState = {
-	items: {
-		weapon: [null, null, null],
-		head: [null, null, null],
-		shoulders: [null, null, null],
-		chest: [null, null, null],
-		hands: [null, null, null],
-		legs: [null, null, null],
-		feet: [null, null, null]
-	}
-};
-
-function updateObject(a, b) {
-	let c = Object.assign({}, a);
-
-	for (let k in b) {
-		if (
-			k in a
-			&& c[k] instanceof Object
-			&& b[k] instanceof Object
-			&& !(b[k] instanceof Array)
-		) {
-			c[k] = updateObject(c[k], b[k]);
-		} else {
-			c[k] = b[k];
-		}
-	}
-
-	return c;
-}
-
-function reduceLoadoutStore(state = defaultLoadoutState, action) {
-	switch (action.type) {
-		case "modify_item":
-			if (action.item in state.items)
-				return updateObject(
-					state,
-					{
-						items: {
-							[action.item]: action.runes
-						}
-					}
-				);
-			else
-				return state;
-
-		case "reset":
-			return defaultLoadoutState;
-
-		case "load":
-			return updateObject(
-				state,
-				{
-					items: action.loadout
-				}
-			);
-
-		default:
-			return state;
-	}
-}
-
 class StatSummary extends Component {
 	constructor(props) {
 		super(props);
@@ -97,9 +36,9 @@ class StatSummary extends Component {
 	}
 
 	componentDidMount() {
-		this.storeLease = this.props.loadoutStore.subscribe(
+		this.storeLease = AppStore.subscribe(
 			() => {
-				const loadoutState = this.props.loadoutStore.getState().items;
+				const loadoutState = AppStore.getState().items;
 				this.setState({runes: Object.values(loadoutState)});
 			}
 		);
@@ -127,8 +66,6 @@ class Root extends Component {
 	constructor(props) {
 		super(props);
 
-		this.loadoutStore = Redux.createStore(reduceLoadoutStore);
-
 		this.state = {
 			powerConverter: false
 		};
@@ -136,24 +73,18 @@ class Root extends Component {
 		this.resetLoadout = this.resetLoadout.bind(this);
 		this.showSaveDialog = this.showSaveDialog.bind(this);
 		this.showLoadDialog = this.showLoadDialog.bind(this);
-		this.loadLoadout = this.loadLoadout.bind(this);
 	}
 
 	resetLoadout() {
-		this.loadoutStore.dispatch({type: "reset"});
+		AppStore.dispatch({type: "reset"});
 	}
 
 	showSaveDialog() {
-		Overlay.show(<SaveLoadoutDialog loadout={this.loadoutStore.getState()} onSave={Overlay.hide} />);
+		Overlay.show(<SaveLoadoutDialog onSave={Overlay.hide} />);
 	}
 
 	showLoadDialog() {
-		Overlay.show(<LoadLoadoutDialog onLoad={this.loadLoadout} />);
-	}
-
-	loadLoadout(loadout) {
-		Overlay.hide();
-		this.loadoutStore.dispatch({type: "load", loadout});
+		Overlay.show(<LoadLoadoutDialog onLoad={Overlay.hide} />);
 	}
 
 	render() {
@@ -164,13 +95,13 @@ class Root extends Component {
 					onLoad={this.showLoadDialog}
 					onSave={this.showSaveDialog} />
 				<div className="contents">
-					<ItemSet loadoutStore={this.loadoutStore} />
+					<ItemSet />
 					<div className="side-bar">
 						<div className="section">
 							<div className="headline">
 								Summary
 							</div>
-							<StatSummary loadoutStore={this.loadoutStore} />
+							<StatSummary />
 						</div>
 						{/*<div className="section">
 							<div className="headline">

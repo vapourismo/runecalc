@@ -5,12 +5,13 @@
 import React, {Component} from "react";
 import RuneSlot from "./rune-slot.jsx";
 import StatDisplay from "./stat-display.jsx";
+import AppStore from "../app-store.jsx";
 
 export default class Item extends Component {
 	constructor(props) {
 		super(props);
 
-		const loadoutState = props.loadoutStore.getState().items;
+		const loadoutState = AppStore.getState().items;
 
 		this.state = {
 			runes: loadoutState[props.item] || [null]
@@ -21,9 +22,9 @@ export default class Item extends Component {
 	}
 
 	componentDidMount() {
-		this.storeLease = this.props.loadoutStore.subscribe(
+		this.storeLease = AppStore.subscribe(
 			() => {
-				const loadoutState = this.props.loadoutStore.getState().items;
+				const loadoutState = AppStore.getState().items;
 
 				this.setState({
 					runes: loadoutState[this.props.item] || [null]
@@ -37,7 +38,7 @@ export default class Item extends Component {
 	}
 
 	signalChange(runes) {
-		this.props.loadoutStore.dispatch({
+		AppStore.dispatch({
 			type: "modify_item",
 			item: this.props.item,
 			runes

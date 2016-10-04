@@ -4,11 +4,15 @@
 
 import React, {Component} from "react";
 import Storage from "../utilities/storage.jsx";
+import AppStore from "../app-store.jsx";
 
 export default class LoadLoadoutDialog extends Component {
 	loadLoadout(name) {
-		if (name in Storage.state.loadouts && this.props.onLoad)
-			this.props.onLoad(Storage.state.loadouts[name]);
+		if (name in Storage.state.loadouts)
+			AppStore.dispatch({type: "load", items: Storage.state.loadouts[name]});
+
+		if (this.props.onLoad)
+			this.props.onLoad();
 	}
 
 	render() {

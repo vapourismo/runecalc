@@ -4,6 +4,7 @@
 
 import React, {Component} from "react";
 import Item from "./item.jsx";
+import AppStore from "../app-store.jsx";
 import Runes from "../database/runes.jsx";
 
 export default class ItemSet extends Component {
@@ -14,7 +15,7 @@ export default class ItemSet extends Component {
 	}
 
 	runeSelector(item, newRuneID, oldRuneID) {
-		const loadoutState = this.props.loadoutStore.getState().items;
+		const loadoutState = AppStore.getState().items;
 
 		if (!(newRuneID in Runes && item in loadoutState))
 			return false;
@@ -46,31 +47,24 @@ export default class ItemSet extends Component {
 			<div className="item-set">
 				<Item
 					item="weapon"
-					loadoutStore={this.props.loadoutStore}
 					selector={this.runeSelector} />
 				<Item
 					item="head"
-					loadoutStore={this.props.loadoutStore}
 					selector={this.runeSelector} />
 				<Item
 					item="shoulders"
-					loadoutStore={this.props.loadoutStore}
 					selector={this.runeSelector} />
 				<Item
 					item="chest"
-					loadoutStore={this.props.loadoutStore}
 					selector={this.runeSelector} />
 				<Item
 					item="hands"
-					loadoutStore={this.props.loadoutStore}
 					selector={this.runeSelector} />
 				<Item
 					item="legs"
-					loadoutStore={this.props.loadoutStore}
 					selector={this.runeSelector} />
 				<Item
 					item="feet"
-					loadoutStore={this.props.loadoutStore}
 					selector={this.runeSelector} />
 			</div>
 		);
