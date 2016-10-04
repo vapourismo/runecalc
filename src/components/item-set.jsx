@@ -10,17 +10,11 @@ export default class ItemSet extends Component {
 	constructor(props) {
 		super(props);
 
-		this.updateRunes = this.updateRunes.bind(this);
 		this.runeSelector = this.runeSelector.bind(this);
 	}
 
-	updateRunes(item, runes) {
-		if (this.props.onChangeLoadout)
-			this.props.onChangeLoadout(item, runes);
-	}
-
 	runeSelector(item, newRuneID, oldRuneID) {
-		const loadoutState = this.props.loadoutStore.getState();
+		const loadoutState = this.props.loadoutStore.getState().items;
 
 		if (!(newRuneID in Runes && item in loadoutState))
 			return false;

@@ -26,20 +26,48 @@ function modPowerConverter(stats) {
 }
 
 const defaultLoadoutState = {
-	weapon: [null, null, null],
-	head: [null, null, null],
-	shoulders: [null, null, null],
-	chest: [null, null, null],
-	hands: [null, null, null],
-	legs: [null, null, null],
-	feet: [null, null, null]
+	items: {
+		weapon: [null, null, null],
+		head: [null, null, null],
+		shoulders: [null, null, null],
+		chest: [null, null, null],
+		hands: [null, null, null],
+		legs: [null, null, null],
+		feet: [null, null, null]
+	}
 };
+
+function updateObject(a, b) {
+	let c = Object.assign({}, a);
+
+	for (let k in b) {
+		if (
+			k in a
+			&& c[k] instanceof Object
+			&& b[k] instanceof Object
+			&& !(b[k] instanceof Array)
+		) {
+			c[k] = updateObject(c[k], b[k]);
+		} else {
+			c[k] = b[k];
+		}
+	}
+
+	return c;
+}
 
 function reduceLoadoutStore(state = defaultLoadoutState, action) {
 	switch (action.type) {
 		case "modify_item":
-			if (action.item in state)
-				return Object.assign({}, state, {[action.item]: action.runes});
+			if (action.item in state.items)
+				return updateObject(
+					state,
+					{
+						items: {
+							[action.item]: action.runes
+						}
+					}
+				);
 			else
 				return state;
 
@@ -47,14 +75,12 @@ function reduceLoadoutStore(state = defaultLoadoutState, action) {
 			return defaultLoadoutState;
 
 		case "load":
-			const stateCopy = Object.assign({}, state);
-
-			for (let item in action.loadout)
-				if (item in state)
-					stateCopy[item] = action.loadout[item];
-
-
-			return stateCopy;
+			return updateObject(
+				state,
+				{
+					items: action.loadout
+				}
+			);
 
 		default:
 			return state;
@@ -73,7 +99,7 @@ class StatSummary extends Component {
 	componentDidMount() {
 		this.storeLease = this.props.loadoutStore.subscribe(
 			() => {
-				const loadoutState = this.props.loadoutStore.getState();
+				const loadoutState = this.props.loadoutStore.getState().items;
 				this.setState({runes: Object.values(loadoutState)});
 			}
 		);

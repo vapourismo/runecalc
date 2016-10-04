@@ -10,7 +10,7 @@ export default class Item extends Component {
 	constructor(props) {
 		super(props);
 
-		const loadoutState = props.loadoutStore.getState();
+		const loadoutState = props.loadoutStore.getState().items;
 
 		this.state = {
 			runes: loadoutState[props.item] || [null]
@@ -23,7 +23,7 @@ export default class Item extends Component {
 	componentDidMount() {
 		this.storeLease = this.props.loadoutStore.subscribe(
 			() => {
-				const loadoutState = this.props.loadoutStore.getState();
+				const loadoutState = this.props.loadoutStore.getState().items;
 
 				this.setState({
 					runes: loadoutState[this.props.item] || [null]
