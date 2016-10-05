@@ -5,7 +5,6 @@
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
-    "node-sass": "^3.10.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "redux": "^3.6.0",
@@ -13,8 +12,8 @@
   },
   "scripts": {
     "watch-js": "webpack -w",
-    "watch-css": "node-sass -w -o . src/index.scss",
-    "build-client": "webpack && node-sass -o . src/index.scss"
+    "watch-css": "sass --watch styles/index.scss:index.css",
+    "build-client": "webpack && sass styles/index.scss:index.css"
   },
   "devDependencies": {
     "eslint": "^3.7.0",
