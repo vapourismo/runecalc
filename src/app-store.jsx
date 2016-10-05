@@ -23,7 +23,7 @@ function updateObject(a, b) {
 	return c;
 }
 
-const defaultLoadoutState = {
+const defaultState = {
 	loadout: {
 		weapon: {
 			item: null,
@@ -56,7 +56,7 @@ const defaultLoadoutState = {
 	}
 };
 
-function reduceAppState(state = defaultLoadoutState, action) {
+function reduceAppState(state = defaultState, action) {
 	switch (action.type) {
 		case "modify_item_runes":
 			return updateObject(
@@ -71,7 +71,7 @@ function reduceAppState(state = defaultLoadoutState, action) {
 			);
 
 		case "reset":
-			return defaultLoadoutState;
+			return defaultState;
 
 		case "load":
 			return updateObject(
@@ -86,4 +86,4 @@ function reduceAppState(state = defaultLoadoutState, action) {
 	}
 }
 
-export default Redux.createStore(reduceAppState, defaultLoadoutState);
+export default Redux.createStore(reduceAppState, defaultState);
