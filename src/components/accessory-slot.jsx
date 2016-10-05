@@ -4,8 +4,12 @@
 
 import React, {Component} from "react";
 import RuneSlot from "./rune-slot.jsx";
+import Item from "./item.jsx";
 import StatDisplay from "./stat-display.jsx";
+import ItemSelector from "./item-selector.jsx";
 import AppStore from "../app-store.jsx";
+import Items from "../database/items.jsx";
+import Overlay from "../utilities/overlay.jsx";
 
 export default class AccessorySlot extends Component {
 	constructor(props) {
@@ -19,23 +23,20 @@ export default class AccessorySlot extends Component {
 	componentDidMount() {
 		this.storeLease = AppStore.subscribe(
 			() => {
-
+				this.setState({
+					item: AppStore.getState().loadout[this.props.itemSlot].item
+				});
 			}
 		);
-	}
-
-	componentWillUnmount() {
-		if (this.storeLease) this.storeLease();
 	}
 
 	render() {
 		const title = this.props.itemSlot[0].toUpperCase() + this.props.itemSlot.substring(1);
 
 		return (
-			<div className="item">
+			<div className="item-slot">
 				<div className="headline">{title}</div>
-				<div className="body">
-				</div>
+				<Item itemSlot={this.props.itemSlot} />
 			</div>
 		);
 	}

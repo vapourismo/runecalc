@@ -3,6 +3,7 @@
 "use strict";
 
 import React, {Component} from "react";
+import Item from "./item.jsx";
 import RuneSlot from "./rune-slot.jsx";
 import StatDisplay from "./stat-display.jsx";
 import AppStore from "../app-store.jsx";
@@ -14,7 +15,7 @@ export default class ItemSlot extends Component {
 		const loadoutState = AppStore.getState().loadout;
 
 		this.state = {
-			runes: loadoutState[props.itemSlot].runes || [null]
+			runes: loadoutState[props.itemSlot].runes
 		};
 
 		this.addRuneSlot = this.addRuneSlot.bind(this);
@@ -70,29 +71,26 @@ export default class ItemSlot extends Component {
 		return this.props.selector(this.props.itemSlot, newRuneID, oldRuneID);
 	}
 
+	renderSlot(runeID, runeSlot) {
+		return (
+			<RuneSlot
+				key={runeSlot}
+				runeID={runeID}
+				selector={this.runeSelector}
+				onChangeRune={(newRuneID) => this.updateRuneSlot(runeSlot, newRuneID)}
+				onRemoveSlot={() => this.removeRuneSlot(runeSlot)} />
+		);
+	}
+
 	render() {
 		const title = this.props.itemSlot[0].toUpperCase() + this.props.itemSlot.substring(1);
 
 		return (
-			<div className="item">
+			<div className="item-slot">
 				<div className="headline">{title}</div>
-				<div className="body">
-					<div className="runes">
-						{
-							this.state.runes.map(
-								(runeID, runeSlot) => (
-									<RuneSlot
-										key={runeSlot}
-										runeID={runeID}
-										selector={this.runeSelector}
-										onChangeRune={(newRuneID) => this.updateRuneSlot(runeSlot, newRuneID)}
-										onRemoveSlot={() => this.removeRuneSlot(runeSlot)} />
-								)
-							)
-						}
-						<div className="add" onClick={this.addRuneSlot}>+</div>
-					</div>
-				</div>
+				<Item itemSlot={this.props.itemSlot} />
+				{this.state.runes.map(this.renderSlot, this)}
+				<div className="add" onClick={this.addRuneSlot}>+</div>
 			</div>
 		);
 	}

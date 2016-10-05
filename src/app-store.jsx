@@ -72,6 +72,8 @@ const defaultState = {
 };
 
 function reduceAppState(state = defaultState, action) {
+	console.log("reduce", state, action);
+
 	switch (action.type) {
 		case "modify_item_runes":
 			return updateObject(
@@ -80,6 +82,30 @@ function reduceAppState(state = defaultState, action) {
 					loadout: {
 						[action.itemSlot]: {
 							runes: action.runes
+						}
+					}
+				}
+			);
+
+		case "select_item":
+			return updateObject(
+				state,
+				{
+					loadout: {
+						[action.itemSlot]: {
+							item: action.itemID
+						}
+					}
+				}
+			);
+
+		case "remove_item":
+			return updateObject(
+				state,
+				{
+					loadout: {
+						[action.itemSlot]: {
+							item: null
 						}
 					}
 				}
