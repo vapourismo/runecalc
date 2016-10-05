@@ -56,13 +56,13 @@ const defaultState = {
 			item: null,
 			runes: [null, null, null]
 		},
-		implant: {
-			item: null
-		},
 		weaponAttachment: {
 			item: null
 		},
 		supportSystem: {
+			item: null
+		},
+		implant: {
 			item: null
 		},
 		key: {
