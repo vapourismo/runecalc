@@ -83,7 +83,7 @@ function makeNonRMTClassSet(lvl, name, stats, powers) {
 			statName,
 			statValue: statUpgradeValue,
 			unique: true,
-			items: ["head", "shoulders", "legs"]
+			slots: ["head", "shoulders", "legs"]
 		});
 
 		runes.push({
@@ -129,7 +129,7 @@ function makeRMTClassSet(name, stats, powers) {
 			statName,
 			statValue,
 			unique: true,
-			items: ["head", "shoulders", "legs"]
+			slots: ["head", "shoulders", "legs"]
 		});
 	});
 
