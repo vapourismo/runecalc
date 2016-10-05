@@ -78,7 +78,7 @@ class StatSummary extends Component {
 
 			Stats.merge(ratings, info.ratings);
 			Stats.merge(bonuses, info.bonuses);
-			Stats.merge(multipliers, info.multipliers);
+			Stats.mergeMultipliers(multipliers, info.multipliers);
 		});
 
 		const stats = Stats.translateRatingsToStats(ratings);

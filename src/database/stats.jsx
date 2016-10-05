@@ -89,6 +89,14 @@ function merge(target, source) {
 		insertOrAdd(target, key, source[key]);
 }
 
+function mergeMultipliers(target, source) {
+	for (let key in source)
+		if (key in target)
+			target[key] = ((100 + target[key]) * (100 + source[key])) / 10000;
+		else
+			target[key] = source[key];
+}
+
 function analyzeItem(runes) {
 	const setPowers = {};
 	const ratings = {};
@@ -153,6 +161,7 @@ export default {
 	applyStatMultipliers,
 
 	merge,
+	mergeMultipliers,
 
 	analyzeItem,
 
