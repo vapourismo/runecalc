@@ -14,27 +14,28 @@ export default class ItemSet extends Component {
 		this.runeSelector = this.runeSelector.bind(this);
 	}
 
-	runeSelector(item, newRuneID, oldRuneID) {
-		const loadoutState = AppStore.getState().items;
+	runeSelector(itemSlot, newRuneID, oldRuneID) {
+		const loadoutState = AppStore.getState().loadout;
 
-		if (!(newRuneID in Runes && item in loadoutState))
+		if (!(newRuneID in Runes && itemSlot in loadoutState))
 			return false;
 
-		const itemState = loadoutState[item];
 		const rune = Runes[newRuneID];
 
-		if (rune.items && rune.items.indexOf(item) < 0)
+		if (rune.slots && rune.slots.indexOf(itemSlot) < 0)
 			return false;
 
 		if (newRuneID == oldRuneID || (!rune.unique && !rune.uniquePerItem))
 			return true;
 
-		if ((rune.uniquePerItem || rune.unique) && itemState.indexOf(newRuneID) >= 0)
+		const itemRunes = loadoutState[itemSlot].runes;
+
+		if ((rune.uniquePerItem || rune.unique) && itemRunes.indexOf(newRuneID) >= 0)
 			return false;
 
 		if (rune.unique) {
 			for (let i in loadoutState) {
-				if (loadoutState[i].indexOf(newRuneID) >= 0)
+				if (loadoutState[i].runes.indexOf(newRuneID) >= 0)
 					return false;
 			}
 		}
@@ -46,25 +47,25 @@ export default class ItemSet extends Component {
 		return (
 			<div className="item-set">
 				<Item
-					item="weapon"
+					itemSlot="weapon"
 					selector={this.runeSelector} />
 				<Item
-					item="head"
+					itemSlot="head"
 					selector={this.runeSelector} />
 				<Item
-					item="shoulders"
+					itemSlot="shoulders"
 					selector={this.runeSelector} />
 				<Item
-					item="chest"
+					itemSlot="chest"
 					selector={this.runeSelector} />
 				<Item
-					item="hands"
+					itemSlot="hands"
 					selector={this.runeSelector} />
 				<Item
-					item="legs"
+					itemSlot="legs"
 					selector={this.runeSelector} />
 				<Item
-					item="feet"
+					itemSlot="feet"
 					selector={this.runeSelector} />
 			</div>
 		);

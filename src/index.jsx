@@ -31,42 +31,18 @@ class StatSummary extends Component {
 		super(props);
 
 		this.state = {
-			stats: {}
+			runes: []
 		};
 	}
 
 	componentDidMount() {
 		this.storeLease = AppStore.subscribe(
 			() => {
-				const loadoutState = AppStore.getState().items;
+				const loadoutState = AppStore.getState().loadout;
 
-				const items = [
-					loadoutState.weapon,
-					loadoutState.head,
-					loadoutState.shoulders,
-					loadoutState.chest,
-					loadoutState.hands,
-					loadoutState.legs,
-					loadoutState.feet
-				];
-
-				const ratings = {};
-				const bonuses = {};
-				const multipliers = {};
-
-				items.forEach(item => {
-					const info = Stats.analyzeItem(item);
-
-					Stats.merge(ratings, info.ratings);
-					Stats.merge(bonuses, info.bonuses);
-					Stats.merge(multipliers, info.multipliers);
+				this.setState({
+					runes: Object.keys(loadoutState).map(itemSlot => loadoutState[itemSlot].runes)
 				});
-
-				const stats = Stats.translateRatingsToStats(ratings);
-				Stats.applyStatBonuses(stats, bonuses);
-				Stats.applyStatMultipliers(stats, multipliers);
-
-				this.setState({stats});
 			}
 		);
 	}
@@ -76,7 +52,23 @@ class StatSummary extends Component {
 	}
 
 	render() {
-		return <StatDisplay stats={this.state.stats} />
+		const ratings = {};
+		const bonuses = {};
+		const multipliers = {};
+
+		this.state.runes.forEach(runes => {
+			const info = Stats.analyzeItem(runes);
+
+			Stats.merge(ratings, info.ratings);
+			Stats.merge(bonuses, info.bonuses);
+			Stats.merge(multipliers, info.multipliers);
+		});
+
+		const stats = Stats.translateRatingsToStats(ratings);
+		Stats.applyStatBonuses(stats, bonuses);
+		Stats.applyStatMultipliers(stats, multipliers);
+
+		return <StatDisplay stats={stats} />
 	}
 }
 

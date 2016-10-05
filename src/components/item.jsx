@@ -11,10 +11,10 @@ export default class Item extends Component {
 	constructor(props) {
 		super(props);
 
-		const loadoutState = AppStore.getState().items;
+		const loadoutState = AppStore.getState().loadout;
 
 		this.state = {
-			runes: loadoutState[props.item] || [null]
+			runes: loadoutState[props.itemSlot].runes || [null]
 		};
 
 		this.addRuneSlot = this.addRuneSlot.bind(this);
@@ -24,10 +24,10 @@ export default class Item extends Component {
 	componentDidMount() {
 		this.storeLease = AppStore.subscribe(
 			() => {
-				const loadoutState = AppStore.getState().items;
+				const loadoutState = AppStore.getState().loadout;
 
 				this.setState({
-					runes: loadoutState[this.props.item] || [null]
+					runes: loadoutState[this.props.itemSlot].runes || [null]
 				});
 			}
 		);
@@ -39,8 +39,8 @@ export default class Item extends Component {
 
 	signalChange(runes) {
 		AppStore.dispatch({
-			type: "modify_item",
-			item: this.props.item,
+			type: "modify_item_runes",
+			itemSlot: this.props.itemSlot,
 			runes
 		});
 	}
@@ -49,29 +49,29 @@ export default class Item extends Component {
 		this.signalChange(this.state.runes.concat([null]));
 	}
 
-	updateRuneSlot(slot, runeID) {
-		if (slot >= this.state.runes.length)
+	updateRuneSlot(runeSlot, runeID) {
+		if (runeSlot >= this.state.runes.length)
 			return;
 
-		this.signalChange(Object.assign([], this.state.runes, {[slot]: runeID}));
+		this.signalChange(Object.assign([], this.state.runes, {[runeSlot]: runeID}));
 	}
 
-	removeRuneSlot(slot) {
-		if (slot >= this.state.runes.length)
+	removeRuneSlot(runeSlot) {
+		if (runeSlot >= this.state.runes.length)
 			return;
 
 		const runes = Object.assign([], this.state.runes);
-		runes.splice(slot, 1);
+		runes.splice(runeSlot, 1);
 
 		this.signalChange(runes);
 	}
 
 	runeSelector(newRuneID, oldRuneID) {
-		return this.props.selector(this.props.item, newRuneID, oldRuneID);
+		return this.props.selector(this.props.itemSlot, newRuneID, oldRuneID);
 	}
 
 	render() {
-		const title = this.props.item[0].toUpperCase() + this.props.item.substring(1);
+		const title = this.props.itemSlot[0].toUpperCase() + this.props.itemSlot.substring(1);
 
 		return (
 			<div className="item">
@@ -80,13 +80,13 @@ export default class Item extends Component {
 					<div className="runes">
 						{
 							this.state.runes.map(
-								(runeID, slot) => (
+								(runeID, runeSlot) => (
 									<RuneSlot
-										key={slot}
+										key={runeSlot}
 										runeID={runeID}
 										selector={this.runeSelector}
-										onChangeRune={(newRuneID) => this.updateRuneSlot(slot, newRuneID)}
-										onRemoveSlot={() => this.removeRuneSlot(slot)} />
+										onChangeRune={(newRuneID) => this.updateRuneSlot(runeSlot, newRuneID)}
+										onRemoveSlot={() => this.removeRuneSlot(runeSlot)} />
 								)
 							)
 						}

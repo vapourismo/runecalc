@@ -26,7 +26,7 @@ export default class SaveLoadoutDialog extends Component {
 	}
 
 	overrideLoadout(name) {
-		Storage.state.loadouts[name] = AppStore.getState().items;
+		Storage.state.loadouts[name] = AppStore.getState().loadout;
 		Storage.save();
 
 		Overlay.hide();

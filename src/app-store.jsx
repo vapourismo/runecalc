@@ -24,31 +24,51 @@ function updateObject(a, b) {
 }
 
 const defaultLoadoutState = {
-	items: {
-		weapon:    [null, null, null],
-		head:      [null, null, null],
-		shoulders: [null, null, null],
-		chest:     [null, null, null],
-		hands:     [null, null, null],
-		legs:      [null, null, null],
-		feet:      [null, null, null]
+	loadout: {
+		weapon: {
+			item: null,
+			runes: [null, null, null]
+		},
+		head: {
+			item: null,
+			runes: [null, null, null]
+		},
+		shoulders: {
+			item: null,
+			runes: [null, null, null]
+		},
+		chest: {
+			item: null,
+			runes: [null, null, null]
+		},
+		hands: {
+			item: null,
+			runes: [null, null, null]
+		},
+		legs: {
+			item: null,
+			runes: [null, null, null]
+		},
+		feet: {
+			item: null,
+			runes: [null, null, null]
+		}
 	}
 };
 
 function reduceAppState(state = defaultLoadoutState, action) {
 	switch (action.type) {
-		case "modify_item":
-			if (action.item in state.items)
-				return updateObject(
-					state,
-					{
-						items: {
-							[action.item]: action.runes
+		case "modify_item_runes":
+			return updateObject(
+				state,
+				{
+					loadout: {
+						[action.itemSlot]: {
+							runes: action.runes
 						}
 					}
-				);
-			else
-				return state;
+				}
+			);
 
 		case "reset":
 			return defaultLoadoutState;
@@ -57,7 +77,7 @@ function reduceAppState(state = defaultLoadoutState, action) {
 			return updateObject(
 				state,
 				{
-					items: action.items
+					loadout: action.loadout
 				}
 			);
 

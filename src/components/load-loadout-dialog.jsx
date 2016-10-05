@@ -14,7 +14,7 @@ export default class LoadLoadoutDialog extends Component {
 
 	loadLoadout(name) {
 		if (name in Storage.state.loadouts)
-			AppStore.dispatch({type: "load", items: Storage.state.loadouts[name]});
+			AppStore.dispatch({type: "load", loadout: Storage.state.loadouts[name]});
 
 		Overlay.hide();
 	}
