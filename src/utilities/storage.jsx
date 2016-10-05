@@ -22,43 +22,23 @@ function setItem(key, data) {
 	localStorage.setItem(key, JSON.stringify(data));
 }
 
-const currentVersion = 2;
+const currentVersion = 3;
 
 const defaultState = {
 	loadouts: {}
 };
 
-const migrations = [
-	function (state) {
-		return {
-			loadouts: {}
-		};
-	},
-	function (state) {
-		return {
-			loadouts: {}
-		};
-	}
-];
-
 let state = defaultState;
 
 if (isAvailable) {
 	const version = getItem("version");
-	state = getItem("state");
 
-	if (version == null || state == null || version > currentVersion) {
-		state = defaultState;
-	} else if (version < currentVersion) {
-		for (let i = version; i < currentVersion; i++)
-			state = migrations[i](state);
-	} else if (!(state instanceof Object)) {
-		state = defaultState;
-	} else if (!state.loadouts || !(state.loadouts instanceof Object)) {
-		state.loadouts = {};
+	if (version === currentVersion) {
+		state = getItem("state");
+	} else {
+		setItem("state", state);
+		save();
 	}
-
-	save();
 }
 
 function save() {
