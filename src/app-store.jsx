@@ -55,6 +55,18 @@ const defaultState = {
 		feet: {
 			item: null,
 			runes: [null, null, null]
+		},
+		implant: {
+			item: null
+		},
+		weaponAttachment: {
+			item: null
+		},
+		supportSystem: {
+			item: null
+		},
+		key: {
+			item: null
 		}
 	}
 };

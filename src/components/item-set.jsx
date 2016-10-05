@@ -47,32 +47,16 @@ export default class ItemSet extends Component {
 	}
 
 	render() {
+		const loadoutState = AppStore.getState().loadout;
+
 		return (
 			<div className="item-set">
-				<ItemSlot
-					itemSlot="weapon"
-					selector={this.runeSelector} />
-				<AccessorySlot
-					itemSlot="shield"
-					selector={this.runeSelector} />
-				<ItemSlot
-					itemSlot="head"
-					selector={this.runeSelector} />
-				<ItemSlot
-					itemSlot="shoulders"
-					selector={this.runeSelector} />
-				<ItemSlot
-					itemSlot="chest"
-					selector={this.runeSelector} />
-				<ItemSlot
-					itemSlot="hands"
-					selector={this.runeSelector} />
-				<ItemSlot
-					itemSlot="legs"
-					selector={this.runeSelector} />
-				<ItemSlot
-					itemSlot="feet"
-					selector={this.runeSelector} />
+				{Object.keys(loadoutState).map(itemSlot => {
+					if (loadoutState[itemSlot].runes)
+						return <ItemSlot key={itemSlot} itemSlot={itemSlot} selector={this.runeSelector} />;
+					else
+						return <AccessorySlot key={itemSlot} itemSlot={itemSlot} />
+				})}
 			</div>
 		);
 	}
