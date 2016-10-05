@@ -19,7 +19,7 @@ export default class SaveLoadoutDialog extends Component {
 	}
 
 	saveLoadout() {
-		if (this.inputCom && this.inputCom.value != "" && this.props.onSave)
+		if (this.inputCom && this.inputCom.value != "")
 			this.overrideLoadout(this.inputCom.value);
 		else if (this.inputCom)
 			this.inputCom.focus();
