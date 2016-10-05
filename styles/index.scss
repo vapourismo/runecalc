@@ -91,29 +91,6 @@ body {
 	}
 }
 
-// Reusable styles
-
-.interactable {
-	transition: 300ms all;
-
-	border-bottom: solid 1px #333333;
-
-	&:hover {
-		background-color: #333333;
-		border-bottom: solid 1px #efefef;
-	}
-}
-
-.headline {
-	padding: 10px;
-	border-bottom: solid 1px #666666;
-
-	background-color: #252525;
-
-	font-size: 14px;
-	text-align: center;
-}
-
 // Components
 
 .rune {
@@ -234,11 +211,12 @@ body {
 	padding: 15px;
 	margin: 15px;
 
-	.body {
-		overflow: auto;
+	overflow-y: auto;
 
+	.body {
 		display: flex;
 		flex-direction: column;
+		min-height: min-content;
 
 		.set {
 			@extend .interactable;
@@ -359,7 +337,10 @@ body {
 	}
 }
 
-.item {
+@import "./components/item-slot.scss";
+@import "./components/item-selector.scss";
+
+/*.item {
 	display: inline-block;
 
 	border-bottom: solid 1px #333333;
@@ -390,7 +371,7 @@ body {
 			flex: 1;
 		}
 	}
-}
+}*/
 
 .summary {
 	.property {
@@ -462,8 +443,10 @@ body {
 		flex: 1;
 		padding: 10px;
 
-		.item {
-			width: 100%;
+		display: flex;
+		flex-direction: column;
+
+		.item-slot {
 			margin-bottom: 10px;
 		}
 	}
@@ -494,7 +477,7 @@ body {
 	cursor: pointer;
 
 	.check-box {
-		transition: 300ms all;
+		transition: 300ms background-color;
 
 		width: 14px;
 		height: 14px;

@@ -1,0 +1,55 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
+@import "../helpers.scss";
+
+.item-selector {
+	display: flex;
+	flex-direction: column;
+	background-color: #222222;
+	border: solid 1px #efefef;
+	box-shadow: 0 0 10px #000000;
+
+	margin: 15px;
+	padding: 15px;
+
+	overflow-y: auto;
+
+	.body {
+		display: flex;
+		flex-direction: column;
+
+		min-height: min-content;
+
+		.item {
+			margin-bottom: 10px;
+
+			.item-name {
+				@extend .headline;
+				@extend .interactable;
+
+				cursor: pointer;
+			}
+
+			.rating {
+				display: flex;
+				flex-direction: row;
+
+				border-bottom: solid 1px #333333;
+
+				font-size: 14px;
+
+				.rating-name, .rating-value {
+					padding: 5px 10px;
+				}
+
+				.rating-name {
+					flex: 1;
+				}
+
+				.rating-value {
+					text-align: right;
+				}
+			}
+		}
+	}
+}
