@@ -7,6 +7,7 @@ import ReactDOM from "react-dom";
 
 import AppStore from "./app-store.jsx";
 import Runes from "./database/runes.jsx";
+import Items from "./database/items.jsx";
 
 import StatDisplay from "./components/stat-display.jsx";
 import Toolbar from "./components/toolbar.jsx";
@@ -31,7 +32,8 @@ class StatSummary extends Component {
 		super(props);
 
 		this.state = {
-			runes: []
+			runes: [],
+			items: []
 		};
 	}
 
@@ -40,15 +42,19 @@ class StatSummary extends Component {
 			() => {
 				const loadoutState = AppStore.getState().loadout;
 				const runes = [];
+				const items = [];
 
 				for (let itemSlot in loadoutState) {
 					let item = loadoutState[itemSlot];
+
+					if (item.item)
+						items.push(item.item);
 
 					if (item.runes)
 						runes.push(item.runes);
 				}
 
-				this.setState({runes});
+				this.setState({items, runes});
 			}
 		);
 	}
@@ -61,6 +67,11 @@ class StatSummary extends Component {
 		const ratings = {};
 		const bonuses = {};
 		const multipliers = {};
+
+		this.state.items.forEach(itemID => {
+			if (itemID in Items)
+				Stats.merge(ratings, Items[itemID].ratings);
+		});
 
 		this.state.runes.forEach(runes => {
 			const info = Stats.analyzeItem(runes);
