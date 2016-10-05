@@ -288,10 +288,10 @@ makeNonRMTClassSet(
 	],
 	[
 		{type: "bonus", name: "Multi-Hit Chance", value: 0.35},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.20},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.20},
 		{type: "special", name: "Flame Surge Tier 1", value: ""},
 		{type: "bonus", name: "Strikethrough", value: 0.30},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.28},
 		{type: "bonus", name: "Multi-Hit Chance", value: 0.60},
 		{type: "special", name: "Flame Surge Tier 2", value: ""}
 	]
@@ -307,12 +307,12 @@ makeNonRMTClassSet(
 		"Critical Hit Chance"
 	],
 	[
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
-		{type: "bonus", name: "Crit-Hit Severity", value: 0.80},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.18},
+		{type: "bonus", name: "Critical Hit Severity", value: 0.80},
 		{type: "special", name: "Eviscerator Tier 1", value: ""},
 		{type: "bonus", name: "Strikethrough", value: 0.30},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
-		{type: "bonus", name: "Crit-Hit Severity", value: 1.20},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.28},
+		{type: "bonus", name: "Critical Hit Severity", value: 1.20},
 		{type: "special", name: "Eviscerator Tier 2", value: ""}
 	]
 );
@@ -327,12 +327,12 @@ makeNonRMTClassSet(
 		"Critical Hit Chance"
 	],
 	[
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
-		{type: "bonus", name: "Crit-Hit Severity", value: 0.80},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.18},
+		{type: "bonus", name: "Critical Hit Severity", value: 0.80},
 		{type: "special", name: "Burning Rage Tier 1", value: ""},
 		{type: "bonus", name: "Strikethrough", value: 0.30},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
-		{type: "bonus", name: "Crit-Hit Severity", value: 1.20},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.28},
+		{type: "bonus", name: "Critical Hit Severity", value: 1.20},
 		{type: "special", name: "Burning Rage Tier 2", value: ""}
 	]
 );
@@ -347,12 +347,12 @@ makeNonRMTClassSet(
 		"Critical Hit Severity"
 	],
 	[
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.18},
 		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
 		{type: "special", name: "Hardened Tier 1", value: ""},
-		{type: "bonus", name: "Crit-Hit Severity", value: 1.00},
+		{type: "bonus", name: "Critical Hit Severity", value: 1.00},
 		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.30},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.30},
 		{type: "special", name: "Hardened Tier 2", value: ""}
 	]
 );
@@ -488,12 +488,12 @@ makeNonRMTClassSet(
 		"Critical Hit Severity"
 	],
 	[
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
-		{type: "bonus", name: "Crit-Hit Severity", value: 0.80},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.18},
+		{type: "bonus", name: "Critical Hit Severity", value: 0.80},
 		{type: "special", name: "Mental Prowess Tier 1", value: ""},
 		{type: "bonus", name: "Strikethrough", value: 0.30},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.28},
-		{type: "bonus", name: "Crit-Hit Severity", value: 1.20},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.28},
+		{type: "bonus", name: "Critical Hit Severity", value: 1.20},
 		{type: "special", name: "Mental Prowess Tier 2", value: ""}
 	]
 );
@@ -628,12 +628,12 @@ makeNonRMTClassSet(
 		"Intensity"
 	],
 	[
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.18},
 		{type: "bonus", name: "Multi-Hit Chance", value: 0.40},
 		{type: "special", name: "Surge Life Tier 1", value: ""},
 		{type: "bonus", name: "Intensity", value: 0.30},
 		{type: "bonus", name: "Multi-Hit Chance", value: 0.55},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.30},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.30},
 		{type: "special", name: "Surge Life Tier 2", value: ""}
 	]
 );
@@ -950,8 +950,8 @@ makeRMTSet(
 	],
 	[
 		{type: "multiplier", name: "Health", value: 1},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.32},
-		{type: "bonus", name: "Crit-Hit Severity", value: 3.00}
+		{type: "bonus", name: "Critical Hit Chance", value: 0.32},
+		{type: "bonus", name: "Critical Hit Severity", value: 3.00}
 	]
 );
 
@@ -980,7 +980,7 @@ makeRMTSet(
 	],
 	[
 		{type: "multiplier", name: "Health", value: 1},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.31},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.31},
 		{type: "bonus", name: "Vigor", value: 0.84}
 	]
 );
@@ -1026,7 +1026,7 @@ makeRMTSet(
 	[
 		{type: "multiplier", name: "Health", value: 1},
 		{type: "bonus", name: "Multi-Hit Chance", value: 0.75},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.75}
+		{type: "bonus", name: "Critical Hit Chance", value: 0.75}
 	]
 );
 
@@ -1040,7 +1040,7 @@ makeRMTSet(
 	],
 	[
 		{type: "multiplier", name: "Health", value: 1},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.31},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.31},
 		{type: "multiplier", name: "Focus Pool", value: 4.80}
 	]
 );
@@ -1103,9 +1103,9 @@ makeNonRMTSet(
 	[
 		{type: "multiplier", name: "Health", value: 0.17},
 		{type: "bonus", name: "Multi-Hit Severity", value: 0.40},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.22},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.22},
 		{type: "bonus", name: "Multi-Hit Severity", value: 0.50},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.28}
+		{type: "bonus", name: "Critical Hit Chance", value: 0.28}
 	]
 );
 
@@ -1118,9 +1118,9 @@ makeNonRMTSet(
 	],
 	[
 		{type: "multiplier", name: "Health", value: 0.17},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.20},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.20},
 		{type: "bonus", name: "Multi-Hit Chance", value: 0.45},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.25},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.25},
 		{type: "bonus", name: "Multi-Hit Chance", value: 0.55}
 	]
 );
@@ -1149,11 +1149,11 @@ makeNonRMTSet(
 		"Health"
 	],
 	[
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.18},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.18},
 		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
-		{type: "bonus", name: "Crit-Hit Severity", value: 0.90},
+		{type: "bonus", name: "Critical Hit Severity", value: 0.90},
 		{type: "bonus", name: "Focus Recovery Rate", value: 0.02},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.28}
+		{type: "bonus", name: "Critical Hit Chance", value: 0.28}
 	]
 );
 
@@ -1214,10 +1214,10 @@ makeNonRMTSet(
 	],
 	[
 		{type: "bonus", name: "Strikethrough", value: 0.21},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.20},
-		{type: "bonus", name: "Crit-Hit Severity", value: 0.90},
-		{type: "bonus", name: "Crit-Hit Chance", value: 0.25},
-		{type: "bonus", name: "Crit-Hit Severity", value: 1.10}
+		{type: "bonus", name: "Critical Hit Chance", value: 0.20},
+		{type: "bonus", name: "Critical Hit Severity", value: 0.90},
+		{type: "bonus", name: "Critical Hit Chance", value: 0.25},
+		{type: "bonus", name: "Critical Hit Severity", value: 1.10}
 	]
 );
 
