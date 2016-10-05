@@ -24,7 +24,7 @@ function genCappedRatingConv(base, softcap, coeff) {
 	};
 }
 
-const ConvertibleRatings = {
+const convertibleRatings = {
 	"Armor":                 genRatingConv(0,   0,   8    / 1000, 7250),
 	"Critical Hit Chance":   genRatingConv(5,   30,  2.5  / 1000, 7000),
 	"Critical Hit Severity": genRatingConv(150, 300, 10   / 1000, 5500),
@@ -46,8 +46,6 @@ const ConvertibleRatings = {
 	"Health":                health => health + 10000
 };
 
-window._ConvertibleRatings = ConvertibleRatings;
-
 function insertOrAdd(obj, key, value) {
 	if (key in obj)
 		obj[key] += value;
@@ -59,8 +57,8 @@ function translateRatingsToStats(ratings) {
 	const ratingsCopy = {};
 
 	for (let name in ratings)
-		if (name in ConvertibleRatings)
-			ratingsCopy[name] = ConvertibleRatings[name](ratings[name]);
+		if (name in convertibleRatings)
+			ratingsCopy[name] = convertibleRatings[name](ratings[name]);
 		else
 			ratingsCopy[name] = ratings[name];
 
@@ -71,8 +69,8 @@ function applyStatBonuses(stats, bonuses) {
 	for (let name in bonuses) {
 		if (name in stats)
 			stats[name] += bonuses[name];
-		else if (name in ConvertibleRatings)
-			stats[name] = ConvertibleRatings[name](0) + bonuses[name];
+		else if (name in convertibleRatings)
+			stats[name] = convertibleRatings[name](0) + bonuses[name];
 		else
 			stats[name] = bonuses[name];
 	}
@@ -82,8 +80,8 @@ function applyStatMultipliers(stats, multipliers) {
 	for (let name in multipliers)
 		if (name in stats)
 			stats[name] *= 1 + (multipliers[name] / 100)
-		else if (name in ConvertibleRatings)
-			stats[name] = ConvertibleRatings[name](0) * (1 + (multipliers[name] / 100));
+		else if (name in convertibleRatings)
+			stats[name] = convertibleRatings[name](0) * (1 + (multipliers[name] / 100));
 }
 
 function merge(target, source) {
