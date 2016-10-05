@@ -7,7 +7,7 @@ import RuneSlot from "./rune-slot.jsx";
 import StatDisplay from "./stat-display.jsx";
 import AppStore from "../app-store.jsx";
 
-export default class Item extends Component {
+export default class ItemSlot extends Component {
 	constructor(props) {
 		super(props);
 

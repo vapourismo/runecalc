@@ -39,10 +39,16 @@ class StatSummary extends Component {
 		this.storeLease = AppStore.subscribe(
 			() => {
 				const loadoutState = AppStore.getState().loadout;
+				const runes = [];
 
-				this.setState({
-					runes: Object.keys(loadoutState).map(itemSlot => loadoutState[itemSlot].runes)
-				});
+				for (let itemSlot in loadoutState) {
+					let item = loadoutState[itemSlot];
+
+					if (item.runes)
+						runes.push(item.runes);
+				}
+
+				this.setState({runes});
 			}
 		);
 	}

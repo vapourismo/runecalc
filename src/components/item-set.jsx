@@ -3,7 +3,8 @@
 "use strict";
 
 import React, {Component} from "react";
-import Item from "./item.jsx";
+import ItemSlot from "./item-slot.jsx";
+import AccessorySlot from "./accessory-slot.jsx";
 import AppStore from "../app-store.jsx";
 import Runes from "../database/runes.jsx";
 
@@ -35,7 +36,9 @@ export default class ItemSet extends Component {
 
 		if (rune.unique) {
 			for (let i in loadoutState) {
-				if (loadoutState[i].runes.indexOf(newRuneID) >= 0)
+				let item = loadoutState[i];
+
+				if (item.runes && item.runes.indexOf(newRuneID) >= 0)
 					return false;
 			}
 		}
@@ -46,25 +49,28 @@ export default class ItemSet extends Component {
 	render() {
 		return (
 			<div className="item-set">
-				<Item
+				<ItemSlot
 					itemSlot="weapon"
 					selector={this.runeSelector} />
-				<Item
+				<AccessorySlot
+					itemSlot="shield"
+					selector={this.runeSelector} />
+				<ItemSlot
 					itemSlot="head"
 					selector={this.runeSelector} />
-				<Item
+				<ItemSlot
 					itemSlot="shoulders"
 					selector={this.runeSelector} />
-				<Item
+				<ItemSlot
 					itemSlot="chest"
 					selector={this.runeSelector} />
-				<Item
+				<ItemSlot
 					itemSlot="hands"
 					selector={this.runeSelector} />
-				<Item
+				<ItemSlot
 					itemSlot="legs"
 					selector={this.runeSelector} />
-				<Item
+				<ItemSlot
 					itemSlot="feet"
 					selector={this.runeSelector} />
 			</div>

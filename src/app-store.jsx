@@ -29,6 +29,9 @@ const defaultState = {
 			item: null,
 			runes: [null, null, null]
 		},
+		shield: {
+			item: null
+		},
 		head: {
 			item: null,
 			runes: [null, null, null]
