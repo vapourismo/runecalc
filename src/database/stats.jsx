@@ -79,9 +79,9 @@ function applyStatBonuses(stats, bonuses) {
 function applyStatMultipliers(stats, multipliers) {
 	for (let name in multipliers)
 		if (name in stats)
-			stats[name] *= 1 + (multipliers[name] / 100)
+			stats[name] *= multipliers[name];
 		else if (name in convertibleRatings)
-			stats[name] = convertibleRatings[name](0) * (1 + (multipliers[name] / 100));
+			stats[name] = convertibleRatings[name](0) * multipliers[name];
 }
 
 function merge(target, source) {
@@ -92,9 +92,9 @@ function merge(target, source) {
 function mergeMultipliers(target, source) {
 	for (let key in source)
 		if (key in target)
-			target[key] = ((100 + target[key]) * (100 + source[key])) / 10000;
+			target[key] *= 1 + (source[key] / 100);
 		else
-			target[key] = source[key];
+			target[key] = 1 + (source[key] / 100);
 }
 
 function analyzeItem(runes) {
