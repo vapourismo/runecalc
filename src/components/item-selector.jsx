@@ -41,7 +41,7 @@ export default class ItemSelector extends Component {
 		const availableItems = [];
 
 		for (let itemID in Items)
-			if (Items[itemID].itemSlot === this.props.itemSlot)
+			if (Items[itemID].slot === this.props.itemSlot)
 				availableItems.push(this.renderItem(Items[itemID], itemID));
 
 		return (

@@ -83,11 +83,9 @@ export default class ItemSlot extends Component {
 	}
 
 	render() {
-		const title = this.props.itemSlot[0].toUpperCase() + this.props.itemSlot.substring(1);
-
 		return (
 			<div className="item-slot">
-				<div className="headline">{title}</div>
+				<div className="headline">{this.props.itemSlot}</div>
 				<Item itemSlot={this.props.itemSlot} />
 				{this.state.runes.map(this.renderSlot, this)}
 				<div className="add" onClick={this.addRuneSlot}>+</div>

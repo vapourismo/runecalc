@@ -25,47 +25,47 @@ function updateObject(a, b) {
 
 const defaultState = {
 	loadout: {
-		weapon: {
+		"Weapon": {
 			item: null,
 			runes: [null, null, null]
 		},
-		shield: {
+		"Shield": {
 			item: null
 		},
-		head: {
+		"Head": {
 			item: null,
 			runes: [null, null, null]
 		},
-		shoulders: {
+		"Shoulders": {
 			item: null,
 			runes: [null, null, null]
 		},
-		chest: {
+		"Chest": {
 			item: null,
 			runes: [null, null, null]
 		},
-		hands: {
+		"Hands": {
 			item: null,
 			runes: [null, null, null]
 		},
-		legs: {
+		"Legs": {
 			item: null,
 			runes: [null, null, null]
 		},
-		feet: {
+		"Feet": {
 			item: null,
 			runes: [null, null, null]
 		},
-		weaponAttachment: {
+		"Weapon Attachment": {
 			item: null
 		},
-		supportSystem: {
+		"Support System": {
 			item: null
 		},
-		implant: {
+		"Implant": {
 			item: null
 		},
-		key: {
+		"Key": {
 			item: null
 		}
 	}
