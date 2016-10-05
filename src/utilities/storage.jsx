@@ -9,7 +9,7 @@ function getItem(key) {
 		return null;
 
 	try {
-		return JSON.parse(localStorage.getItem(key));
+		return JSON.parse(window.localStorage.getItem(key));
 	} catch (_) {
 		return null;
 	}
@@ -19,7 +19,7 @@ function setItem(key, data) {
 	if(!isAvailable)
 		return;
 
-	localStorage.setItem(key, JSON.stringify(data));
+	window.localStorage.setItem(key, JSON.stringify(data));
 }
 
 const currentVersion = 3;
