@@ -22,7 +22,7 @@ function setItem(key, data) {
 	window.localStorage.setItem(key, JSON.stringify(data));
 }
 
-const currentVersion = 3;
+const currentVersion = 4;
 
 const defaultState = {
 	loadouts: {}
