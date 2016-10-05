@@ -34,7 +34,7 @@ export default class Item extends Component {
 	}
 
 	showItemSelector() {
-		ItemSelector.show(this.props.itemSlot);
+		ItemSelector.show(this.props.itemSlot, this.state.item);
 	}
 
 	clearSlot(ev) {

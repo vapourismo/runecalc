@@ -3,13 +3,14 @@
 "use strict";
 
 import React, {Component} from "react";
+import RatingsTable from "./ratings-table.jsx";
 import AppStore from "../app-store.jsx";
 import Items from "../database/items.jsx";
 import Overlay from "../utilities/overlay.jsx";
 
 export default class ItemSelector extends Component {
-	static show(itemSlot) {
-		Overlay.show(<ItemSelector itemSlot={itemSlot} />);
+	static show(itemSlot, otherItem) {
+		Overlay.show(<ItemSelector itemSlot={itemSlot} otherItem={otherItem} />);
 	}
 
 	selectItem(itemID) {
@@ -17,22 +18,22 @@ export default class ItemSelector extends Component {
 		Overlay.hide();
 	}
 
-	renderRating(name, value) {
-		return (
-			<div key={name} className="rating">
-				<div className="rating-name">{name}</div>
-				<div className="rating-value">{value}</div>
-			</div>
-		);
-	}
-
 	renderItem(item, itemID) {
 		return (
 			<div key={itemID} className="item">
-				<div className="item-name" onClick={() => this.selectItem(itemID)}>{item.name}</div>
-				{Object.keys(item.ratings).sort().map(
-					name => this.renderRating(name, item.ratings[name])
-				)}
+				<div className="item-info" onClick={() => this.selectItem(itemID)}>
+					<div className="item-name">{item.name}</div>
+					<div className="item-detail">
+						{item.level} {item.type}
+					</div>
+				</div>
+				<RatingsTable
+					ratings={item.ratings}
+					otherRatings={
+						this.props.otherItem
+						? Items[this.props.otherItem].ratings
+						: undefined
+					} />
 			</div>
 		);
 	}
