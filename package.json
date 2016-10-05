@@ -11,7 +11,7 @@
     "webpack": "^1.13.2"
   },
   "scripts": {
-    "watch-js": "webpack -w",
+    "watch-js": "webpack -w -d",
     "watch-css": "sass --watch styles/index.scss:index.css",
     "build-client": "webpack && sass styles/index.scss:index.css"
   },
