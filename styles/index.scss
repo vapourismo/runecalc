@@ -466,11 +466,14 @@ html, body {
 
 	.left {
 		flex: 2;
-
 	}
 
 	.right {
 		flex: 1;
+
+		.section {
+			margin: 10px;
+		}
 	}
 
 	.left, .right {
