@@ -59,11 +59,10 @@ export default class ItemSelector extends Component {
 	}
 
 	componentDidMount() {
-		this.storeLease = AppStore.subscribe(
-			() => {
-				this.setState({
-					itemClass: AppStore.getState().filters.klass
-				});
+		this.storeLease = AppStore.subscribeTo(
+			["filters", "klass"],
+			itemClass => {
+				this.setState({itemClass});
 			}
 		);
 	}

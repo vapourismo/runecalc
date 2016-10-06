@@ -139,4 +139,32 @@ function reduceAppState(state = defaultState, action) {
 	}
 }
 
-export default Redux.createStore(reduceAppState, defaultState);
+const store = Redux.createStore(reduceAppState, defaultState);
+
+function walkObject(obj, path) {
+	for (let i in path) {
+		let dir = path[i];
+
+		if (obj instanceof Object)
+			obj = obj[dir];
+		else
+			return undefined;
+	}
+
+	return obj;
+}
+
+store.subscribeTo = function (path, handler) {
+	let lastestState = walkObject(this.getState(), path);
+
+	return this.subscribe(() => {
+		const localState = walkObject(this.getState(), path);
+
+		if (lastestState !== localState) {
+			lastestState = localState;
+			handler(localState);
+		}
+	});
+};
+
+export default store;
