@@ -20,11 +20,10 @@ export default class Item extends Component {
 	}
 
 	componentDidMount() {
-		this.storeLease = AppStore.subscribe(
-			() => {
-				this.setState({
-					item: AppStore.getState().loadout[this.props.itemSlot].item
-				});
+		this.storeLease = AppStore.subscribeTo(
+			["loadout", this.props.itemSlot, "item"],
+			item => {
+				this.setState({item});
 			}
 		);
 	}
