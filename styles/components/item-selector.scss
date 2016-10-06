@@ -4,37 +4,49 @@
 
 .item-selector {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	background-color: #222222;
 	border: solid 1px #efefef;
 	box-shadow: 0 0 10px #000000;
 
 	margin: 15px;
-	padding: 15px;
+	padding: 5px;
 
 	overflow-y: auto;
 
-	.body {
+	.filters {
+		.section {
+			margin: 10px;
+		}
+	}
+
+	.items {
 		display: flex;
 		flex-direction: column;
 
 		min-height: min-content;
 
 		.item {
-			margin-bottom: 10px;
+			margin: 10px;
+			cursor: pointer;
+
+			&:hover {
+				.item-info {
+					background-color: #333333;
+					border-bottom-color: #efefef;
+				}
+			}
 
 			.item-info {
 				@extend .headline;
-				@extend .interactable;
 
 				display: flex;
 				flex-direction: row;
 				align-items: center;
 
-				cursor: pointer;
-
 				.item-name {
 					flex: 1;
+					font-size: 14px;
 					text-align: left;
 				}
 
