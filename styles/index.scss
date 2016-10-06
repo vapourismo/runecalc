@@ -16,10 +16,23 @@ body {
 	color: #efefef;
 }
 
+html, body {
+	width: 100%;
+	height: 100%;
+
+	margin: 0;
+	padding: 0px;
+}
 
 // Fixed single instance component
 
+#toolbar {
+	z-index: 120;
+}
+
 #overlay {
+	z-index: 100;
+
 	display: none;
 	justify-content: center;
 
@@ -36,6 +49,7 @@ body {
 
 #canvas {
 	flex: 1;
+	overflow: hidden;
 
 	noscript {
 		display: inline-block;
@@ -63,11 +77,17 @@ body {
 }
 
 #footer {
+	z-index: 120;
+
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 
-	border-top: solid 1px #333333;
+	min-height: min-content;
+
+	background-color: #222222;
+	box-shadow: 0 -3px 10px #111111;
+	border-top: solid 1px #666666;
 	padding: 5px;
 
 	.link {
@@ -340,6 +360,7 @@ body {
 @import "./components/item-slot.scss";
 @import "./components/item-selector.scss";
 @import "./components/ratings-table.scss";
+@import "./components/stats-table.scss";
 
 .summary {
 	.property {
@@ -365,10 +386,6 @@ body {
 }
 
 .toolbar {
-	position: fixed;
-	top: 0;
-	width: 100%;
-
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -397,40 +414,6 @@ body {
 
 		&.left {
 			margin-right: 1px;
-		}
-	}
-}
-
-.contents {
-	display: flex;
-	flex-direction: row;
-
-	margin-top: 50px;
-
-	.item-set {
-		flex: 1;
-		padding: 10px;
-
-		display: flex;
-		flex-direction: column;
-
-		.item-slot {
-			margin-bottom: 10px;
-		}
-	}
-
-	.side-bar {
-		flex: 1;
-
-		.section {
-			padding: 10px;
-			margin-bottom: 10px;
-		}
-
-
-		.options {
-			display: flex;
-			flex-direction: column;
 		}
 	}
 }
@@ -470,5 +453,31 @@ body {
 		padding: 5px 10px;
 
 		font-size: 14px;
+	}
+}
+
+.root {
+	height: 100%;
+
+	overflow: hidden;
+
+	display: flex;
+	flex-direction: row;
+
+	.left {
+		flex: 2;
+
+	}
+
+	.right {
+		flex: 1;
+	}
+
+	.left, .right {
+		height: 100%;
+		overflow-y: scroll;
+		overflow-x: hidden;
+
+		background-color: #222222;
 	}
 }

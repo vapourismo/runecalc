@@ -1,0 +1,36 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
+.stat-section {
+	margin: 10px;
+
+	.stats {
+		display: table;
+		width: 100%;
+
+		.stat {
+			display: table-row;
+			width: 100%;
+
+			font-size: 14px;
+
+			.stat-name, .stat-value {
+				display: table-cell;
+				padding: 5px 10px;
+
+				border-bottom: solid 1px #333333;
+			}
+
+			.stat-value {
+				text-align: right;
+
+				&.positive {
+					color: green;
+				}
+
+				&.negative {
+					color: red;
+				}
+			}
+		}
+	}
+}

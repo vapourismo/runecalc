@@ -43,7 +43,9 @@ const convertibleRatings = {
 	"Multi-Hit Severity":    genCappedRatingConv(30, 100, 4    / 1000),
 	"Reflect Chance":        genCappedRatingConv(0,  100, 5    / 1000),
 	"Focus Pool":            pool => pool + 1000,
-	"Health":                health => health + 10000
+	"Health":                health => health + 10000,
+	"Assault Rating":        ap => ap / 4,
+	"Support Rating":        sp => sp / 4
 };
 
 function insertOrAdd(obj, key, value) {
@@ -63,6 +65,12 @@ function translateRatingsToStats(ratings) {
 			ratingsCopy[name] = ratings[name];
 
 	return ratingsCopy;
+}
+
+function fillDefaultStats(stats) {
+	for (let name in convertibleRatings)
+		if (!(name in stats))
+			stats[name] = convertibleRatings[name](0)
 }
 
 function applyStatBonuses(stats, bonuses) {
@@ -158,6 +166,7 @@ function formatStat(name, value) {
 
 export default {
 	translateRatingsToStats,
+	fillDefaultStats,
 
 	applyStatBonuses,
 	applyStatMultipliers,

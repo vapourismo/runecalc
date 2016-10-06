@@ -4,29 +4,21 @@
 
 import React, {Component} from "react";
 import Storage from "../utilities/storage.jsx";
+import SaveLoadoutDialog from "./save-loadout-dialog.jsx";
+import LoadLoadoutDialog from "./load-loadout-dialog.jsx";
+import AppStore from "../app-store.jsx";
 
 export default class Toolbar extends Component {
-	constructor(props) {
-		super(props);
-
-		this.triggerReset = this.triggerReset.bind(this);
-		this.triggerSave = this.triggerSave.bind(this);
-		this.triggerLoad = this.triggerLoad.bind(this);
-	}
-
 	triggerReset() {
-		if (this.props.onReset)
-			this.props.onReset();
+		AppStore.dispatch({type: "reset"});
 	}
 
 	triggerSave() {
-		if (this.props.onSave)
-			this.props.onSave();
+		SaveLoadoutDialog.show();
 	}
 
 	triggerLoad() {
-		if (this.props.onLoad)
-			this.props.onLoad();
+		LoadLoadoutDialog.show();
 	}
 
 	render() {

@@ -70,6 +70,7 @@ class StatSummary extends Component {
 		});
 
 		const stats = Stats.translateRatingsToStats(ratings);
+		Stats.fillDefaultStats(stats);
 		Stats.applyStatBonuses(stats, bonuses);
 		Stats.applyStatMultipliers(stats, multipliers);
 
@@ -94,27 +95,37 @@ class Root extends Component {
 
 	render() {
 		return (
-			<div>
-				<Toolbar
-					onReset={this.resetLoadout}
-					onLoad={LoadLoadoutDialog.show}
-					onSave={SaveLoadoutDialog.show} />
-				<div className="contents">
+			<div className="root">
+				<div id="root-left" className="left">
+					<div id="root-left-inner"></div>
 					<ItemSet />
-					<div className="side-bar">
-						<div className="section">
-							<div className="headline">
-								Summary
-							</div>
-							<StatSummary />
-						</div>
-					</div>
+				</div>
+				<div id="root-right" className="right">
+					<div id="root-right-inner"></div>
+					<StatSummary />
 				</div>
 			</div>
 		);
 	}
 }
 
+function adjustRootSides() {
+	const left = document.getElementById("root-left");
+	const leftInner = document.getElementById("root-left-inner");
+
+	if (left.offsetWidth > leftInner.offsetWidth)
+		left.style.marginRight = (leftInner.offsetWidth - left.offsetWidth) + "px";
+
+	const right = document.getElementById("root-right");
+	const rightInner = document.getElementById("root-right-inner");
+
+	if (right.offsetWidth > rightInner.offsetWidth)
+		right.style.marginRight = (rightInner.offsetWidth - right.offsetWidth) + "px";
+}
+
 window.addEventListener("load", function () {
+	ReactDOM.render(<Toolbar />, document.getElementById("toolbar"));
 	ReactDOM.render(<Root />, document.getElementById("canvas"));
+
+	adjustRootSides();
 });
