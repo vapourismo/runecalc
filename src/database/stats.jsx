@@ -144,6 +144,8 @@ function formatStat(name, value) {
 		case "Focus Pool":
 		case "Health":
 		case "Suit Power":
+		case "Support Rating":
+		case "Assault Rating":
 			return value;
 
 		default:
