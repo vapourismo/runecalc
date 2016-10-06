@@ -339,39 +339,7 @@ body {
 
 @import "./components/item-slot.scss";
 @import "./components/item-selector.scss";
-
-/*.item {
-	display: inline-block;
-
-	border-bottom: solid 1px #333333;
-
-	.body {
-		display: flex;
-		flex-direction: row;
-
-		.runes {
-			flex: 1;
-
-			.rune {
-				cursor: pointer;
-			}
-
-			.add {
-				padding: 5px;
-				text-align: center;
-				cursor: pointer;
-
-				&:hover {
-					background-color: #333333;
-				}
-			}
-		}
-
-		.summary {
-			flex: 1;
-		}
-	}
-}*/
+@import "./components/ratings-table.scss";
 
 .summary {
 	.property {
