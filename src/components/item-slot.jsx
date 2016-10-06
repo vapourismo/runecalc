@@ -22,13 +22,10 @@ export default class ItemSlot extends Component {
 	}
 
 	componentDidMount() {
-		this.storeLease = AppStore.subscribe(
-			() => {
-				const loadoutState = AppStore.getState().loadout;
-
-				this.setState({
-					runes: loadoutState[this.props.itemSlot].runes || [null]
-				});
+		this.storeLease = AppStore.subscribeTo(
+			["loadout", this.props.itemSlot, "runes"],
+			runes => {
+				this.setState({runes});
 			}
 		);
 	}
