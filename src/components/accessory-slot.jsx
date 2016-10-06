@@ -5,7 +5,6 @@
 import React, {Component} from "react";
 import RuneSlot from "./rune-slot.jsx";
 import Item from "./item.jsx";
-import StatDisplay from "./stat-display.jsx";
 import ItemSelector from "./item-selector.jsx";
 import AppStore from "../app-store.jsx";
 import Items from "../database/items.jsx";

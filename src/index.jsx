@@ -9,7 +9,7 @@ import AppStore from "./app-store.jsx";
 import Runes from "./database/runes.jsx";
 import Items from "./database/items.jsx";
 
-import StatDisplay from "./components/stat-display.jsx";
+import StatTable from "./components/stats-table.jsx";
 import Toolbar from "./components/toolbar.jsx";
 import Stats from "./database/stats.jsx";
 import ItemSet from "./components/item-set.jsx";
@@ -85,7 +85,7 @@ class StatSummary extends Component {
 		Stats.applyStatBonuses(stats, bonuses);
 		Stats.applyStatMultipliers(stats, multipliers);
 
-		return <StatDisplay stats={stats} />
+		return <StatTable stats={stats} />
 	}
 }
 
@@ -120,19 +120,6 @@ class Root extends Component {
 							</div>
 							<StatSummary />
 						</div>
-						{/*<div className="section">
-							<div className="headline">
-								Options
-							</div>
-							<div className="options">
-								{<Option
-									state={this.state.powerConverter}
-									onToggle={newState => this.setState({powerConverter: newState})}
-								>
-									Power Converter AMP
-								</Option>}
-							</div>
-						</div>*/}
 					</div>
 				</div>
 			</div>

@@ -5,7 +5,6 @@
 import React, {Component} from "react";
 import Item from "./item.jsx";
 import RuneSlot from "./rune-slot.jsx";
-import StatDisplay from "./stat-display.jsx";
 import AppStore from "../app-store.jsx";
 
 export default class ItemSlot extends Component {
