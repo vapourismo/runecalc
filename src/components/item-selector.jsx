@@ -10,14 +10,14 @@ import Items from "../database/items.jsx";
 import Overlay from "../utilities/overlay.jsx";
 
 function itemMatchesType(item, itemType) {
-	if (!itemType)
+	if (!itemType || item.type == null)
 		return true;
 
 	return item.type === itemType;
 }
 
 function itemMatchesClass(item, itemClass) {
-	if (!itemClass)
+	if (!itemClass || item.type == null)
 		return true;
 
 	if (item.klass == null)
@@ -54,8 +54,22 @@ export default class ItemSelector extends Component {
 
 		this.state = {
 			itemType: null,
-			itemClass: null
+			itemClass: AppStore.getState().filters.klass
 		};
+	}
+
+	componentDidMount() {
+		this.storeLease = AppStore.subscribe(
+			() => {
+				this.setState({
+					itemClass: AppStore.getState().filters.klass
+				});
+			}
+		);
+	}
+
+	componentWillUnmount() {
+		if (this.storeLease) this.storeLease();
 	}
 
 	selectItem(itemID) {
@@ -72,9 +86,9 @@ export default class ItemSelector extends Component {
 
 	toggleItemClass(itemClass, enabled) {
 		if (enabled) {
-			this.setState({itemClass});
+			AppStore.dispatch({type: "change_class_filter", klass: itemClass});
 		} else if (this.state.itemClass === itemClass) {
-			this.setState({itemClass: null});
+			AppStore.dispatch({type: "change_class_filter", klass: null});
 		}
 	}
 

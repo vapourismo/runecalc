@@ -68,12 +68,14 @@ const defaultState = {
 		"Key": {
 			item: null
 		}
+	},
+
+	filters: {
+		klass: null
 	}
 };
 
 function reduceAppState(state = defaultState, action) {
-	console.log("reduce", state, action);
-
 	switch (action.type) {
 		case "modify_item_runes":
 			return updateObject(
@@ -107,6 +109,16 @@ function reduceAppState(state = defaultState, action) {
 						[action.itemSlot]: {
 							item: null
 						}
+					}
+				}
+			);
+
+		case "change_class_filter":
+			return updateObject(
+				state,
+				{
+					filters: {
+						klass: action.klass
 					}
 				}
 			);
