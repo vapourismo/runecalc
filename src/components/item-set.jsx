@@ -55,7 +55,7 @@ export default class ItemSet extends Component {
 					if (loadoutState[itemSlot].runes)
 						return <ItemSlot key={itemSlot} itemSlot={itemSlot} selector={this.runeSelector} />;
 					else
-						return <AccessorySlot key={itemSlot} itemSlot={itemSlot} />
+						return <AccessorySlot key={itemSlot} itemSlot={itemSlot} />;
 				})}
 			</div>
 		);

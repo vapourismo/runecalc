@@ -6,26 +6,14 @@ import React, {Component} from "react";
 import ReactDOM from "react-dom";
 
 import AppStore from "./app-store.jsx";
-import Runes from "./database/runes.jsx";
 import Items from "./database/items.jsx";
 
 import StatTable from "./components/stats-table.jsx";
 import Toolbar from "./components/toolbar.jsx";
 import Stats from "./database/stats.jsx";
 import ItemSet from "./components/item-set.jsx";
-import Option from "./components/option.jsx";
 import SaveLoadoutDialog from "./components/save-loadout-dialog.jsx";
 import LoadLoadoutDialog from "./components/load-loadout-dialog.jsx";
-
-function modPowerConverter(stats) {
-	if ("Crit-Hit Severity Rating" in stats) {
-		Stats.insertOrAdd(
-			stats,
-			"Multi-Hit Severity Rating",
-			stats["Crit-Hit Severity Rating"] /= 2
-		);
-	}
-}
 
 class StatSummary extends Component {
 	constructor(props) {
@@ -85,7 +73,7 @@ class StatSummary extends Component {
 		Stats.applyStatBonuses(stats, bonuses);
 		Stats.applyStatMultipliers(stats, multipliers);
 
-		return <StatTable stats={stats} />
+		return <StatTable stats={stats} />;
 	}
 }
 

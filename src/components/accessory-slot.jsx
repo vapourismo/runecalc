@@ -3,12 +3,8 @@
 "use strict";
 
 import React, {Component} from "react";
-import RuneSlot from "./rune-slot.jsx";
 import Item from "./item.jsx";
-import ItemSelector from "./item-selector.jsx";
 import AppStore from "../app-store.jsx";
-import Items from "../database/items.jsx";
-import Overlay from "../utilities/overlay.jsx";
 
 export default class AccessorySlot extends Component {
 	constructor(props) {
