@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import Toolbar from "./components/toolbar.jsx";
 import ItemSet from "./components/item-set.jsx";
 import ClassFilter from "./components/class-filter.jsx";
+import RoleFilter from "./components/role-filter.jsx";
 import StatSummary from "./components/stat-summary.jsx";
 
 class Root extends Component {
@@ -21,6 +22,7 @@ class Root extends Component {
 				<div id="root-right" className="right">
 					<div id="root-right-inner"></div>
 					<ClassFilter />
+					<RoleFilter />
 					<StatSummary />
 				</div>
 			</div>

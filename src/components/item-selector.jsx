@@ -37,6 +37,22 @@ function itemMatchesClass(item, klass) {
 	return item.klass === klass;
 }
 
+function itemMatchesRole(item, role) {
+	const ap = item.ratings["Assault Rating"] || 0;
+	const sp = item.ratings["Support Rating"] || 0;
+
+	switch (role) {
+		case "Assault":
+			return ap >= sp;
+
+		case "Support":
+			return sp >= ap;
+
+		default:
+			return true;
+	}
+}
+
 export default class ItemSelector extends Component {
 	static show(itemSlot, otherItem) {
 		Overlay.show(<ItemSelector itemSlot={itemSlot} otherItem={otherItem} />);
@@ -45,16 +61,22 @@ export default class ItemSelector extends Component {
 	constructor(props) {
 		super(props);
 
+		const filters = AppStore.getState().filters;
+
 		this.state = {
-			klass: AppStore.getState().filters.klass
+			klass: filters.klass,
+			role: filters.role
 		};
 	}
 
 	componentDidMount() {
 		this.storeLease = AppStore.subscribeTo(
-			["filters", "klass"],
-			klass => {
-				this.setState({klass});
+			["filters"],
+			filters => {
+				this.setState({
+					klass: filters.klass,
+					role: filters.role
+				});
 			}
 		);
 	}
@@ -94,7 +116,7 @@ export default class ItemSelector extends Component {
 		for (let itemID in Items) {
 			let item = Items[itemID];
 
-			if (item.slot === this.props.itemSlot && itemMatchesClass(item, this.state.klass))
+			if (item.slot === this.props.itemSlot && itemMatchesClass(item, this.state.klass) && itemMatchesRole(item, this.state.role))
 				availableItems.push(this.renderItem(item, itemID));
 		}
 

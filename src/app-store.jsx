@@ -71,7 +71,8 @@ const defaultState = {
 	},
 
 	filters: {
-		klass: null
+		klass: null,
+		role: null
 	}
 };
 
@@ -119,6 +120,16 @@ function reduceAppState(state = defaultState, action) {
 				{
 					filters: {
 						klass: action.klass
+					}
+				}
+			);
+
+		case "change_role_filter":
+			return updateObject(
+				state,
+				{
+					filters: {
+						role: action.role
 					}
 				}
 			);
