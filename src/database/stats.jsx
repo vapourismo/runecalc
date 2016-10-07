@@ -44,8 +44,8 @@ const convertibleRatings = {
 	"Reflect Chance":        genCappedRatingConv(0,  100, 5    / 1000),
 	"Focus Pool":            pool => pool + 1000,
 	"Health":                health => health + 10000,
-	"Assault Rating":        ap => ap / 4,
-	"Support Rating":        sp => sp / 4
+	"Assault Rating":        ap => (ap + 900) / 4,
+	"Support Rating":        sp => (sp + 900) / 4
 };
 
 function insertOrAdd(obj, key, value) {
