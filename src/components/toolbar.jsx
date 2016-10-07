@@ -13,22 +13,14 @@ export default class Toolbar extends Component {
 		AppStore.dispatch({type: "reset"});
 	}
 
-	triggerSave() {
-		SaveLoadoutDialog.show();
-	}
-
-	triggerLoad() {
-		LoadLoadoutDialog.show();
-	}
-
 	render() {
 		if (Storage.isAvailable) {
 			return (
 				<div className="toolbar">
 					<div className="filler left"></div>
 					<div className="button" onClick={this.triggerReset}>Reset</div>
-					<div className="button" onClick={this.triggerSave}>Save</div>
-					<div className="button" onClick={this.triggerLoad}>Load</div>
+					<div className="button" onClick={SaveLoadoutDialog.show}>Save</div>
+					<div className="button" onClick={LoadLoadoutDialog.show}>Load</div>
 					<div className="filler"></div>
 				</div>
 			);
