@@ -70,12 +70,12 @@ export default class StatsTable extends Component {
 				<div className="stat-section">
 					<div className="headline">Utility</div>
 					<div className="ratings">
+						{this.renderStat("CC Resilience")}
+						{this.renderStat("Life Steal")}
 						{this.renderStat("Focus Pool")}
 						{this.renderStat("Focus Recovery Rate")}
-						{this.renderStat("Intensity")}
-						{this.renderStat("Life Steal")}
-						{this.renderStat("CC Resilience")}
 						{this.renderStat("Reflect Chance")}
+						{this.renderStat("Intensity")}
 					</div>
 				</div>
 			</div>
