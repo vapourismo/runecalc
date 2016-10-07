@@ -39,7 +39,7 @@ const convertibleRatings = {
 	"Vigor":                 genRatingConv(0,   30,  2.8  / 1000, 5000),
 	"Armor Pierce":          genCappedRatingConv(0,  100, 3.25 / 1000),
 	"CC Resilience":         genCappedRatingConv(0,  25,  4    / 1000),
-	"Glance Mitigation":     genCappedRatingConv(50, 75,  5.5  / 1000),
+	"Glance Mitigation":     genCappedRatingConv(30, 75,  5.5  / 1000),
 	"Multi-Hit Severity":    genCappedRatingConv(30, 100, 4    / 1000),
 	"Reflect Chance":        genCappedRatingConv(0,  100, 5    / 1000),
 	"Focus Pool":            pool => pool + 1000,
