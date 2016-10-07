@@ -31,7 +31,7 @@ const convertibleRatings = {
 	"Critical Mitigation":   genRatingConv(0,   150, 15   / 1000, 2750),
 	"Deflect Chance":        genRatingConv(5,   30,  1.5  / 1000, 7000),
 	"Focus Recovery Rate":   genRatingConv(0.5, 1.5, 0.2  / 1000, 2000),
-	"Glance Chance":         genRatingConv(5,   30,  2.75 / 1000, 4000),
+	"Glance Chance":         genRatingConv(0,   60,  2.75 / 1000, 4000), // TODO: Is Glance Chance Rating correct?
 	"Intensity":             genRatingConv(0,   30,  2.8  / 1000, 5000),
 	"Life Steal":            genRatingConv(0,   10,  2.1  / 1000, 6200),
 	"Multi-Hit Chance":      genRatingConv(5,   60,  6    / 1000, 5000),
@@ -97,12 +97,16 @@ function merge(target, source) {
 		insertOrAdd(target, key, source[key]);
 }
 
+function insertOrMultiply(target, name, value) {
+	if (name in target)
+		target[name] *= 1 + (value / 100);
+	else
+		target[name] = 1 + (value / 100);
+}
+
 function mergeMultipliers(target, source) {
 	for (let key in source)
-		if (key in target)
-			target[key] *= 1 + (source[key] / 100);
-		else
-			target[key] = 1 + (source[key] / 100);
+		insertOrMultiply(target, key, source[key]);
 }
 
 function analyzeItem(runes) {
@@ -131,7 +135,7 @@ function analyzeItem(runes) {
 			if (power.type === "bonus")
 				insertOrAdd(bonuses, power.name, power.value);
 			else if (power.type === "multiplier")
-				insertOrAdd(multipliers, power.name, power.value);
+				insertOrMultiply(multipliers, power.name, power.value);
 		});
 	}
 
