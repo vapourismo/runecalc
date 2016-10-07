@@ -73,6 +73,19 @@ const defaultState = {
 	filters: {
 		klass: null,
 		role: null
+	},
+
+	amps: {
+		assaultPower: 0,
+		supportPower: 0,
+		criticalHitChance: 0,
+		criticalHitSeverity: 0,
+		strikethrough: 0,
+		armorPierce: 0,
+		lifeSteal: 0,
+		deflectChance: 0,
+		criticalMitigation: 0,
+		intensity: 0
 	}
 };
 
@@ -130,6 +143,16 @@ function reduceAppState(state = defaultState, action) {
 				{
 					filters: {
 						role: action.role
+					}
+				}
+			);
+
+		case "change_amp":
+			return updateObject(
+				state,
+				{
+					amps: {
+						[action.name]: action.value
 					}
 				}
 			);

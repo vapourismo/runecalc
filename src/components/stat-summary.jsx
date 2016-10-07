@@ -10,34 +10,56 @@ import AppStore from "../app-store.jsx";
 import Items from "../database/items.jsx";
 import Stats from "../database/stats.jsx";
 
+function translateAMPs(amps) {
+	return {
+		bonuses: {
+			"Critical Hit Chance": amps.criticalHitChance,
+			"Critical Hit Severity": 2 * amps.criticalHitSeverity,
+			"Strikethrough": 1.5 * amps.strikethrough,
+			"Armor Pierce": 2 * amps.armorPierce,
+			"Life Steal": amps.lifeSteal,
+			"Deflect Chance": amps.deflectChance,
+			"Critical Mitigation": 4 * amps.criticalMitigation,
+			"Intensity": 2 * amps.intensity
+		},
+
+		multipliers: {
+			"Assault Rating": 2.5 * amps.assaultPower,
+			"Support Rating": 2.5 * amps.supportPower
+		}
+	}
+}
+
 export default class StatSummary extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			runes: [],
-			items: []
-		};
+		this.state = this.calculateState();
+	}
+
+	calculateState() {
+		const appState = AppStore.getState();
+
+		const runes = [];
+		const items = [];
+
+		for (let itemSlot in appState.loadout) {
+			let item = appState.loadout[itemSlot];
+
+			if (item.item)
+				items.push(item.item);
+
+			if (item.runes)
+				runes.push(item.runes);
+		}
+
+		return {items, runes, amps: appState.amps};
 	}
 
 	componentDidMount() {
 		this.storeLease = AppStore.subscribe(
 			() => {
-				const loadoutState = AppStore.getState().loadout;
-				const runes = [];
-				const items = [];
-
-				for (let itemSlot in loadoutState) {
-					let item = loadoutState[itemSlot];
-
-					if (item.item)
-						items.push(item.item);
-
-					if (item.runes)
-						runes.push(item.runes);
-				}
-
-				this.setState({items, runes});
+				this.setState(this.calculateState());
 			}
 		);
 	}
@@ -63,6 +85,10 @@ export default class StatSummary extends Component {
 			Stats.merge(bonuses, info.bonuses);
 			Stats.mergeMultipliers(multipliers, info.multipliers);
 		});
+
+		const ampInfos = translateAMPs(this.state.amps);
+		Stats.merge(bonuses, ampInfos.bonuses);
+		Stats.mergeMultipliers(multipliers, ampInfos.multipliers);
 
 		const stats = Stats.translateRatingsToStats(ratings);
 		Stats.fillDefaultStats(stats);

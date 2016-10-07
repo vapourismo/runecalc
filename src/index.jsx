@@ -10,6 +10,7 @@ import ItemSet from "./components/item-set.jsx";
 import ClassFilter from "./components/class-filter.jsx";
 import RoleFilter from "./components/role-filter.jsx";
 import StatSummary from "./components/stat-summary.jsx";
+import AMPSelector from "./components/amp-selector.jsx";
 
 class Root extends Component {
 	render() {
@@ -23,6 +24,9 @@ class Root extends Component {
 					<div id="root-right-inner"></div>
 					<ClassFilter />
 					<RoleFilter />
+					<div className="section amp-selector-button" onClick={AMPSelector.show}>
+						Select AMPs
+					</div>
 					<StatSummary />
 				</div>
 			</div>
