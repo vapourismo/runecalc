@@ -8,6 +8,7 @@ import ReactDOM from "react-dom";
 import StatTable from "./stats-table.jsx";
 import AppStore from "../app-store.jsx";
 import Items from "../database/items.jsx";
+import Runes from "../database/runes.jsx";
 import Stats from "../database/stats.jsx";
 
 function translateAMPs(amps) {
@@ -24,8 +25,8 @@ function translateAMPs(amps) {
 		},
 
 		multipliers: {
-			"Assault Rating": 2.5 * amps.assaultPower,
-			"Support Rating": 2.5 * amps.supportPower
+			"Assault Rating": (Math.pow(1.025, amps.assaultPower) - 1) * 100,
+			"Support Rating": (Math.pow(1.025, amps.supportPower) - 1) * 100
 		}
 	}
 }
