@@ -1,0 +1,14 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
+.item-set {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	align-items: flex-start;
+	justify-content: flex-start;
+
+	.item-slot-box {
+		width: 50%;
+	}
+}

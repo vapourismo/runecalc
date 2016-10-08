@@ -53,9 +53,17 @@ export default class ItemSet extends Component {
 			<div className="item-set">
 				{Object.keys(loadoutState).map(itemSlot => {
 					if (loadoutState[itemSlot].runes)
-						return <ItemSlot key={itemSlot} itemSlot={itemSlot} selector={this.runeSelector} />;
+						return (
+							<div className="item-slot-box">
+								<ItemSlot key={itemSlot} itemSlot={itemSlot} selector={this.runeSelector} />
+							</div>
+						);
 					else
-						return <AccessorySlot key={itemSlot} itemSlot={itemSlot} />;
+						return (
+							<div className="item-slot-box">
+								<AccessorySlot key={itemSlot} itemSlot={itemSlot} />
+							</div>
+						);
 				})}
 			</div>
 		);
