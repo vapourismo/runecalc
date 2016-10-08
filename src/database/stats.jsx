@@ -48,11 +48,70 @@ const convertibleRatings = {
 	"Support Rating":        sp => (sp + 900) / 4
 };
 
+function processRating(name, rating, bonuses) {
+	let value;
+
+	switch (name) {
+		case "Focus Pool":
+		case "Health":
+		case "Support Rating":
+		case "Assault Rating":
+			value = convertibleRatings[name](rating);
+			bonuses.forEach(multiplier => value *= 1 + (multiplier / 100));
+
+			return value;
+
+		default:
+			value = convertibleRatings[name](rating);
+			bonuses.forEach(addition => value += addition);
+
+			return value;
+	}
+}
+
+function processRatings(ratings, bonuses) {
+	const stats = {};
+
+	for (let name in ratings)
+		stats[name] = processRating(name, ratings[name], bonuses[name] || []);
+
+	return stats;
+}
+
+function insertIntoSection(obj, section, value) {
+	if (section in obj)
+		obj[section].push(value);
+	else
+		obj[section] = [value];
+
+}
+
 function insertOrAdd(obj, key, value) {
 	if (key in obj)
 		obj[key] += value;
 	else
 		obj[key] = value;
+}
+
+function gatherRuneDetails(runes, ratings, bonuses) {
+	const setPowers = {};
+
+	runes.forEach(runeID => {
+		if (runeID in Runes) {
+			const rune = Runes[runeID];
+
+			insertOrAdd(setPowers, rune.setName, rune.power || 0);
+			insertOrAdd(ratings, rune.statName, rune.statValue);
+		}
+	});
+
+	for (let setName in setPowers) {
+		if (!(setName in Runes.sets))
+			continue;
+
+		let powers = Runes.sets[setName].powers.filter((power, idx) => power != null && idx < setPowers[setName]);
+		powers.forEach(power => insertIntoSection(bonuses, power.name, power.value));
+	}
 }
 
 function translateRatingsToStats(ratings) {
@@ -73,80 +132,21 @@ function fillDefaultStats(stats) {
 			stats[name] = convertibleRatings[name](0)
 }
 
-function applyStatBonuses(stats, bonuses) {
-	for (let name in bonuses) {
-		if (name in stats)
-			stats[name] += bonuses[name];
-		else if (name in convertibleRatings)
-			stats[name] = convertibleRatings[name](0) + bonuses[name];
-		else
-			stats[name] = bonuses[name];
-	}
-}
-
-function applyStatMultipliers(stats, multipliers) {
-	for (let name in multipliers)
-		if (name in stats)
-			stats[name] *= multipliers[name];
-		else if (name in convertibleRatings)
-			stats[name] = convertibleRatings[name](0) * multipliers[name];
-}
-
-function merge(target, source) {
-	for (let key in source)
-		insertOrAdd(target, key, source[key]);
-}
-
-function insertOrMultiply(target, name, value) {
-	if (name in target)
-		target[name] *= 1 + (value / 100);
-	else
-		target[name] = 1 + (value / 100);
-}
-
-function mergeMultipliers(target, source) {
-	for (let key in source)
-		insertOrMultiply(target, key, source[key]);
-}
-
-function analyzeItem(runes) {
-	const setPowers = {};
-	const ratings = {};
-
-	runes.forEach(runeID => {
-		if (runeID in Runes) {
-			const rune = Runes[runeID];
-
-			insertOrAdd(setPowers, rune.setName, rune.power || 0);
-			insertOrAdd(ratings, rune.statName, rune.statValue);
-		}
-	});
-
-	const bonuses = {};
-	const multipliers = {};
-
-	for (let setName in setPowers) {
-		if (!(setName in Runes.sets))
-			continue;
-
-		let powers = Runes.sets[setName].powers.filter((power, idx) => power != null && idx < setPowers[setName]);
-
-		powers.forEach(power => {
-			if (power.type === "bonus")
-				insertOrAdd(bonuses, power.name, power.value);
-			else if (power.type === "multiplier")
-				insertOrMultiply(multipliers, power.name, power.value);
-		});
-	}
-
-	return {ratings, bonuses, multipliers};
-}
-
 function roundTwoDigits(value) {
 	if (typeof(value) == "number")
 		return Math.round(value * 100) / 100;
 	else
 		return value;
+}
+
+function mergeRatings(target, source) {
+	for (let key in source)
+		insertOrAdd(target, key, source[key]);
+}
+
+function mergeBonuses(target, source) {
+	for (let key in source)
+		insertIntoSection(target, key, source[key]);
 }
 
 function formatStat(name, value) {
@@ -169,16 +169,12 @@ function formatStat(name, value) {
 }
 
 export default {
-	translateRatingsToStats,
 	fillDefaultStats,
+	gatherRuneDetails,
+	processRatings,
 
-	applyStatBonuses,
-	applyStatMultipliers,
-
-	merge,
-	mergeMultipliers,
-
-	analyzeItem,
+	mergeRatings,
+	mergeBonuses,
 
 	formatStat
 };

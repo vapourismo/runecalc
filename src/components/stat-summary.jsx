@@ -11,24 +11,19 @@ import Items from "../database/items.jsx";
 import Runes from "../database/runes.jsx";
 import Stats from "../database/stats.jsx";
 
-function translateAMPs(amps) {
+function getAMPBonuses(amps) {
 	return {
-		bonuses: {
-			"Critical Hit Chance": amps.criticalHitChance,
-			"Critical Hit Severity": 2 * amps.criticalHitSeverity,
-			"Strikethrough": 1.5 * amps.strikethrough,
-			"Armor Pierce": 2 * amps.armorPierce,
-			"Life Steal": amps.lifeSteal,
-			"Deflect Chance": amps.deflectChance,
-			"Critical Mitigation": 4 * amps.criticalMitigation,
-			"Intensity": 2 * amps.intensity
-		},
-
-		multipliers: {
-			"Assault Rating": (Math.pow(1.025, amps.assaultPower) - 1) * 100,
-			"Support Rating": (Math.pow(1.025, amps.supportPower) - 1) * 100
-		}
-	}
+		"Critical Hit Chance": amps.criticalHitChance,
+		"Critical Hit Severity": 2 * amps.criticalHitSeverity,
+		"Strikethrough": 1.5 * amps.strikethrough,
+		"Armor Pierce": 2 * amps.armorPierce,
+		"Life Steal": amps.lifeSteal,
+		"Deflect Chance": amps.deflectChance,
+		"Critical Mitigation": 4 * amps.criticalMitigation,
+		"Intensity": 2 * amps.intensity,
+		"Assault Rating": (Math.pow(1.025, amps.assaultPower) - 1) * 100,
+		"Support Rating": (Math.pow(1.025, amps.supportPower) - 1) * 100
+	};
 }
 
 export default class StatSummary extends Component {
@@ -72,29 +67,20 @@ export default class StatSummary extends Component {
 	render() {
 		const ratings = {};
 		const bonuses = {};
-		const multipliers = {};
 
 		this.state.items.forEach(itemID => {
 			if (itemID in Items)
-				Stats.merge(ratings, Items[itemID].ratings);
+				Stats.mergeRatings(ratings, Items[itemID].ratings);
 		});
 
 		this.state.runes.forEach(runes => {
-			const info = Stats.analyzeItem(runes);
-
-			Stats.merge(ratings, info.ratings);
-			Stats.merge(bonuses, info.bonuses);
-			Stats.mergeMultipliers(multipliers, info.multipliers);
+			Stats.gatherRuneDetails(runes, ratings, bonuses);
 		});
 
-		const ampInfos = translateAMPs(this.state.amps);
-		Stats.merge(bonuses, ampInfos.bonuses);
-		Stats.mergeMultipliers(multipliers, ampInfos.multipliers);
+		Stats.mergeBonuses(bonuses, getAMPBonuses(this.state.amps));
 
-		const stats = Stats.translateRatingsToStats(ratings);
+		const stats = Stats.processRatings(ratings, bonuses);
 		Stats.fillDefaultStats(stats);
-		Stats.applyStatBonuses(stats, bonuses);
-		Stats.applyStatMultipliers(stats, multipliers);
 
 		return <StatTable stats={stats} />;
 	}
