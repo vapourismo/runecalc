@@ -52,6 +52,10 @@ function processRating(name, rating, bonuses) {
 	let value;
 
 	switch (name) {
+		case "Armor":
+			bonuses.forEach(multiplier => rating *= 1 + (multiplier / 100));
+			return convertibleRatings["Armor"](rating);
+
 		case "Focus Pool":
 		case "Health":
 		case "Support Rating":
