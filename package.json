@@ -13,7 +13,7 @@
   "scripts": {
     "watch-js": "webpack -w -d",
     "watch-css": "sass --watch styles/index.scss:index.css",
-    "build-client": "webpack && sass styles/index.scss:index.css"
+    "build-client": "webpack -d && sass styles/index.scss:index.css"
   },
   "devDependencies": {
     "eslint": "^3.7.0",
