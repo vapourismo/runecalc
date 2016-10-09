@@ -76,8 +76,12 @@ function processRating(name, rating, bonuses) {
 function processRatings(ratings, bonuses) {
 	const stats = {};
 
-	for (let name in ratings)
-		stats[name] = processRating(name, ratings[name], bonuses[name] || []);
+	for (let name in convertibleRatings)
+		stats[name] = processRating(
+			name,
+			name in ratings ? ratings[name] : 0,
+			bonuses[name] || []
+		);
 
 	return stats;
 }
@@ -131,9 +135,9 @@ function translateRatingsToStats(ratings) {
 }
 
 function fillDefaultStats(stats) {
-	for (let name in convertibleRatings)
-		if (!(name in stats))
-			stats[name] = convertibleRatings[name](0)
+	// for (let name in convertibleRatings)
+	// 	if (!(name in stats))
+	// 		stats[name] = convertibleRatings[name](0)
 }
 
 function roundTwoDigits(value) {
