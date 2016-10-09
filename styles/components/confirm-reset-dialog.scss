@@ -1,0 +1,56 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
+@import "../helpers.scss";
+
+.confirm-reset-dialog {
+	display: flex;
+	flex-direction: column;
+	background-color: #222222;
+	border: solid 1px #efefef;
+	box-shadow: 0 0 10px #000000;
+
+	align-self: center;
+
+	margin: 15px;
+	padding: 15px;
+
+	overflow-y: auto;
+
+	.message {
+		padding: 10px;
+
+		font-size: 14px;
+		text-align: center;
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+
+		.yes, .no {
+			cursor: pointer;
+			padding: 10px;
+		}
+
+		.yes {
+			background-color: #668066;
+
+			&:hover {
+				background-color: #008000;
+			}
+		}
+
+		.no {
+			background-color: #806666;
+
+			&:hover {
+				background-color: #800000;
+			}
+		}
+
+		.splitter {
+			width: 1px;
+		}
+	}
+}
