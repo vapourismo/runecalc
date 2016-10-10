@@ -24,6 +24,11 @@ html, body {
 	padding: 0px;
 }
 
+a:link, a:active, a:visited {
+	text-decoration: none;
+	color: #efefef;
+}
+
 // Fixed single instance component
 
 #toolbar {
@@ -364,6 +369,7 @@ html, body {
 @import "./components/ratings-table.scss";
 @import "./components/stats-table.scss";
 @import "./components/confirm-reset-dialog.scss";
+@import "./components/error-display.scss";
 
 .summary {
 	.property {

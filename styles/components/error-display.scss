@@ -1,0 +1,37 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
+@import "../helpers.scss";
+
+.error-display {
+	display: flex;
+	flex-direction: column;
+	background-color: #222222;
+	border: solid 1px #efefef;
+	box-shadow: 0 0 10px #000000;
+
+	margin: 15px;
+	padding: 15px;
+
+	overflow-y: auto;
+
+	.stack {
+		font-size: 14px;
+		padding: 10px;
+		white-space: pre;
+	}
+
+	.buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+
+		.report {
+			@extend .interactable;
+
+			cursor: pointer;
+			padding: 10px;
+
+			background-color: #252525;
+		}
+	}
+}
