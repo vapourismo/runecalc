@@ -7,7 +7,13 @@ import ReactDOM from "react-dom";
 import BackStack from "./back-stack.jsx";
 
 function show(content) {
-	const elem = document.getElementById("overlay");
+	let elem = document.getElementById("overlay");
+
+	if (!elem) {
+		elem = document.createElement("div");
+		elem.id = "overlay";
+	}
+
 	elem.style.display = "flex";
 
 	ReactDOM.render(content, elem);
