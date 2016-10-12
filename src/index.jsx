@@ -2,7 +2,7 @@
 
 "use strict";
 
-import {} from "./utilities/debugger.jsx";
+import "./utilities/debugger.jsx";
 
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
@@ -13,6 +13,8 @@ import ClassFilter from "./components/class-filter.jsx";
 import RoleFilter from "./components/role-filter.jsx";
 import StatSummary from "./components/stat-summary.jsx";
 import AMPSelector from "./components/amp-selector.jsx";
+
+import "./utilities/persist-current-profile.jsx";
 
 class Root extends Component {
 	render() {
