@@ -15,6 +15,8 @@ export default class SaveLoadoutDialog extends Component {
 	constructor(props) {
 		super(props);
 
+		this.profiles = Storage.loadProfiles() || {};
+
 		this.saveLoadout = this.saveLoadout.bind(this);
 	}
 
@@ -26,14 +28,21 @@ export default class SaveLoadoutDialog extends Component {
 	}
 
 	overrideLoadout(name) {
-		Storage.state.loadouts[name] = AppStore.getState().loadout;
-		Storage.save();
+		const appState = AppStore.getState();
+
+		this.profiles[name] = {
+			loadout: appState.loadout,
+			amps: appState.amps
+		};
+
+		if (!Storage.saveProfiles(this.profiles))
+			console.error("Storage rejected saving profiles:", this.profiles);
 
 		Overlay.hide();
 	}
 
 	render() {
-		const names = Object.keys(Storage.state.loadouts);
+		const names = Object.keys(this.profiles);
 		let loadouts;
 
 		if (names.length > 0)

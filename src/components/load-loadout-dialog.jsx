@@ -12,15 +12,21 @@ export default class LoadLoadoutDialog extends Component {
 		Overlay.show(<LoadLoadoutDialog />);
 	}
 
+	constructor(props) {
+		super(props);
+
+		this.profiles = Storage.loadProfiles() || {};
+	}
+
 	loadLoadout(name) {
-		if (name in Storage.state.loadouts)
-			AppStore.dispatch({type: "load", loadout: Storage.state.loadouts[name]});
+		if (name in this.profiles)
+			AppStore.dispatch({type: "load_profile", profile: this.profiles[name]});
 
 		Overlay.hide();
 	}
 
 	render() {
-		const names = Object.keys(Storage.state.loadouts);
+		const names = Object.keys(this.profiles);
 		let loadouts;
 
 		if (names.length > 0)
