@@ -12,6 +12,7 @@ if (Storage.isAvailable) {
 
 		const result = Storage.saveCurrentProfile({
 			loadout: appState.loadout,
+			filters: appState.filters,
 			amps: appState.amps
 		});
 

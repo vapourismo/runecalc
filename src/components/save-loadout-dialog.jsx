@@ -32,6 +32,7 @@ export default class SaveLoadoutDialog extends Component {
 
 		this.profiles[name] = {
 			loadout: appState.loadout,
+			filters: appState.filters,
 			amps: appState.amps
 		};
 

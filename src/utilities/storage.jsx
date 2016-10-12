@@ -158,6 +158,22 @@ const currentProfileMigrations = [
 					)
 				})
 			}),
+			filters: Serialize.object({
+				klass: Serialize.oneOf(
+					Serialize.exact("Engineer"),
+					Serialize.exact("Esper"),
+					Serialize.exact("Medic"),
+					Serialize.exact("Spellslinger"),
+					Serialize.exact("Stalker"),
+					Serialize.exact("Warrior"),
+					Serialize.exact(null)
+				),
+				role: Serialize.oneOf(
+					Serialize.exact("Assault"),
+					Serialize.exact("Support"),
+					Serialize.exact(null)
+				)
+			}),
 			amps: Serialize.object({
 				assaultPower: Serialize.typeOf("number"),
 				supportPower: Serialize.typeOf("number"),
