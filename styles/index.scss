@@ -29,7 +29,7 @@ a:link, a:active, a:visited {
 	color: #efefef;
 }
 
-// Fixed single instance component
+// Single instance components
 
 #toolbar {
 	z-index: 120;
@@ -116,146 +116,7 @@ a:link, a:active, a:visited {
 	}
 }
 
-// Components
-
-.rune {
-	@extend .interactable;
-
-	display: flex;
-	flex-direction: row;
-
-	padding: 2px;
-
-	.symbol {
-		display: inline-block;
-		width: 48px;
-		height: 48px;
-		border: solid 2px #efefef;
-		background-color: #333333;
-		box-shadow: inset 0 0 5px #000;
-
-		&.power-1 {
-			border-color: #67a8e1;
-		}
-
-		&.power-2 {
-			border-color: #8d33ff;
-		}
-
-		&.power-3 {
-			border-color: #ffad5c;
-		}
-
-		margin: 2px;
-
-		.icon {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-
-			width: 100%;
-			height: 100%;
-
-			font-size: 20px;
-			color: #333333;
-
-			&.logic {
-				background-color: #B6DB40;
-			}
-
-			&.life {
-				background-color: #1C8421;
-			}
-
-			&.air {
-				background-color: #D5CDC7;
-			}
-
-			&.water {
-				background-color: #4056DB;
-			}
-
-			&.fire {
-				background-color: #B52700;
-			}
-
-			&.earth {
-				background-color: #AE821B;
-			}
-
-			&.fusion {
-				background-color: #EC60D3;
-			}
-		}
-	}
-
-	.description {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-
-		flex: 1;
-		padding: 5px;
-		margin: 2px;
-
-		.name {
-			font-size: 14px;
-		}
-
-		.set-name {
-			font-size: 12px;
-			color: #a0a0a0;
-		}
-
-		.hint {
-			font-size: 12px;
-			color: #a0a0a0;
-			text-align: right;
-			padding: 2px 0px;
-		}
-	}
-
-	.rating {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-
-		padding: 5px;
-		margin: 2px;
-		font-size: 16px;
-	}
-}
-
-.rune-selector {
-	display: flex;
-	flex-direction: column;
-	background-color: #222222;
-	border: solid 1px #efefef;
-	box-shadow: 0 0 10px #000000;
-
-	padding: 15px;
-	margin: 15px;
-
-	overflow-y: auto;
-
-	.body {
-		display: flex;
-		flex-direction: column;
-		min-height: min-content;
-
-		.set {
-			@extend .interactable;
-
-			cursor: pointer;
-			padding: 10px;
-			font-size: 14px;
-		}
-
-		.rune {
-			cursor: pointer;
-		}
-	}
-}
+// Useful classes
 
 .text-input {
 	display: block;
@@ -278,192 +139,24 @@ a:link, a:active, a:visited {
 	}
 }
 
-.save-loadout-dialog {
-	display: flex;
-	flex-direction: row;
-	background-color: #222222;
-	border: solid 1px #efefef;
-	box-shadow: 0 0 10px #000000;
+// Component styles
 
-	margin: 15px;
-
-	.existing-loadouts {
-		padding: 15px;
-
-		.empty-message {
-			padding: 10px;
-			font-size: 12px;
-			color: #999999;
-			text-align: center;
-		}
-
-		.loadout {
-			font-size: 14px;
-			padding: 10px;
-			border-bottom: solid 1px #333333;
-			cursor: pointer;
-
-			&:hover {
-				background-color: #333333;
-				border-bottom: solid 1px #efefef;
-			}
-		}
-	}
-
-	.new-loadout {
-		padding: 15px;
-
-		.text-input {
-			text-align: center;
-		}
-
-		.submit {
-			text-align: center;
-			font-size: 14px;
-			padding: 10px;
-			border-bottom: solid 1px #333333;
-			cursor: pointer;
-
-			&:hover {
-				background-color: #333333;
-				border-bottom: solid 1px #efefef;
-			}
-		}
-	}
-}
-
-.load-loadout-dialog {
-	display: flex;
-	flex-direction: column;
-	background-color: #222222;
-	border: solid 1px #efefef;
-	box-shadow: 0 0 10px #000000;
-
-	margin: 15px;
-	padding: 15px;
-
-	.empty-message {
-		padding: 10px;
-		font-size: 12px;
-		color: #999999;
-		text-align: center;
-	}
-
-	.loadout {
-		font-size: 14px;
-		padding: 10px;
-		border-bottom: solid 1px #333333;
-		cursor: pointer;
-
-		&:hover {
-			background-color: #333333;
-			border-bottom: solid 1px #efefef;
-		}
-	}
-}
-
-@import "./components/item-set.scss";
-@import "./components/item-slot.scss";
-@import "./components/item-selector.scss";
 @import "./components/amp-selector.scss";
-@import "./components/ratings-table.scss";
-@import "./components/stats-table.scss";
 @import "./components/confirm-reset-dialog.scss";
 @import "./components/error-display.scss";
+@import "./components/item-selector.scss";
+@import "./components/item-set.scss";
+@import "./components/item-slot.scss";
+@import "./components/load-loadout-dialog.scss";
+@import "./components/option.scss";
+@import "./components/ratings-table.scss";
+@import "./components/rune-selector.scss";
+@import "./components/rune.scss";
+@import "./components/save-loadout-dialog.scss";
+@import "./components/stats-table.scss";
+@import "./components/toolbar.scss";
 
-.summary {
-	.property {
-		@extend .interactable;
-
-		display: flex;
-		flex-direction: row;
-
-		.name, .value {
-			padding: 5px 10px;
-			font-size: 14px;
-		}
-
-		.name {
-			flex: 1;
-			text-align: left;
-		}
-
-		.value {
-			text-align: center;
-		}
-	}
-}
-
-.toolbar {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-
-	padding-bottom: 0px;
-	background-color: #222222;
-	box-shadow: 0 3px 10px #111111;
-
-	.button {
-		@extend .interactable;
-		@extend .headline;
-
-		display: inline-block;
-
-		padding: 10px;
-		margin-right: 1px;
-
-		cursor: pointer;
-
-		font-size: 14px;
-	}
-
-	.filler {
-		flex: 1;
-		border-bottom: solid 1px #666666;
-
-		&.left {
-			margin-right: 1px;
-		}
-	}
-}
-
-.option {
-	@extend .interactable;
-
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-
-	cursor: pointer;
-
-	.check-box {
-		transition: 300ms background-color;
-
-		width: 14px;
-		height: 14px;
-
-		margin-left: 5px;
-		background-color: #222222;
-		border: solid 1px #333333;
-
-		&.checked {
-			border-color: #666666;
-			background-color: #333333;
-		}
-	}
-
-	&:hover .check-box {
-		border-color: #efefef;
-	}
-
-	.description {
-		flex: 1;
-
-		padding: 5px 10px;
-
-		font-size: 14px;
-	}
-}
+// Root layout
 
 .root {
 	height: 100%;

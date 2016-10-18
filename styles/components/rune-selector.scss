@@ -1,0 +1,34 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
+@import "../helpers.scss";
+
+.rune-selector {
+	display: flex;
+	flex-direction: column;
+	background-color: #222222;
+	border: solid 1px #efefef;
+	box-shadow: 0 0 10px #000000;
+
+	padding: 15px;
+	margin: 15px;
+
+	overflow-y: auto;
+
+	.body {
+		display: flex;
+		flex-direction: column;
+		min-height: min-content;
+
+		.set {
+			@extend .interactable;
+
+			cursor: pointer;
+			padding: 10px;
+			font-size: 14px;
+		}
+
+		.rune {
+			cursor: pointer;
+		}
+	}
+}
