@@ -48,6 +48,43 @@ class Tier1AMPSection extends Component {
 	}
 }
 
+class SpecialAMP extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			enabled: AppStore.getState().amps[props.name]
+		};
+
+		this.toggleEnabled = this.toggleEnabled.bind(this);
+	}
+
+	componentDidMount() {
+		this.storeLease = AppStore.subscribeTo(
+			["amps", this.props.name],
+			enabled => {
+				this.setState({enabled});
+			}
+		);
+	}
+
+	componentWillUnmount() {
+		if (this.storeLease) this.storeLease();
+	}
+
+	toggleEnabled(n) {
+		AppStore.dispatch({type: "change_amp", name: this.props.name, value: n});
+	}
+
+	render() {
+		return (
+			<Option state={this.state.enabled} onToggle={this.toggleEnabled}>
+				{this.props.title}
+			</Option>
+		);
+	}
+}
+
 export default class AMPSection extends Component {
 	render() {
 		return (
@@ -63,6 +100,7 @@ export default class AMPSection extends Component {
 					<Tier1AMPSection title="Deflect Chance" name="deflectChance" />
 					<Tier1AMPSection title="Critical Mitigation" name="criticalMitigation" />
 					<Tier1AMPSection title="Intensity" name="intensity" />
+					<SpecialAMP title="Power Converter" name="powerConverter" />
 				</Section>
 			</div>
 		);

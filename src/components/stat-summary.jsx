@@ -26,6 +26,10 @@ function getAMPBonuses(amps) {
 	};
 }
 
+function ampPowerConverterRating(ratings) {
+	ratings["Multi-Hit Severity"] += (ratings["Critical Hit Severity"] /= 2);
+}
+
 export default class StatSummary extends Component {
 	constructor(props) {
 		super(props);
@@ -78,9 +82,12 @@ export default class StatSummary extends Component {
 		});
 
 		Stats.mergeBonuses(bonuses, getAMPBonuses(this.state.amps));
+		Stats.fillDefaultRatings(ratings);
+
+		if (this.state.amps.powerConverter)
+			ampPowerConverterRating(ratings);
 
 		const stats = Stats.processRatings(ratings, bonuses);
-		Stats.fillDefaultStats(stats);
 
 		return <StatTable stats={stats} />;
 	}

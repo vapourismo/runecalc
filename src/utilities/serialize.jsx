@@ -64,12 +64,16 @@ function unpack(json, versions = []) {
 			else
 				return undefined;
 		} else if (value.version < currentVersion) {
+			let target = value.payload;
+
 			for (let version = value.version; version < currentVersion; version++) {
-				if (!versions[version].validate(value))
+				if (!versions[version].validate(target))
 					return undefined;
 
-				value = versions[version].upgrade(value);
+				target = versions[version].upgrade(target);
 			}
+
+			return versions[currentVersion].validate(target) ? target : undefined;
 		} else {
 			return undefined;
 		}
@@ -87,6 +91,25 @@ function pack(value, versions = []) {
 		return undefined;
 }
 
+function updateObject(a, b) {
+	let c = Object.assign({}, a);
+
+	for (let k in b) {
+		if (
+			k in a
+			&& c[k] instanceof Object
+			&& b[k] instanceof Object
+			&& !(b[k] instanceof Array)
+		) {
+			c[k] = updateObject(c[k], b[k]);
+		} else {
+			c[k] = b[k];
+		}
+	}
+
+	return c;
+}
+
 export default {
 	array: schemaArray,
 	object: schemaObject,
@@ -97,5 +120,7 @@ export default {
 	oneOf: schemaOneOf,
 
 	unpack,
-	pack
+	pack,
+
+	updateObject
 };

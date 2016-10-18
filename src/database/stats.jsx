@@ -86,6 +86,12 @@ function processRatings(ratings, bonuses) {
 	return stats;
 }
 
+function fillDefaultRatings(ratings) {
+	for (let name in convertibleRatings)
+		if (!(name in ratings))
+			ratings[name] = 0;
+}
+
 function insertIntoSection(obj, section, value) {
 	if (section in obj)
 		obj[section].push(value);
@@ -134,12 +140,6 @@ function translateRatingsToStats(ratings) {
 	return ratingsCopy;
 }
 
-function fillDefaultStats(stats) {
-	// for (let name in convertibleRatings)
-	// 	if (!(name in stats))
-	// 		stats[name] = convertibleRatings[name](0)
-}
-
 function roundTwoDigits(value) {
 	if (typeof(value) == "number")
 		return Math.round(value * 100) / 100;
@@ -177,9 +177,9 @@ function formatStat(name, value) {
 }
 
 export default {
-	fillDefaultStats,
 	gatherRuneDetails,
 	processRatings,
+	fillDefaultRatings,
 
 	mergeRatings,
 	mergeBonuses,
