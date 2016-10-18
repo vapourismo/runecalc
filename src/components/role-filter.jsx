@@ -4,6 +4,7 @@
 
 import React, {Component} from "react";
 
+import Section from "./section.jsx";
 import Option from "./option.jsx";
 import AppStore from "../app-store.jsx";
 
@@ -39,8 +40,7 @@ export default class RoleFilter extends Component {
 
 	render() {
 		return (
-			<div className="section">
-				<div className="headline">Role</div>
+			<Section headline="Role">
 				<Option
 					state={this.state.role === "Assault"}
 					onToggle={n => this.toggleClass("Assault", n)}
@@ -53,7 +53,7 @@ export default class RoleFilter extends Component {
 				>
 					Support
 				</Option>
-			</div>
+			</Section>
 		);
 	}
 }

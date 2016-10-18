@@ -1,0 +1,12 @@
+/* Copyright (C) 2016, Ole Krüger <ole@vprsm.de> */
+
+@import "../helpers.scss";
+
+.section {
+	.headline {
+		@extend .interactable;
+		@extend .headline;
+
+		cursor: pointer;
+	}
+}

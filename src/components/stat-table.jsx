@@ -3,6 +3,8 @@
 "use strict";
 
 import React, {Component} from "react";
+
+import Section from "./section.jsx";
 import Stats from "../database/stats.jsx";
 
 export default class StatTable extends Component {
@@ -20,16 +22,14 @@ export default class StatTable extends Component {
 	render() {
 		return (
 			<div>
-				<div className="stat-section">
-					<div className="headline">General</div>
+				<Section headline="General" expanded={true}>
 					<div className="ratings">
 						{this.renderStat("Health")}
 						{this.renderStat("Assault Rating")}
 						{this.renderStat("Support Rating")}
 					</div>
-				</div>
-				<div className="stat-section">
-					<div className="headline">Offensive</div>
+				</Section>
+				<Section headline="Offensive" expanded={true}>
 					<div className="ratings">
 						{this.renderStat("Strikethrough")}
 						{this.renderStat("Critical Hit Chance")}
@@ -39,9 +39,8 @@ export default class StatTable extends Component {
 						{this.renderStat("Vigor")}
 						{this.renderStat("Armor Pierce")}
 					</div>
-				</div>
-				<div className="stat-section">
-					<div className="headline">Defensive</div>
+				</Section>
+				<Section headline="Defensive" expanded={true}>
 					<div className="ratings">
 						{this.renderStat("Armor")}
 						{this.renderStat("Glance Mitigation")}
@@ -49,9 +48,8 @@ export default class StatTable extends Component {
 						{this.renderStat("Critical Mitigation")}
 						{this.renderStat("Deflect Chance")}
 					</div>
-				</div>
-				<div className="stat-section">
-					<div className="headline">Utility</div>
+				</Section>
+				<Section headline="Utility" expanded={true}>
 					<div className="ratings">
 						{this.renderStat("CC Resilience")}
 						{this.renderStat("Life Steal")}
@@ -60,7 +58,7 @@ export default class StatTable extends Component {
 						{this.renderStat("Reflect Chance")}
 						{this.renderStat("Intensity")}
 					</div>
-				</div>
+				</Section>
 			</div>
 		);
 	}

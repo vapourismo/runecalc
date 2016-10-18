@@ -4,6 +4,7 @@
 
 import React, {Component} from "react";
 
+import Section from "./section.jsx";
 import Option from "./option.jsx";
 import AppStore from "../app-store.jsx";
 
@@ -12,7 +13,8 @@ export default class ClassFilter extends Component {
 		super(props);
 
 		this.state = {
-			klass: AppStore.getState().filters.klass
+			klass: AppStore.getState().filters.klass,
+			expanded: false
 		};
 	}
 
@@ -39,8 +41,7 @@ export default class ClassFilter extends Component {
 
 	render() {
 		return (
-			<div className="section">
-				<div className="headline">Class</div>
+			<Section headline="Class">
 				<Option
 					state={this.state.klass === "Engineer"}
 					onToggle={n => this.toggleClass("Engineer", n)}
@@ -77,7 +78,7 @@ export default class ClassFilter extends Component {
 				>
 					Warrior
 				</Option>
-			</div>
+			</Section>
 		);
 	}
 }
