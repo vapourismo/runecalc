@@ -5,24 +5,7 @@
 import React, {Component} from "react";
 import Stats from "../database/stats.jsx";
 
-export default class StatsTable extends Component {
-	// renderStatComparison(name) {
-	// 	const value = this.props.stats[name] || 0;
-	// 	const otherValue = this.props.otherStats[name] || 0;
-
-	// 	const offset = value - otherValue;
-
-	// 	return (
-	// 		<div key={name} className="stat">
-	// 			<div className="stat-name">{name}</div>
-	// 			<div className="stat-value">{Stats.formatStat(name, value)}</div>
-	// 			<div className={"stat-value" + (offset >= 0 ? " positive" : " negative")}>
-	// 				{offset >= 0 ? "+" + offset : offset}
-	// 			</div>
-	// 		</div>
-	// 	);
-	// }
-
+export default class StatTable extends Component {
 	renderStat(name) {
 		const value = this.props.stats[name];
 

@@ -5,7 +5,7 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 
-import StatTable from "./stats-table.jsx";
+import StatTable from "./stat-table.jsx";
 import AppStore from "../app-store.jsx";
 import Items from "../database/items.jsx";
 import Runes from "../database/runes.jsx";
