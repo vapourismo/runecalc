@@ -12,7 +12,7 @@
 	cursor: pointer;
 
 	.check-box {
-		transition: 300ms background-color;
+		transition: 200ms background-color;
 
 		width: 14px;
 		height: 14px;
@@ -29,13 +29,15 @@
 
 	&:hover .check-box {
 		border-color: #efefef;
+
+		&.checked {
+			background-color: #666666;
+		}
 	}
 
 	.description {
 		flex: 1;
-
 		margin: 5px;
-
 		font-size: 14px;
 	}
 }

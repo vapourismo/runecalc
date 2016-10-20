@@ -15,6 +15,8 @@ class Tier1AMPSection extends Component {
 		this.state = {
 			level: AppStore.getState().amps[props.name]
 		};
+
+		this.changeLevel = this.changeLevel.bind(this);
 	}
 
 	componentDidMount() {
@@ -30,20 +32,15 @@ class Tier1AMPSection extends Component {
 		if (this.storeLease) this.storeLease();
 	}
 
-	toggleLevel(level, enabled) {
-		if (enabled)
-			AppStore.dispatch({type: "change_amp", name: this.props.name, value: level});
-		else if (this.state.level >= level)
-			AppStore.dispatch({type: "change_amp", name: this.props.name, value: level > 0 ? level - 1 : 0});
+	changeLevel(level) {
+		AppStore.dispatch({type: "change_amp", name: this.props.name, value: level});
 	}
 
 	render() {
 		return (
-			<div>
-				<Option state={this.state.level >= 1} onToggle={n => this.toggleLevel(1, n)}>{this.props.title} I</Option>
-				<Option state={this.state.level >= 2} onToggle={n => this.toggleLevel(2, n)}>{this.props.title} II</Option>
-				<Option state={this.state.level >= 3} onToggle={n => this.toggleLevel(3, n)}>{this.props.title} III</Option>
-			</div>
+			<Option.MultiOption value={this.state.level} count={3} onChange={this.changeLevel}>
+				{this.props.title}
+			</Option.MultiOption>
 		);
 	}
 }
