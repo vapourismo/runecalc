@@ -85,7 +85,9 @@ const defaultState = {
 		lifeSteal: 0,
 		deflectChance: 0,
 		criticalMitigation: 0,
-		intensity: 0
+		intensity: 0,
+		powerConverter: false,
+		fury: false
 	}
 };
 

@@ -30,6 +30,10 @@ function ampPowerConverterRating(ratings) {
 	ratings["Multi-Hit Severity"] += (ratings["Critical Hit Severity"] /= 2);
 }
 
+function ampFury(stats) {
+	stats["Intensity"] += 5;
+}
+
 export default class StatSummary extends Component {
 	constructor(props) {
 		super(props);
@@ -88,6 +92,9 @@ export default class StatSummary extends Component {
 			ampPowerConverterRating(ratings);
 
 		const stats = Stats.processRatings(ratings, bonuses);
+
+		if (this.state.amps.fury)
+			ampFury(stats);
 
 		return <StatTable stats={stats} />;
 	}

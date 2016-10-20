@@ -101,6 +101,7 @@ export default class AMPSection extends Component {
 					<Tier1AMPSection title="Critical Mitigation" name="criticalMitigation" />
 					<Tier1AMPSection title="Intensity" name="intensity" />
 					<SpecialAMP title="Power Converter" name="powerConverter" />
+					<SpecialAMP title="Fury" name="fury" />
 				</Section>
 			</div>
 		);
