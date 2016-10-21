@@ -163,14 +163,7 @@ function reduceAppState(state = defaultState, action) {
 			return defaultState;
 
 		case "load_profile":
-			return updateObject(
-				state,
-				{
-					loadout: action.profile.loadout,
-					filters: action.profile.filters,
-					amps: action.profile.amps
-				}
-			);
+			return updateObject(state, action.profile);
 
 		default:
 			return state;
