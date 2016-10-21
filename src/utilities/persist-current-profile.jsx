@@ -74,7 +74,7 @@ if (hashPattern.test(window.location.hash)) {
 	if (items.length === itemOrder.length) {
 		items.forEach((itemDescription, idx) => {
 			const slot = itemOrder[idx];
-			const info = (loadout[slot] = {});
+			const info = (loadout[slot] = {item: null});
 
 			const segments = itemDescription.split(",");
 
