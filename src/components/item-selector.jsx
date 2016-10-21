@@ -102,7 +102,7 @@ export default class ItemSelector extends Component {
 				<RatingsTable
 					ratings={item.ratings}
 					otherRatings={
-						this.props.otherItem
+						(this.props.otherItem && this.props.otherItem in Items)
 						? Items[this.props.otherItem].ratings
 						: undefined
 					} />
